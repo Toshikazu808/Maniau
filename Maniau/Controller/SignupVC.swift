@@ -50,14 +50,25 @@ class SignupVC: UIViewController {
                   print("Document successfully written!")
                }
             }
-            self?.clearTextFields(self!.emailTextfield, self!.pwTextfield)
-            self?.transitionToHome()
+            self?.clearLoginTextFields(self!.emailTextfield, self!.pwTextfield)
          }
       }
    }
-   
-   private func transitionToHome() {
-      let homeVC = storyboard?.instantiateViewController(identifier: K.homeVC)
-      self.navigationController?.pushViewController(homeVC!, animated: true)
+
+}
+
+
+extension SignupVC: UITextFieldDelegate {
+   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+      switch textField {
+      case emailTextfield:
+         emailTextfield.endEditing(true)
+         return true
+      case pwTextfield:
+         pwTextfield.endEditing(true)
+         return true
+      default:
+         return false
+      }
    }
 }

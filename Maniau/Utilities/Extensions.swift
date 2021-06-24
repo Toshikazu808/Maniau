@@ -14,11 +14,24 @@ extension UIViewController {
       present(alert, animated: true)
    }
    
-   func clearTextFields(_ emailTF:  UITextField, _ pwTF: UITextField) {
+   func clearLoginTextFields(_ emailTF:  UITextField, _ pwTF: UITextField) {
       emailTF.text = ""
       emailTF.placeholder = "email"
       pwTF.text = ""
       pwTF.placeholder = "password"
+   }
+   
+   func askToSavePw() {
+      let alert = UIAlertController(
+         title: "Do you want to save your login information?",
+         message: "Enabling automatic login will save your username and password to your device.",
+         preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+      alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
+         Defaults.saveAutoLogin.removeObject(forKey: Defaults.saveAutoLoginKey)
+         Defaults.saveAutoLogin.setValue(true, forKey: Defaults.saveAutoLoginKey)
+      }))
+      present(alert, animated: true)
    }
 }
 
@@ -30,5 +43,3 @@ extension Date {
       return m.string(from: self)
    }
 }
-
-

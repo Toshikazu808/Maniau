@@ -9,10 +9,10 @@ import UIKit
 
 struct Utilities {
    static func validateFields(_ email: String, _ password: String) -> String? {
-      if email.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+      if email == "" {
          return "Please enter your email."
       }
-      if password.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+      if password == "" {
          return "Please enter a password"
       }
       return nil

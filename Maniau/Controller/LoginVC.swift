@@ -21,90 +21,9 @@ class LoginVC: UIViewController {
       super.viewDidLoad()
       loginView.layer.cornerRadius = 6
       loginBtn.layer.cornerRadius = 15
-      emailTextfield.becomeFirstResponder()
       emailTextfield.delegate = self
       pwTextfield.delegate = self
-      checkUserLoggedIn()
-      checkSavedLogin()
-   }
-
-   @IBAction func loginTapped(_ sender: UIButton) {
-      if Auth.auth().currentUser != nil {
-         print("User is already signed in")
-      } else {
-         print("No users signed in")
-         let email = emailTextfield.text ?? ""
-         let pw = pwTextfield.text ?? ""
-         let err = Utilities.validateFields(email, pw)
-         if err == nil {
-            loginUser(email, pw)
-         } else {
-            showError(err!)
-         }
-      }
-   }
-   
-   @IBAction func signupTapped(_ sender: UIButton) {
-      clearTextFields(emailTextfield, pwTextfield)
-   }
-   
-   private func checkSavedLogin() {
-      let loginSaved = Bool(Defaults.saveLoginTracker.bool(forKey: Defaults.saveLoginKey))
-      if loginSaved == false {
-         askToSavePw()
-      } else {
-         let (email, pw) = loadUserInfo()
-         loginUser(email, pw)
-      }
-   }
-   
-   private func askToSavePw() {
-      let alert = UIAlertController(
-         title: "Do you want to save your login information?",
-         message: "Enabling automatic login will save your username and password to your device.",
-         preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-      alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
-         Defaults.saveLoginTracker.removeObject(forKey: Defaults.saveLoginKey)
-         Defaults.saveLoginTracker.setValue(true, forKey: Defaults.saveLoginKey)
-      }))
-      present(alert, animated: true)
-   }
-   
-   private func checkUserLoggedIn() {
-      if Auth.auth().currentUser != nil {
-         print("User is already signed in")
-         getUserEmailFromFirebase()
-      } else {
-         print("No current user")
-      }
-   }
-   
-   private func loginUser(_ email: String, _ pw: String) {
-      Auth.auth().signIn(withEmail: email, password: pw) { [weak self] authResult, error in
-         if let error = error {
-            self?.showError(error.localizedDescription)
-         } else {
-            print("authResult: \(String(describing: authResult))")
-            self?.saveUserInfoToDefaults(email, pw)
-            self?.getUserEmailFromFirebase()
-         }
-      }
-   }
-   
-   private func loadUserInfo() -> (String, String) {
-      var e = ""
-      var p = ""
-      if let savedInfo = Defaults.saveUserInfoTracker.object(forKey: Defaults.saveUserInfoKey) as? Data {
-         let decoder = JSONDecoder()
-         if let loadedInfo = try? decoder.decode(UserLogin.self, from: savedInfo) {
-            print(loadedInfo.email)
-            print(loadedInfo.pw)
-            e = loadedInfo.email
-            p = loadedInfo.pw
-         }
-      }
-      return (e, p)
+      checkForLoggedInUser()
    }
    
    private func getUserEmailFromFirebase() {
@@ -116,17 +35,78 @@ class LoginVC: UIViewController {
             let data = document.data().map(String.init(describing:)) ?? "nil"
             print("data: \(data)")
             User.email = Utilities.extractEmail(from: data)
-            print("extracted email: \(User.email)")
             self?.transitionToHome()
          }
       }
+   }
+   
+   private func checkForLoggedInUser() {
+      if Auth.auth().currentUser != nil {
+         print("User is already signed in")
+         getUserEmailFromFirebase()
+      } else {
+         print("No current user")
+         askToSavePw()
+         checkSavedLoginInfo()
+      }
+   }
+   
+   private func checkSavedLoginInfo() {
+      let autoLogin = Bool(Defaults.saveAutoLogin.bool(forKey: Defaults.saveAutoLoginKey))
+      if autoLogin {
+         if let (email, pw) = loadUserInfo() {
+            loginUser(email, pw)
+            transitionToHome()
+         } // else let user login like normal
+      } // else let user login like normal
+   }
+   
+   private func loadUserInfo() -> (String, String)? {
+      var info: (String, String)? = nil
+      if let savedInfo = Defaults.saveUserInfo.object(forKey: Defaults.saveUserInfoKey) as? Data {
+         let decoder = JSONDecoder()
+         if let loadedInfo = try? decoder.decode(UserLogin.self, from: savedInfo) {
+            info = (loadedInfo.email, loadedInfo.pw)
+         }
+      }
+      return info
+   }
+   
+   private func loginUser(_ email: String, _ pw: String) {
+      Auth.auth().signIn(withEmail: email, password: pw) { [weak self] authResult, error in
+         if let error = error {
+            self?.showError(error.localizedDescription)
+         } else {
+            print("authResult: \(String(describing: authResult))")
+            self?.getUserEmailFromFirebase()
+         }
+      }
+   }
+
+   @IBAction func loginTapped(_ sender: UIButton) {
+      let email = emailTextfield.text ?? ""
+      let pw = pwTextfield.text ?? ""
+      let err = Utilities.validateFields(email, pw)
+      if err == nil {
+         loginUser(email, pw)
+         saveUserInfoToDefaults(email, pw)
+         clearLoginTextFields(emailTextfield, pwTextfield)
+         // Go to HomeVC via Storyboard segue
+      } else {
+         showError(err!)
+      }
+   }
+   
+   @IBAction func signupTapped(_ sender: UIButton) {
+      clearLoginTextFields(emailTextfield, pwTextfield)
+      // Go to HomeVC via Storyboard segue
    }
    
    private func saveUserInfoToDefaults(_ email: String, _ pw: String) {
       let encoder = JSONEncoder()
       let user = UserLogin(email: email, pw: pw)
       if let encoded = try? encoder.encode(user) {
-         Defaults.saveUserInfoTracker.setValue(encoded, forKey: Defaults.saveUserInfoKey)
+         Defaults.saveUserInfo.setValue(encoded, forKey: Defaults.saveUserInfoKey)
       }
    }
    
@@ -148,40 +128,6 @@ extension LoginVC: UITextFieldDelegate {
          return true
       default:
          return false
-      }
-   }
-   
-   func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-      switch textField {
-      case emailTextfield:
-         if emailTextfield.text != "" {
-            return true
-         } else {
-            emailTextfield.placeholder = emailPlaceholder
-            return false
-         }
-      case pwTextfield:
-         if pwTextfield.text != "" {
-            return true
-         } else {
-            pwTextfield.placeholder = pwPlaceholder
-            return false
-         }
-      default:
-         return false
-      }
-   }
-   
-   func textFieldDidEndEditing(_ textField: UITextField) {
-      switch textField {
-      case emailTextfield:
-         emailTextfield.text = ""
-         emailTextfield.placeholder = emailPlaceholder
-      case pwTextfield:
-         pwTextfield.text = ""
-         pwTextfield.placeholder = pwPlaceholder
-      default:
-         break
       }
    }
 }
