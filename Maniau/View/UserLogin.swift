@@ -10,4 +10,8 @@ import Foundation
 struct UserLogin: Codable {
    let email: String
    let pw: String
+   init(_ email: String, _ pw: String) {
+      self.email = email
+      self.pw = pw
+   }
 }

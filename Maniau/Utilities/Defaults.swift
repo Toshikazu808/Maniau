@@ -8,9 +8,9 @@
 import Foundation
 
 struct Defaults {
-   static let saveAutoLogin = UserDefaults.standard
-   static let saveAutoLoginKey = "SaveAutoLogin"
+   static let autoLogin = UserDefaults.standard
+   static let autoLoginKey = "SaveAutoLogin"
    
-   static let saveUserInfo = UserDefaults.standard
-   static let saveUserInfoKey = "SavedUserInfo"
+   static let userInfo = UserDefaults.standard
+   static let userInfoKey = "SavedUserInfo"
 }

@@ -28,8 +28,8 @@ extension UIViewController {
          preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
       alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
-         Defaults.saveAutoLogin.removeObject(forKey: Defaults.saveAutoLoginKey)
-         Defaults.saveAutoLogin.setValue(true, forKey: Defaults.saveAutoLoginKey)
+         Defaults.autoLogin.removeObject(forKey: Defaults.autoLoginKey)
+         Defaults.autoLogin.setValue(true, forKey: Defaults.autoLoginKey)
       }))
       present(alert, animated: true)
    }

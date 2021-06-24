@@ -14,6 +14,7 @@ class LoginVC: UIViewController {
    @IBOutlet weak var emailTextfield: UITextField!
    @IBOutlet weak var pwTextfield: UITextField!
    @IBOutlet weak var loginBtn: UIButton!
+   var saveAutoLogin = false
    let emailPlaceholder = "email"
    let pwPlaceholder = "password"
    
@@ -52,8 +53,8 @@ class LoginVC: UIViewController {
    }
    
    private func checkSavedLoginInfo() {
-      let autoLogin = Bool(Defaults.saveAutoLogin.bool(forKey: Defaults.saveAutoLoginKey))
-      if autoLogin {
+      saveAutoLogin = Bool(Defaults.autoLogin.bool(forKey: Defaults.autoLoginKey))
+      if saveAutoLogin {
          if let (email, pw) = loadUserInfo() {
             loginUser(email, pw)
             transitionToHome()
@@ -63,7 +64,7 @@ class LoginVC: UIViewController {
    
    private func loadUserInfo() -> (String, String)? {
       var info: (String, String)? = nil
-      if let savedInfo = Defaults.saveUserInfo.object(forKey: Defaults.saveUserInfoKey) as? Data {
+      if let savedInfo = Defaults.userInfo.object(forKey: Defaults.userInfoKey) as? Data {
          let decoder = JSONDecoder()
          if let loadedInfo = try? decoder.decode(UserLogin.self, from: savedInfo) {
             info = (loadedInfo.email, loadedInfo.pw)
@@ -89,7 +90,9 @@ class LoginVC: UIViewController {
       let err = Utilities.validateFields(email, pw)
       if err == nil {
          loginUser(email, pw)
-         saveUserInfoToDefaults(email, pw)
+         if saveAutoLogin {
+            saveUserInfoToDefaults(email, pw)
+         }
          clearLoginTextFields(emailTextfield, pwTextfield)
          // Go to HomeVC via Storyboard segue
       } else {
@@ -104,9 +107,9 @@ class LoginVC: UIViewController {
    
    private func saveUserInfoToDefaults(_ email: String, _ pw: String) {
       let encoder = JSONEncoder()
-      let user = UserLogin(email: email, pw: pw)
+      let user = UserLogin(email, pw)
       if let encoded = try? encoder.encode(user) {
-         Defaults.saveUserInfo.setValue(encoded, forKey: Defaults.saveUserInfoKey)
+         Defaults.userInfo.setValue(encoded, forKey: Defaults.userInfoKey)
       }
    }
    

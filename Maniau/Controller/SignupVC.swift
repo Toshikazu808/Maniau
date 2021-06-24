@@ -19,16 +19,18 @@ class SignupVC: UIViewController {
       super.viewDidLoad()
       signupView.layer.cornerRadius = 6
       signupBtn.layer.cornerRadius = 15
+      emailTextfield.delegate = self
+      pwTextfield.delegate = self
    }
    
    @IBAction func signupTapped(_ sender: UIButton) {
       let email = emailTextfield.text ?? ""
       let pw = pwTextfield.text ?? ""
-      let textfieldError = Utilities.validateFields(email, pw)
-      if textfieldError != nil {
-         showError(textfieldError!)
-      } else {
+      let err = Utilities.validateFields(email, pw)
+      if err == nil {
          createUser(email, pw)
+      } else {
+         showError(err!)
       }
    }
    
@@ -50,11 +52,23 @@ class SignupVC: UIViewController {
                   print("Document successfully written!")
                }
             }
+            let saveAutoLogin = Bool(Defaults.autoLogin.bool(forKey: Defaults.autoLoginKey))
+            if saveAutoLogin {
+               self?.saveUserInfoToDefaults(email, pw)
+            }
             self?.clearLoginTextFields(self!.emailTextfield, self!.pwTextfield)
          }
       }
    }
-
+   
+   private func saveUserInfoToDefaults(_ email: String, _ pw: String) {
+      let encoder = JSONEncoder()
+      let user = UserLogin(email, pw)
+      if let encoded = try? encoder.encode(user) {
+         Defaults.userInfo.setValue(encoded, forKey: Defaults.userInfoKey)
+      }
+   }
+   
 }
 
 
