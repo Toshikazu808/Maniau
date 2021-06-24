@@ -8,7 +8,6 @@
 import Foundation
 
 struct Defaults {
-   static var saveLogin: Bool = false
    static let saveLoginTracker = UserDefaults.standard
    static let saveLoginKey = "SaveAutoLogin"
    

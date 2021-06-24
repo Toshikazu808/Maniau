@@ -27,6 +27,11 @@
 		BCC286822683C83700050BF8 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC286812683C83700050BF8 /* UserLogin.swift */; };
 		BCC286842683CB0900050BF8 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC286832683CB0900050BF8 /* Defaults.swift */; };
 		BCC286862683CE4000050BF8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC286852683CE4000050BF8 /* User.swift */; };
+		BCC286882683E79C00050BF8 /* DayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC286872683E79C00050BF8 /* DayVC.swift */; };
+		BCC2868A26840A2200050BF8 /* AddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2868926840A2200050BF8 /* AddVC.swift */; };
+		BCC2868C26840A3700050BF8 /* TimeSelectorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2868B26840A3700050BF8 /* TimeSelectorVC.swift */; };
+		BCC2868E26840AAA00050BF8 /* RepeatAlertTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2868D26840AAA00050BF8 /* RepeatAlertTableVC.swift */; };
+		BCC2869026840AF400050BF8 /* DateSelectorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2868F26840AF400050BF8 /* DateSelectorVC.swift */; };
 		BCD9587C2682D4F400B4A06C /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = BCD9587B2682D4F400B4A06C /* FSCalendar */; };
 		BCD958802682DBAE00B4A06C /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD9587F2682DBAE00B4A06C /* K.swift */; };
 /* End PBXBuildFile section */
@@ -52,6 +57,11 @@
 		BCC286812683C83700050BF8 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserLogin.swift; path = Maniau/View/UserLogin.swift; sourceTree = SOURCE_ROOT; };
 		BCC286832683CB0900050BF8 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		BCC286852683CE4000050BF8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BCC286872683E79C00050BF8 /* DayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayVC.swift; sourceTree = "<group>"; };
+		BCC2868926840A2200050BF8 /* AddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVC.swift; sourceTree = "<group>"; };
+		BCC2868B26840A3700050BF8 /* TimeSelectorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectorVC.swift; sourceTree = "<group>"; };
+		BCC2868D26840AAA00050BF8 /* RepeatAlertTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatAlertTableVC.swift; sourceTree = "<group>"; };
+		BCC2868F26840AF400050BF8 /* DateSelectorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorVC.swift; sourceTree = "<group>"; };
 		BCD9587F2682DBAE00B4A06C /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +119,11 @@
 				BC6DD2F42682853500C95111 /* LoginVC.swift */,
 				BC6DD30B268295C300C95111 /* SignupVC.swift */,
 				BC6DD3122682ADAE00C95111 /* HomeVC.swift */,
+				BCC2868926840A2200050BF8 /* AddVC.swift */,
+				BCC2868B26840A3700050BF8 /* TimeSelectorVC.swift */,
+				BCC2868D26840AAA00050BF8 /* RepeatAlertTableVC.swift */,
+				BCC2868F26840AF400050BF8 /* DateSelectorVC.swift */,
+				BCC286872683E79C00050BF8 /* DayVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -234,11 +249,16 @@
 				BC6DD3132682ADAE00C95111 /* HomeVC.swift in Sources */,
 				BC6DD3112682A57600C95111 /* Extensions.swift in Sources */,
 				BCC2867B2683C80E00050BF8 /* MonthTabCell.swift in Sources */,
+				BCC2868C26840A3700050BF8 /* TimeSelectorVC.swift in Sources */,
 				BC6DD2F52682853500C95111 /* LoginVC.swift in Sources */,
+				BCC2868A26840A2200050BF8 /* AddVC.swift in Sources */,
 				BC6DD2F12682853500C95111 /* AppDelegate.swift in Sources */,
 				BCC2867F2683C82900050BF8 /* DayTabCell.swift in Sources */,
 				BC6DD30F2682A51500C95111 /* Utilities.swift in Sources */,
 				BC6DD2F32682853500C95111 /* SceneDelegate.swift in Sources */,
+				BCC2868E26840AAA00050BF8 /* RepeatAlertTableVC.swift in Sources */,
+				BCC286882683E79C00050BF8 /* DayVC.swift in Sources */,
+				BCC2869026840AF400050BF8 /* DateSelectorVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

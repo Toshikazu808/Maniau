@@ -49,8 +49,8 @@ class LoginVC: UIViewController {
    }
    
    private func checkSavedLogin() {
-      Defaults.saveLogin = Bool(Defaults.saveLoginTracker.bool(forKey: Defaults.saveLoginKey))
-      if Defaults.saveLogin == false {
+      let loginSaved = Bool(Defaults.saveLoginTracker.bool(forKey: Defaults.saveLoginKey))
+      if loginSaved == false {
          askToSavePw()
       } else {
          let (email, pw) = loadUserInfo()
@@ -59,12 +59,14 @@ class LoginVC: UIViewController {
    }
    
    private func askToSavePw() {
-      let alert = UIAlertController(title: "Do you want to save your login information?", message: "Enabling automatic login will save your username and password to your device.", preferredStyle: .alert)
+      let alert = UIAlertController(
+         title: "Do you want to save your login information?",
+         message: "Enabling automatic login will save your username and password to your device.",
+         preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
       alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
-         Defaults.saveLogin = true
          Defaults.saveLoginTracker.removeObject(forKey: Defaults.saveLoginKey)
-         Defaults.saveLoginTracker.setValue(Defaults.saveLogin, forKey: Defaults.saveLoginKey)
+         Defaults.saveLoginTracker.setValue(true, forKey: Defaults.saveLoginKey)
       }))
       present(alert, animated: true)
    }

@@ -16,6 +16,7 @@ class HomeVC: UIViewController {
    @IBOutlet weak var tableView: UITableView!
    let firebaseAuth = Auth.auth()
    
+   let formatter = DateFormatter()
    let dateDays = Calendar.current.dateComponents([.day],
       from: Calendar.current.dateInterval(of: .month, for: Date())!.start,
       to: Calendar.current.dateInterval(of: .month, for: Date())!.end)
@@ -40,14 +41,10 @@ class HomeVC: UIViewController {
       return num
    }
    
-//   var schedule: [Int: [String]?] = {
-//
-//   }
-   
-   
    override func viewDidLoad() {
       super.viewDidLoad()
       self.navigationController?.isNavigationBarHidden = true
+      formatter.dateFormat = "EEEE MM-dd-YYYY"
       labelView.layer.cornerRadius = 6      
       userLabel.text = User.email
       calendar.delegate = self
@@ -60,17 +57,19 @@ class HomeVC: UIViewController {
          print("Signed out user")
          self.navigationController?.popToRootViewController(animated: true)
       } catch let signOutError as NSError {
-         print ("Error signing out: %@", signOutError)
+         print ("Error signing out: \(signOutError)")
       }
    }
+   
+   @IBAction func addTapped(_ sender: UIButton) {
+   }
+   
    
 }
 
 
 extension HomeVC: FSCalendarDelegate {
    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-      let formatter = DateFormatter()
-      formatter.dateFormat = "EEEE MM-dd-YYYY"
       let dateString = formatter.string(from: date)
       print(dateString)
    }
