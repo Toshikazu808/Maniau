@@ -114,8 +114,8 @@ class LoginVC: UIViewController {
    }
    
    private func transitionToHome() {
-      let homeVC = storyboard?.instantiateViewController(identifier: K.homeVC)
-      self.navigationController?.pushViewController(homeVC!, animated: true)
+      let homeVC = storyboard?.instantiateViewController(identifier: K.tabBarVC)
+      self.present(homeVC!, animated: true, completion: nil)
    }
 }
 

@@ -23,6 +23,10 @@ class SignupVC: UIViewController {
       pwTextfield.delegate = self
    }
    
+   @IBAction func backTapped(_ sender: UIButton) {
+      self.dismiss(animated: true, completion: nil)
+   }
+   
    @IBAction func signupTapped(_ sender: UIButton) {
       let email = emailTextfield.text ?? ""
       let pw = pwTextfield.text ?? ""

@@ -10,8 +10,6 @@ import FirebaseAuth
 import FSCalendar
 
 class HomeVC: UIViewController {
-   @IBOutlet weak var labelView: UIView!
-   @IBOutlet weak var userLabel: UILabel!
    @IBOutlet weak var calendar: FSCalendar!
    @IBOutlet weak var tableView: UITableView!
    let firebaseAuth = Auth.auth()
@@ -43,15 +41,12 @@ class HomeVC: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      self.navigationController?.isNavigationBarHidden = true
       formatter.dateFormat = "EEEE MM-dd-YYYY"
-      labelView.layer.cornerRadius = 6      
-      userLabel.text = User.email
       calendar.delegate = self
       print("days as string: \(daysInMonth)")
    }
    
-   @IBAction func logoutTapped(_ sender: UIButton) {
+   @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
       do {
          try firebaseAuth.signOut()
          print("Signed out user")
@@ -60,10 +55,6 @@ class HomeVC: UIViewController {
          print ("Error signing out: \(signOutError)")
       }
    }
-   
-   @IBAction func addTapped(_ sender: UIButton) {
-   }
-   
    
 }
 
