@@ -18,19 +18,12 @@ class AddVC: UIViewController {
    @IBOutlet weak var repeatBtn: UIButton!
    @IBOutlet weak var alertBtn: UIButton!
    
-   let titlePlaceholder = "Title"
-   let descriptionPlaceholder = "Description"
-   var selectStartTimeVC = SelectStartTimeVC()
-   var selectEndTimeVC = SelectEndTimeVC()
-   var selectRepeatVC = SelectRepeatVC()
-   var selectDateVC = SelectDateVC()
-   var selectAlertVC = SelectAlertVC()
-   
-   var startTime = "4:00 PM"
-   var endTime = "5:00 PM"
-   var repeats = "Never"
-   var alerts = "None"
-   var startDate = "Jun 24, 2021"
+   private var selectStartTimeVC = SelectStartTimeVC()
+   private var selectEndTimeVC = SelectEndTimeVC()
+   private var selectRepeatVC = SelectRepeatVC()
+   private var selectAlertVC = SelectAlertVC()
+   private var selectDateVC = SelectDateVC()
+   private var event = ScheduledEvent(startTime: "4:00 PM", endTime: "5:00 PM", repeats: "Never", alert: "None", date: "Jun 24, 2021")
    
    
    override func viewDidLoad() {
@@ -38,8 +31,22 @@ class AddVC: UIViewController {
       selectStartTimeVC.delegate = self
       selectEndTimeVC.delegate = self
       selectRepeatVC.delegate = self
-      selectDateVC.delegate = self
       selectAlertVC.delegate = self
+      selectDateVC.delegate = self
+   }
+   
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      if let destination = segue.destination as? SelectStartTimeVC {
+         destination.delegate = self
+      } else if let destination = segue.destination as? SelectEndTimeVC {
+         destination.delegate = self
+      } else if let destination = segue.destination as? SelectRepeatVC {
+         destination.delegate = self
+      } else if let destination = segue.destination as? SelectAlertVC {
+         destination.delegate = self
+      } else if let destination = segue.destination as? SelectDateVC {
+         destination.delegate = self
+      }
    }
    
    @IBAction func saveTapped(_ sender: UIBarButtonItem) {
@@ -48,7 +55,6 @@ class AddVC: UIViewController {
    }
    
 }
-
 
 extension AddVC: UITextFieldDelegate {
    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -67,19 +73,29 @@ extension AddVC: UITextFieldDelegate {
 
 extension AddVC: SelectStartTimeVCDelegate {
    func updateStartTime(time: String) {
-      startTime = time
+      event.startTime = time
+      startBtn.setTitle(event.startTime, for: .normal)
    }
 }
 
 extension AddVC: SelectEndTimeVCDelegate {
    func updateEndTime(time: String) {
-      endTime = time
+      event.endTime = time
+      endBtn.setTitle(event.endTime, for: .normal)
    }
 }
 
 extension AddVC: SelectRepeatVCDelegate {
-   func updateRepeatSelection() {
-      
+   func updateRepeatSelection(repeatSelection: String) {
+      repeatBtn.setTitle(repeatSelection, for: .normal)
+      // Set notification for selected interval
+   }
+}
+
+extension AddVC: SelectAlertVCDelegate {
+   func updateAlertSelection(alertSelection: String) {
+      alertBtn.setTitle(alertSelection, for: .normal)
+      // Set notification for selected date / time
    }
 }
 
@@ -89,8 +105,4 @@ extension AddVC: SelectDateVCDelegate {
    }
 }
 
-extension AddVC: SelectAlertVCDelegate {
-   func updateAlertSelection() {
-      
-   }
-}
+

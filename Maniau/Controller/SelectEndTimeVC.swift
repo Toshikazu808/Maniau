@@ -24,7 +24,7 @@ class SelectEndTimeVC: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      super.viewDidLoad()
+      self.tabBarController?.tabBar.isHidden = true
       for i in 1...12 {
          hrArray.append("\(i)")
       }

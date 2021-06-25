@@ -12,6 +12,7 @@ protocol SelectStartTimeVCDelegate {
 }
 
 class SelectStartTimeVC: UIViewController {
+   
    var delegate: SelectStartTimeVCDelegate?
    @IBOutlet weak var pickerView: UIPickerView!
    private var hrArray: [String] = []
@@ -23,9 +24,9 @@ class SelectStartTimeVC: UIViewController {
    }
    
    
-   
    override func viewDidLoad() {
       super.viewDidLoad()
+      self.tabBarController?.tabBar.isHidden = true
       for i in 1...12 {
          hrArray.append("\(i)")
       }
@@ -35,6 +36,8 @@ class SelectStartTimeVC: UIViewController {
       pickerView.delegate = self
       pickerView.dataSource = self
    }
+   
+   
    
    @IBAction func saveTapped(_ sender: UIBarButtonItem) {
       delegate?.updateStartTime(time: timeToTransfer)
@@ -81,7 +84,7 @@ extension SelectStartTimeVC: UIPickerViewDelegate, UIPickerViewDataSource {
       case 0:
          time.hr = "\(row)"
       case 1:
-         time.min = "\(row)"
+         time.min = Utilities.formatMinutes(num: row)
       case 2:
          if row == 0 {
             time.amPm = "AM"

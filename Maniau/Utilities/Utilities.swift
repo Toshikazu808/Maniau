@@ -30,4 +30,12 @@ struct Utilities {
       email.removeLast()
       return email
    }
+   
+   static func formatMinutes(num: Int) -> String {
+      if num < 10 {
+         return "0\(num)"
+      } else {
+         return "\(num)"
+      }
+   }
 }
