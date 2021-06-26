@@ -22,7 +22,6 @@
 		BC6DD30F2682A51500C95111 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD30E2682A51500C95111 /* Utilities.swift */; };
 		BC6DD3112682A57600C95111 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD3102682A57600C95111 /* Extensions.swift */; };
 		BC6DD3132682ADAE00C95111 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD3122682ADAE00C95111 /* HomeVC.swift */; };
-		BCA9FF1B268583D700B2A4F7 /* SelectEndTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9FF1A268583D700B2A4F7 /* SelectEndTimeVC.swift */; };
 		BCA9FF1D2685840400B2A4F7 /* SelectAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9FF1C2685840400B2A4F7 /* SelectAlertVC.swift */; };
 		BCC2867B2683C80E00050BF8 /* MonthTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC286792683C80E00050BF8 /* MonthTabCell.swift */; };
 		BCC2867C2683C80E00050BF8 /* MonthTabCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCC2867A2683C80E00050BF8 /* MonthTabCell.xib */; };
@@ -33,7 +32,6 @@
 		BCC286862683CE4000050BF8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC286852683CE4000050BF8 /* User.swift */; };
 		BCC286882683E79C00050BF8 /* DayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC286872683E79C00050BF8 /* DayVC.swift */; };
 		BCC2868A26840A2200050BF8 /* AddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2868926840A2200050BF8 /* AddVC.swift */; };
-		BCC2868C26840A3700050BF8 /* SelectStartTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2868B26840A3700050BF8 /* SelectStartTimeVC.swift */; };
 		BCC2868E26840AAA00050BF8 /* SelectRepeatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2868D26840AAA00050BF8 /* SelectRepeatVC.swift */; };
 		BCC2869026840AF400050BF8 /* SelectDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2868F26840AF400050BF8 /* SelectDateVC.swift */; };
 		BCD9587C2682D4F400B4A06C /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = BCD9587B2682D4F400B4A06C /* FSCalendar */; };
@@ -56,7 +54,6 @@
 		BC6DD30E2682A51500C95111 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		BC6DD3102682A57600C95111 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BC6DD3122682ADAE00C95111 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
-		BCA9FF1A268583D700B2A4F7 /* SelectEndTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEndTimeVC.swift; sourceTree = "<group>"; };
 		BCA9FF1C2685840400B2A4F7 /* SelectAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlertVC.swift; sourceTree = "<group>"; };
 		BCC286792683C80E00050BF8 /* MonthTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthTabCell.swift; sourceTree = "<group>"; };
 		BCC2867A2683C80E00050BF8 /* MonthTabCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthTabCell.xib; sourceTree = "<group>"; };
@@ -67,7 +64,6 @@
 		BCC286852683CE4000050BF8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BCC286872683E79C00050BF8 /* DayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayVC.swift; sourceTree = "<group>"; };
 		BCC2868926840A2200050BF8 /* AddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVC.swift; sourceTree = "<group>"; };
-		BCC2868B26840A3700050BF8 /* SelectStartTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStartTimeVC.swift; sourceTree = "<group>"; };
 		BCC2868D26840AAA00050BF8 /* SelectRepeatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRepeatVC.swift; sourceTree = "<group>"; };
 		BCC2868F26840AF400050BF8 /* SelectDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateVC.swift; sourceTree = "<group>"; };
 		BCD9587F2682DBAE00B4A06C /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
@@ -128,8 +124,6 @@
 				BC6DD30B268295C300C95111 /* SignupVC.swift */,
 				BC6DD3122682ADAE00C95111 /* HomeVC.swift */,
 				BCC2868926840A2200050BF8 /* AddVC.swift */,
-				BCC2868B26840A3700050BF8 /* SelectStartTimeVC.swift */,
-				BCA9FF1A268583D700B2A4F7 /* SelectEndTimeVC.swift */,
 				BCC2868D26840AAA00050BF8 /* SelectRepeatVC.swift */,
 				BCA9FF1C2685840400B2A4F7 /* SelectAlertVC.swift */,
 				BCC2868F26840AF400050BF8 /* SelectDateVC.swift */,
@@ -261,7 +255,6 @@
 				BC6DD3132682ADAE00C95111 /* HomeVC.swift in Sources */,
 				BC6DD3112682A57600C95111 /* Extensions.swift in Sources */,
 				BCC2867B2683C80E00050BF8 /* MonthTabCell.swift in Sources */,
-				BCC2868C26840A3700050BF8 /* SelectStartTimeVC.swift in Sources */,
 				BC6DD2F52682853500C95111 /* LoginVC.swift in Sources */,
 				BCC2868A26840A2200050BF8 /* AddVC.swift in Sources */,
 				BC036BF62686474000E4ECE8 /* TableItem.swift in Sources */,
@@ -270,7 +263,6 @@
 				BC6DD30F2682A51500C95111 /* Utilities.swift in Sources */,
 				BC6DD2F32682853500C95111 /* SceneDelegate.swift in Sources */,
 				BC036BF826867B0E00E4ECE8 /* ScheduledEvent.swift in Sources */,
-				BCA9FF1B268583D700B2A4F7 /* SelectEndTimeVC.swift in Sources */,
 				BCC2868E26840AAA00050BF8 /* SelectRepeatVC.swift in Sources */,
 				BCC286882683E79C00050BF8 /* DayVC.swift in Sources */,
 				BCC2869026840AF400050BF8 /* SelectDateVC.swift in Sources */,

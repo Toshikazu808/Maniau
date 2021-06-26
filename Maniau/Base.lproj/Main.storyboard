@@ -384,9 +384,6 @@
                                                         <state key="normal" title="Jun 23, 2021">
                                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
-                                                        <connections>
-                                                            <segue destination="GBb-KE-PJi" kind="show" id="vAr-eC-ief"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -403,7 +400,7 @@
                                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="Eto-KF-WiK" kind="show" id="HsF-X2-9Cd"/>
+                                                    <action selector="displayPicker:" destination="c3m-l5-yKN" eventType="touchUpInside" id="o35-d8-a48"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -429,14 +426,14 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="keP-IK-7ea">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="keP-IK-7ea">
                                                 <rect key="frame" x="349" y="5.6666666666666856" width="69" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="5:00 PM">
                                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="HOd-Of-loy" kind="show" id="L8w-H1-WoT"/>
+                                                    <action selector="displayPicker:" destination="c3m-l5-yKN" eventType="touchUpInside" id="SZc-dJ-zXu"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -459,7 +456,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3b-Lw-Rhs">
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3b-Lw-Rhs">
                                                 <rect key="frame" x="357.33333333333331" y="11.666666666666686" width="60.666666666666686" height="22"/>
                                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Never" image="chevron.right" catalog="system">
@@ -489,7 +486,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzt-8z-L6P">
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzt-8z-L6P">
                                                 <rect key="frame" x="362.33333333333331" y="11.666666666666686" width="55.666666666666686" height="22"/>
                                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="None" image="chevron.right" catalog="system">
@@ -512,20 +509,27 @@
                                     </view>
                                 </subviews>
                             </stackView>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zec-Sl-zMa">
+                                <rect key="frame" x="0.0" y="685" width="428" height="216"/>
+                            </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LFB-Jy-hyT"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Sp0-94-NHy" firstAttribute="top" secondItem="Qxo-mP-RQX" secondAttribute="top" id="0gQ-cd-SJ8"/>
+                            <constraint firstItem="zec-Sl-zMa" firstAttribute="leading" secondItem="Qxo-mP-RQX" secondAttribute="leading" id="5CB-io-HOz"/>
                             <constraint firstItem="s72-iU-vUf" firstAttribute="top" secondItem="Fqj-Sc-faS" secondAttribute="bottom" constant="40" id="Ac5-ev-BxA"/>
                             <constraint firstItem="LFB-Jy-hyT" firstAttribute="trailing" secondItem="Fqj-Sc-faS" secondAttribute="trailing" id="Del-6W-Ek8"/>
+                            <constraint firstItem="zec-Sl-zMa" firstAttribute="height" secondItem="Qxo-mP-RQX" secondAttribute="height" multiplier="0.233261" id="Drp-62-BVe"/>
                             <constraint firstAttribute="trailing" secondItem="Sp0-94-NHy" secondAttribute="trailing" id="OK5-NC-bDK"/>
                             <constraint firstItem="Fqj-Sc-faS" firstAttribute="top" secondItem="LFB-Jy-hyT" secondAttribute="top" constant="15" id="OMd-bw-PQj"/>
+                            <constraint firstAttribute="trailing" secondItem="zec-Sl-zMa" secondAttribute="trailing" id="REd-8o-unU"/>
                             <constraint firstItem="s72-iU-vUf" firstAttribute="leading" secondItem="LFB-Jy-hyT" secondAttribute="leading" id="bLT-E2-mU8"/>
                             <constraint firstItem="Fqj-Sc-faS" firstAttribute="leading" secondItem="LFB-Jy-hyT" secondAttribute="leading" id="ctr-gU-Z3V"/>
                             <constraint firstItem="s72-iU-vUf" firstAttribute="trailing" secondItem="LFB-Jy-hyT" secondAttribute="trailing" id="pbX-3i-LMd"/>
                             <constraint firstAttribute="bottom" secondItem="Sp0-94-NHy" secondAttribute="bottom" id="qLw-0Y-fmS"/>
                             <constraint firstItem="Sp0-94-NHy" firstAttribute="leading" secondItem="Qxo-mP-RQX" secondAttribute="leading" id="xKh-eR-4gF"/>
+                            <constraint firstAttribute="bottom" secondItem="zec-Sl-zMa" secondAttribute="bottom" constant="25" id="xW4-pA-mE2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add event" id="fPN-cb-6os">
@@ -541,6 +545,7 @@
                         <outlet property="dateBtn" destination="4f1-RK-RsX" id="zJ9-jT-DXn"/>
                         <outlet property="descriptionTF" destination="Q4e-ZD-DDn" id="mYp-5p-ObI"/>
                         <outlet property="endBtn" destination="keP-IK-7ea" id="lbu-18-86H"/>
+                        <outlet property="picker" destination="zec-Sl-zMa" id="pmM-gk-xGi"/>
                         <outlet property="repeatBtn" destination="i3b-Lw-Rhs" id="n1g-SJ-aHi"/>
                         <outlet property="startBtn" destination="uns-yV-FWk" id="MdQ-AS-CVA"/>
                         <outlet property="titleTF" destination="f8c-Sy-Wdk" id="Sex-lv-gJx"/>
@@ -550,96 +555,10 @@
             </objects>
             <point key="canvasLocation" x="1575.7009345794393" y="787.9049676025918"/>
         </scene>
-        <!--Select Start TimeVC-->
-        <scene sceneID="8UB-aF-P00">
-            <objects>
-                <viewController storyboardIdentifier="TimeSelectorVC" id="Eto-KF-WiK" customClass="SelectStartTimeVC" customModule="Maniau" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zL6-7n-yW8">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoBackground" translatesAutoresizingMaskIntoConstraints="NO" id="vao-p7-PrE">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                            </imageView>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5xy-Sy-A93">
-                                <rect key="frame" x="0.0" y="355" width="428" height="216"/>
-                            </pickerView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="hn7-mR-bvN"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="vao-p7-PrE" secondAttribute="bottom" id="6Ks-Lg-wyg"/>
-                            <constraint firstItem="5xy-Sy-A93" firstAttribute="leading" secondItem="hn7-mR-bvN" secondAttribute="leading" id="C7m-Lh-wgJ"/>
-                            <constraint firstItem="5xy-Sy-A93" firstAttribute="height" secondItem="zL6-7n-yW8" secondAttribute="height" multiplier="0.233261" id="J6p-J1-1AX"/>
-                            <constraint firstItem="5xy-Sy-A93" firstAttribute="centerY" secondItem="zL6-7n-yW8" secondAttribute="centerY" id="ONo-gU-3Xj"/>
-                            <constraint firstAttribute="trailing" secondItem="vao-p7-PrE" secondAttribute="trailing" id="X6j-Bd-7gg"/>
-                            <constraint firstItem="vao-p7-PrE" firstAttribute="top" secondItem="zL6-7n-yW8" secondAttribute="top" id="auc-Lt-Vrf"/>
-                            <constraint firstItem="vao-p7-PrE" firstAttribute="leading" secondItem="zL6-7n-yW8" secondAttribute="leading" id="kHE-H6-Sr4"/>
-                            <constraint firstItem="5xy-Sy-A93" firstAttribute="trailing" secondItem="hn7-mR-bvN" secondAttribute="trailing" id="urx-Z2-bkO"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="VSo-O7-jO9">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="iUN-3Y-b0e">
-                            <connections>
-                                <action selector="saveTapped:" destination="Eto-KF-WiK" id="FlR-ia-XHJ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="pickerView" destination="5xy-Sy-A93" id="9Gg-Dt-mHs"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LfR-fy-RkH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="181" y="1494"/>
-        </scene>
-        <!--Select End TimeVC-->
-        <scene sceneID="FzX-xQ-HVF">
-            <objects>
-                <viewController storyboardIdentifier="SelectEndTimeVC" id="HOd-Of-loy" customClass="SelectEndTimeVC" customModule="Maniau" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="AiS-5w-MuK">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoBackground" translatesAutoresizingMaskIntoConstraints="NO" id="l8t-Yc-d5M">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                            </imageView>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clC-7w-xw4">
-                                <rect key="frame" x="0.0" y="355" width="428" height="216"/>
-                            </pickerView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="YHl-VE-VAj"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="l8t-Yc-d5M" secondAttribute="bottom" id="3rF-6C-OFa"/>
-                            <constraint firstItem="clC-7w-xw4" firstAttribute="centerY" secondItem="AiS-5w-MuK" secondAttribute="centerY" id="Alz-vE-7NH"/>
-                            <constraint firstItem="clC-7w-xw4" firstAttribute="leading" secondItem="YHl-VE-VAj" secondAttribute="leading" id="Vvo-5J-jK9"/>
-                            <constraint firstItem="clC-7w-xw4" firstAttribute="trailing" secondItem="YHl-VE-VAj" secondAttribute="trailing" id="YZo-tj-M6q"/>
-                            <constraint firstItem="l8t-Yc-d5M" firstAttribute="leading" secondItem="AiS-5w-MuK" secondAttribute="leading" id="aS7-cl-cjt"/>
-                            <constraint firstAttribute="trailing" secondItem="l8t-Yc-d5M" secondAttribute="trailing" id="azh-q3-JC8"/>
-                            <constraint firstItem="l8t-Yc-d5M" firstAttribute="top" secondItem="AiS-5w-MuK" secondAttribute="top" id="okp-2R-WbR"/>
-                            <constraint firstItem="clC-7w-xw4" firstAttribute="height" secondItem="AiS-5w-MuK" secondAttribute="height" multiplier="0.233261" id="p92-72-2eE"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="Ep1-g5-z5H">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="SzI-As-Teh">
-                            <connections>
-                                <action selector="saveTapped:" destination="HOd-Of-loy" id="9S8-oO-vVb"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="pickerView" destination="clC-7w-xw4" id="eWP-nd-tqi"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KTf-gU-oRx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="878.97196261682234" y="1493.5205183585315"/>
-        </scene>
         <!--Select RepeatVC-->
         <scene sceneID="f6R-Zu-VeS">
             <objects>
-                <viewController storyboardIdentifier="SelectRepeatVC" id="mDA-g7-Jez" customClass="SelectRepeatVC" customModule="Maniau" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectRepeatVC" modalPresentationStyle="formSheet" id="mDA-g7-Jez" customClass="SelectRepeatVC" customModule="Maniau" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ltt-4d-9IY">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -905,7 +824,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0gH-ld-vL9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1575.7009345794393" y="1493.5205183585315"/>
+            <point key="canvasLocation" x="879" y="1494"/>
         </scene>
         <!--Select AlertVC-->
         <scene sceneID="aZL-cw-NgA">
@@ -1351,7 +1270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GF6-dY-wqz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2297.663551401869" y="1493.5205183585315"/>
+            <point key="canvasLocation" x="1576" y="1494"/>
         </scene>
         <!--Select DateVC-->
         <scene sceneID="N9S-AK-yi2">
@@ -1384,10 +1303,13 @@
                     <navigationItem key="navigationItem" id="QIi-EW-gm8">
                         <barButtonItem key="rightBarButtonItem" title="Save" id="CNQ-Js-IlL"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="HcI-ca-k24" id="0lZ-z8-Ray"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6XU-ra-u3F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3011" y="1494"/>
+            <point key="canvasLocation" x="2298" y="1494"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gIT-qT-9AJ">

@@ -13,10 +13,12 @@ protocol SelectDateVCDelegate {
 
 class SelectDateVC: UIViewController {
    var delegate: SelectDateVCDelegate?
+   @IBOutlet weak var datePicker: UIDatePicker!
    
    override func viewDidLoad() {
       super.viewDidLoad()
       self.tabBarController?.tabBar.isHidden = true
+//      datePicker.datePickerMode = .date
    }
    
    

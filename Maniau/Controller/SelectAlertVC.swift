@@ -8,13 +8,13 @@
 import UIKit
 
 protocol SelectAlertVCDelegate {
-   func updateAlertSelection(alertSelection: String)
+   func setAlert(_ alertSelection: String)
 }
 
 class SelectAlertVC: UIViewController {
    var delegate: SelectAlertVCDelegate?
    @IBOutlet var selectedImages: [UIImageView]! // ORDER MATTERS
-   var alertSelection: [TableItem] = [
+   private var alertSelection: [TableItem] = [
       TableItem("None", true),
       TableItem("At time of event", false),
       TableItem("5 minutes before", false),
@@ -42,7 +42,14 @@ class SelectAlertVC: UIViewController {
    }
    
    @IBAction func saveTapped(_ sender: UIBarButtonItem) {
-      
+      for i in 0..<alertSelection.count {
+         if !alertSelection[i].isSelected {
+            continue
+         } else {
+            delegate?.setAlert(alertSelection[i].label)
+         }
+      }
+      self.navigationController?.popViewController(animated: true)
    }
    
    @IBAction func cellTapped(_ sender: UIButton) {

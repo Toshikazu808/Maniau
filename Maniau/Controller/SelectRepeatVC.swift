@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SelectRepeatVCDelegate {
-   func updateRepeatSelection(repeatSelection: String)
+   func setRepeat(_ repeatSelection: String)
 }
 
 class SelectRepeatVC: UIViewController {
@@ -37,6 +37,14 @@ class SelectRepeatVC: UIViewController {
    }
    
    @IBAction func saveTapped(_ sender: UIBarButtonItem) {
+      for i in 0..<repeatSelection.count {
+         if !repeatSelection[i].isSelected {
+            continue
+         } else {
+            delegate?.setRepeat(repeatSelection[i].label)
+         }
+      }
+      self.navigationController?.popViewController(animated: true)
    }
    
    @IBAction func cellTapped(_ sender: UIButton) {
