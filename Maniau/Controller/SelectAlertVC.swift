@@ -13,7 +13,7 @@ protocol SelectAlertVCDelegate {
 
 class SelectAlertVC: UIViewController {
    var delegate: SelectAlertVCDelegate?
-   @IBOutlet var selectedImages: [UIImageView]! // ORDER MATTERS
+   @IBOutlet private var selectedImages: [UIImageView]! // ORDER MATTERS
    private var alertSelection: [TableItem] = [
       TableItem("None", true),
       TableItem("At time of event", false),

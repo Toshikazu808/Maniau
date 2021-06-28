@@ -13,8 +13,8 @@ protocol SelectRepeatVCDelegate {
 
 class SelectRepeatVC: UIViewController {
    var delegate: SelectRepeatVCDelegate?
-   @IBOutlet var selectedImages: [UIImageView]! // ORDER MATTERS
-   var repeatSelection: [TableItem] = [
+   @IBOutlet private var selectedImages: [UIImageView]! // ORDER MATTERS
+   private var repeatSelection: [TableItem] = [
       TableItem("Never", true),
       TableItem("Every Day", false),
       TableItem("Every Week", false),

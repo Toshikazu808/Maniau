@@ -378,26 +378,27 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rh5-Ce-Y68" userLabel="Date View">
                                                 <rect key="frame" x="198" y="0.0" width="150" height="45"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4f1-RK-RsX">
-                                                        <rect key="frame" x="23" y="5.6666666666666856" width="104" height="34"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                        <state key="normal" title="Jun 23, 2021">
-                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                    </button>
+                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Xp6-9R-x0r">
+                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="45"/>
+                                                        <connections>
+                                                            <action selector="dateTapped:" destination="c3m-l5-yKN" eventType="valueChanged" id="ucH-J6-8UD"/>
+                                                        </connections>
+                                                    </datePicker>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="4f1-RK-RsX" firstAttribute="centerY" secondItem="Rh5-Ce-Y68" secondAttribute="centerY" id="7oq-vX-0z6"/>
-                                                    <constraint firstItem="4f1-RK-RsX" firstAttribute="centerX" secondItem="Rh5-Ce-Y68" secondAttribute="centerX" id="HzM-f9-r8H"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Xp6-9R-x0r" secondAttribute="trailing" id="3KE-i1-AsX"/>
+                                                    <constraint firstItem="Xp6-9R-x0r" firstAttribute="leading" secondItem="Rh5-Ce-Y68" secondAttribute="leading" id="3ft-8a-2XI"/>
+                                                    <constraint firstItem="Xp6-9R-x0r" firstAttribute="top" secondItem="Rh5-Ce-Y68" secondAttribute="top" id="VmK-Qo-dW6"/>
                                                     <constraint firstAttribute="width" constant="150" id="rO3-OL-qKS"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Xp6-9R-x0r" secondAttribute="bottom" id="rrt-lv-uSK"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uns-yV-FWk">
                                                 <rect key="frame" x="349" y="5.6666666666666856" width="69" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="4:00 PM">
-                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" systemColor="linkColor"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="displayPicker:" destination="c3m-l5-yKN" eventType="touchUpInside" id="o35-d8-a48"/>
@@ -430,7 +431,7 @@
                                                 <rect key="frame" x="349" y="5.6666666666666856" width="69" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="5:00 PM">
-                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" systemColor="linkColor"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="displayPicker:" destination="c3m-l5-yKN" eventType="touchUpInside" id="SZc-dJ-zXu"/>
@@ -458,9 +459,9 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3b-Lw-Rhs">
                                                 <rect key="frame" x="357.33333333333331" y="11.666666666666686" width="60.666666666666686" height="22"/>
-                                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" systemColor="linkColor"/>
                                                 <state key="normal" title="Never" image="chevron.right" catalog="system">
-                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" systemColor="linkColor"/>
                                                 </state>
                                                 <connections>
                                                     <segue destination="mDA-g7-Jez" kind="show" id="XlB-7z-JoB"/>
@@ -488,9 +489,9 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzt-8z-L6P">
                                                 <rect key="frame" x="362.33333333333331" y="11.666666666666686" width="55.666666666666686" height="22"/>
-                                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" systemColor="linkColor"/>
                                                 <state key="normal" title="None" image="chevron.right" catalog="system">
-                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" systemColor="linkColor"/>
                                                 </state>
                                                 <connections>
                                                     <segue destination="Ri7-sH-xmH" kind="show" id="ePA-03-tIH"/>
@@ -509,6 +510,12 @@
                                     </view>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etN-q5-VTc">
+                                <rect key="frame" x="150.66666666666666" y="655" width="126.66666666666666" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zec-Sl-zMa">
                                 <rect key="frame" x="0.0" y="685" width="428" height="216"/>
                             </pickerView>
@@ -524,10 +531,12 @@
                             <constraint firstAttribute="trailing" secondItem="Sp0-94-NHy" secondAttribute="trailing" id="OK5-NC-bDK"/>
                             <constraint firstItem="Fqj-Sc-faS" firstAttribute="top" secondItem="LFB-Jy-hyT" secondAttribute="top" constant="15" id="OMd-bw-PQj"/>
                             <constraint firstAttribute="trailing" secondItem="zec-Sl-zMa" secondAttribute="trailing" id="REd-8o-unU"/>
+                            <constraint firstItem="etN-q5-VTc" firstAttribute="centerX" secondItem="zec-Sl-zMa" secondAttribute="centerX" id="SlO-zc-vxs"/>
                             <constraint firstItem="s72-iU-vUf" firstAttribute="leading" secondItem="LFB-Jy-hyT" secondAttribute="leading" id="bLT-E2-mU8"/>
                             <constraint firstItem="Fqj-Sc-faS" firstAttribute="leading" secondItem="LFB-Jy-hyT" secondAttribute="leading" id="ctr-gU-Z3V"/>
                             <constraint firstItem="s72-iU-vUf" firstAttribute="trailing" secondItem="LFB-Jy-hyT" secondAttribute="trailing" id="pbX-3i-LMd"/>
                             <constraint firstAttribute="bottom" secondItem="Sp0-94-NHy" secondAttribute="bottom" id="qLw-0Y-fmS"/>
+                            <constraint firstItem="zec-Sl-zMa" firstAttribute="top" secondItem="etN-q5-VTc" secondAttribute="bottom" id="th2-ai-LD8"/>
                             <constraint firstItem="Sp0-94-NHy" firstAttribute="leading" secondItem="Qxo-mP-RQX" secondAttribute="leading" id="xKh-eR-4gF"/>
                             <constraint firstAttribute="bottom" secondItem="zec-Sl-zMa" secondAttribute="bottom" constant="25" id="xW4-pA-mE2"/>
                         </constraints>
@@ -542,10 +551,11 @@
                     <connections>
                         <outlet property="alertBtn" destination="hzt-8z-L6P" id="Y3m-zl-k2W"/>
                         <outlet property="allDay" destination="97H-DG-i2h" id="2pH-r1-9tT"/>
-                        <outlet property="dateBtn" destination="4f1-RK-RsX" id="zJ9-jT-DXn"/>
+                        <outlet property="datePicker" destination="Xp6-9R-x0r" id="FBD-83-TnQ"/>
                         <outlet property="descriptionTF" destination="Q4e-ZD-DDn" id="mYp-5p-ObI"/>
                         <outlet property="endBtn" destination="keP-IK-7ea" id="lbu-18-86H"/>
                         <outlet property="picker" destination="zec-Sl-zMa" id="pmM-gk-xGi"/>
+                        <outlet property="pickerLabel" destination="etN-q5-VTc" id="NuT-pr-aZh"/>
                         <outlet property="repeatBtn" destination="i3b-Lw-Rhs" id="n1g-SJ-aHi"/>
                         <outlet property="startBtn" destination="uns-yV-FWk" id="MdQ-AS-CVA"/>
                         <outlet property="titleTF" destination="f8c-Sy-Wdk" id="Sex-lv-gJx"/>
@@ -1272,45 +1282,6 @@
             </objects>
             <point key="canvasLocation" x="1576" y="1494"/>
         </scene>
-        <!--Select DateVC-->
-        <scene sceneID="N9S-AK-yi2">
-            <objects>
-                <viewController storyboardIdentifier="SelectDateVC" id="GBb-KE-PJi" customClass="SelectDateVC" customModule="Maniau" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Pva-NE-OGI">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoBackground" translatesAutoresizingMaskIntoConstraints="NO" id="rIY-cb-BjP">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                            </imageView>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="HcI-ca-k24">
-                                <rect key="frame" x="0.0" y="355" width="428" height="216"/>
-                            </datePicker>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="QJS-H6-rbC"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="HcI-ca-k24" firstAttribute="leading" secondItem="QJS-H6-rbC" secondAttribute="leading" id="7po-9L-EWu"/>
-                            <constraint firstItem="HcI-ca-k24" firstAttribute="trailing" secondItem="QJS-H6-rbC" secondAttribute="trailing" id="99Q-ID-vB2"/>
-                            <constraint firstItem="HcI-ca-k24" firstAttribute="height" secondItem="Pva-NE-OGI" secondAttribute="height" multiplier="0.233261" id="B4U-Um-1FF"/>
-                            <constraint firstAttribute="bottom" secondItem="rIY-cb-BjP" secondAttribute="bottom" id="UH7-Md-Rfz"/>
-                            <constraint firstAttribute="trailing" secondItem="rIY-cb-BjP" secondAttribute="trailing" id="UI1-ah-lKK"/>
-                            <constraint firstItem="rIY-cb-BjP" firstAttribute="leading" secondItem="Pva-NE-OGI" secondAttribute="leading" id="WUq-g8-pyc"/>
-                            <constraint firstItem="rIY-cb-BjP" firstAttribute="top" secondItem="Pva-NE-OGI" secondAttribute="top" id="iND-hR-2e7"/>
-                            <constraint firstItem="HcI-ca-k24" firstAttribute="centerY" secondItem="Pva-NE-OGI" secondAttribute="centerY" id="mmZ-mp-VF8"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="QIi-EW-gm8">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="CNQ-Js-IlL"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="datePicker" destination="HcI-ca-k24" id="0lZ-z8-Ray"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6XU-ra-u3F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2298" y="1494"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gIT-qT-9AJ">
             <objects>
@@ -1357,6 +1328,9 @@
         <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

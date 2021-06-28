@@ -12,13 +12,15 @@ class AddVC: UIViewController {
    @IBOutlet weak var titleTF: UITextField!
    @IBOutlet weak var descriptionTF: UITextField!
    @IBOutlet weak var allDay: UISwitch!
-   @IBOutlet weak var dateBtn: UIButton!
+   
+   @IBOutlet weak var datePicker: UIDatePicker!
    @IBOutlet weak var startBtn: UIButton!
    @IBOutlet weak var endBtn: UIButton!
    private var startWasTapped = false
    @IBOutlet weak var repeatBtn: UIButton!
    @IBOutlet weak var alertBtn: UIButton!
    
+   @IBOutlet weak var pickerLabel: UILabel!
    @IBOutlet weak var picker: UIPickerView!
    private var viewPicker = false
    private var hrArray: [String] = []
@@ -39,10 +41,12 @@ class AddVC: UIViewController {
       self.tabBarController?.tabBar.isHidden = true
       selectRepeatVC.delegate = self
       selectAlertVC.delegate = self
+      pickerLabel.alpha = 0
       picker.alpha = 0
       makePickerArrays()
       picker.delegate = self
       picker.dataSource = self
+      datePicker.datePickerMode = .date
    }
    
    private func makePickerArrays() {
@@ -69,17 +73,25 @@ class AddVC: UIViewController {
    
    @IBAction func displayPicker(_ sender: UIButton) {
       startWasTapped = sender.tag == 0 ? true : false
+      pickerLabel.text = startWasTapped ? "Select Start Time" : "Select End Time"
       if viewPicker {
          UIView.animate(withDuration: 0.4) {
+            self.pickerLabel.alpha = 0
             self.picker.alpha = 0
          }
       } else {
          UIView.animate(withDuration: 0.4) {
+            self.pickerLabel.alpha = 1
             self.picker.alpha = 1
          }
       }
       viewPicker = viewPicker == true ? false : true
    }
+   
+   @IBAction func dateTapped(_ sender: UIDatePicker) {
+      
+   }
+   
    
 }
 

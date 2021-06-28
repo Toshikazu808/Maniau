@@ -33,7 +33,6 @@
 		BCC286882683E79C00050BF8 /* DayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC286872683E79C00050BF8 /* DayVC.swift */; };
 		BCC2868A26840A2200050BF8 /* AddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2868926840A2200050BF8 /* AddVC.swift */; };
 		BCC2868E26840AAA00050BF8 /* SelectRepeatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2868D26840AAA00050BF8 /* SelectRepeatVC.swift */; };
-		BCC2869026840AF400050BF8 /* SelectDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2868F26840AF400050BF8 /* SelectDateVC.swift */; };
 		BCD9587C2682D4F400B4A06C /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = BCD9587B2682D4F400B4A06C /* FSCalendar */; };
 		BCD958802682DBAE00B4A06C /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD9587F2682DBAE00B4A06C /* K.swift */; };
 /* End PBXBuildFile section */
@@ -65,7 +64,6 @@
 		BCC286872683E79C00050BF8 /* DayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayVC.swift; sourceTree = "<group>"; };
 		BCC2868926840A2200050BF8 /* AddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVC.swift; sourceTree = "<group>"; };
 		BCC2868D26840AAA00050BF8 /* SelectRepeatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRepeatVC.swift; sourceTree = "<group>"; };
-		BCC2868F26840AF400050BF8 /* SelectDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateVC.swift; sourceTree = "<group>"; };
 		BCD9587F2682DBAE00B4A06C /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,7 +124,6 @@
 				BCC2868926840A2200050BF8 /* AddVC.swift */,
 				BCC2868D26840AAA00050BF8 /* SelectRepeatVC.swift */,
 				BCA9FF1C2685840400B2A4F7 /* SelectAlertVC.swift */,
-				BCC2868F26840AF400050BF8 /* SelectDateVC.swift */,
 				BCC286872683E79C00050BF8 /* DayVC.swift */,
 			);
 			path = Controller;
@@ -265,7 +262,6 @@
 				BC036BF826867B0E00E4ECE8 /* ScheduledEvent.swift in Sources */,
 				BCC2868E26840AAA00050BF8 /* SelectRepeatVC.swift in Sources */,
 				BCC286882683E79C00050BF8 /* DayVC.swift in Sources */,
-				BCC2869026840AF400050BF8 /* SelectDateVC.swift in Sources */,
 				BCA9FF1D2685840400B2A4F7 /* SelectAlertVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
