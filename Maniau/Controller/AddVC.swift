@@ -34,7 +34,7 @@ class AddVC: UIViewController {
    private var selectRepeatVC = SelectRepeatVC()
    private var selectAlertVC = SelectAlertVC()
    private var event = ScheduledEvent(startTime: "4:00 PM", endTime: "5:00 PM", repeats: "Never", alert: "None", date: "Jun 24, 2021")
-   
+   private var formatter = DateFormatter()
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -89,6 +89,7 @@ class AddVC: UIViewController {
    }
    
    @IBAction func dateTapped(_ sender: UIDatePicker) {
+      event.date = sender.date.formatDate()
       
    }
    

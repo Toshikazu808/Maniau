@@ -36,10 +36,19 @@ extension UIViewController {
 }
 
 
+extension String {
+   func formatDate(date: Date) -> String {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "MMM dd, yyyy"
+      return formatter.string(from: date)
+   }
+}
+
+
 extension Date {
-   var month: String {
-      let m = DateFormatter()
-      m.dateFormat = "MMMM"
-      return m.string(from: self)
+   func formatDate() -> String {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "MMM dd, yyyy"
+      return formatter.string(from: self)
    }
 }
