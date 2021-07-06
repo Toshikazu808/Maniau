@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct ScheduledEvent {
+public struct ScheduledEvent: Codable {
+   var title: String
+   var description: String
    var startTime: String
    var endTime: String
    var repeats: String

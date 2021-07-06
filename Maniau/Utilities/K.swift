@@ -9,7 +9,8 @@ import Foundation
 
 struct K {
    static let fbUsers = "users"
+   static let schedule = "schedule"
+   
    static let tabBarVC = "TabBarController"
    static let homeVC = "HomeVC"
-   
 }

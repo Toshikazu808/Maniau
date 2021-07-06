@@ -8,7 +8,12 @@
 import UIKit
 import FirebaseFirestore
 
+protocol AddVCDelegate {
+   func updateScheduleTable(scheduleAdded: Bool)
+}
+
 class AddVC: UIViewController {
+   var delegate: AddVCDelegate?
    @IBOutlet weak var titleTF: UITextField!
    @IBOutlet weak var descriptionTF: UITextField!
    @IBOutlet weak var allDay: UISwitch!
@@ -22,7 +27,7 @@ class AddVC: UIViewController {
    
    @IBOutlet weak var pickerLabel: UILabel!
    @IBOutlet weak var picker: UIPickerView!
-   private var viewPicker = false
+   private var pickerIsSelected = false
    private var hrArray: [String] = []
    private var minArray: [String] = []
    private var ampmArray: [String] = ["AM", "PM"]
@@ -33,8 +38,16 @@ class AddVC: UIViewController {
    
    private var selectRepeatVC = SelectRepeatVC()
    private var selectAlertVC = SelectAlertVC()
-   private var event = ScheduledEvent(startTime: "4:00 PM", endTime: "5:00 PM", repeats: "Never", alert: "None", date: "Jun 24, 2021")
+   private var event = ScheduledEvent(
+      title: "",
+      description: "",
+      startTime: "4:00 PM",
+      endTime: "5:00 PM",
+      repeats: "Never",
+      alert: "None",
+      date: "Jun 24, 2021")
    private var formatter = DateFormatter()
+   private var scheduleAdded = false
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -48,6 +61,9 @@ class AddVC: UIViewController {
       picker.dataSource = self
       datePicker.datePickerMode = .date
    }
+   override var shouldAutorotate: Bool { return false }
+   override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
+   override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation { return .portrait }
    
    private func makePickerArrays() {
       for i in 1...12 {
@@ -67,14 +83,23 @@ class AddVC: UIViewController {
    }
    
    @IBAction func saveTapped(_ sender: UIBarButtonItem) {
-      // Save data to Firebase
-      self.navigationController?.popViewController(animated: true)
+      if titleTF.text != "" {
+         event.title = titleTF.text!
+         event.description = descriptionTF.text ?? ""
+         Utilities.setAlert(for: event)
+         if let err = Utilities.saveToFirebase(event) {
+            self.showError(err.localizedDescription)
+         }
+         self.navigationController?.popViewController(animated: true)
+      } else {
+         showError("Please give your event a title")
+      }
    }
    
    @IBAction func displayPicker(_ sender: UIButton) {
       startWasTapped = sender.tag == 0 ? true : false
       pickerLabel.text = startWasTapped ? "Select Start Time" : "Select End Time"
-      if viewPicker {
+      if pickerIsSelected {
          UIView.animate(withDuration: 0.4) {
             self.pickerLabel.alpha = 0
             self.picker.alpha = 0
@@ -85,15 +110,12 @@ class AddVC: UIViewController {
             self.picker.alpha = 1
          }
       }
-      viewPicker = viewPicker == true ? false : true
+      pickerIsSelected = pickerIsSelected == true ? false : true
    }
    
    @IBAction func dateTapped(_ sender: UIDatePicker) {
       event.date = sender.date.formatDate()
-      
    }
-   
-   
 }
 
 extension AddVC: UITextFieldDelegate {

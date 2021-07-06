@@ -10,6 +10,10 @@
 		BC036BF62686474000E4ECE8 /* TableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC036BF52686474000E4ECE8 /* TableItem.swift */; };
 		BC036BF826867B0E00E4ECE8 /* ScheduledEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC036BF726867B0E00E4ECE8 /* ScheduledEvent.swift */; };
 		BC394BFB268A6A36000380F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC394BFA268A6A36000380F6 /* GoogleService-Info.plist */; };
+		BC5FA16C2695016A00C76EDD /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5FA16B2695016A00C76EDD /* UIViewController.swift */; };
+		BC5FA16E2695018E00C76EDD /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5FA16D2695018E00C76EDD /* Date.swift */; };
+		BC5FA170269501A500C76EDD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5FA16F269501A500C76EDD /* String.swift */; };
+		BC5FA1722695119C00C76EDD /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5FA1712695119C00C76EDD /* UIAlertController.swift */; };
 		BC6DD2F12682853500C95111 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD2F02682853500C95111 /* AppDelegate.swift */; };
 		BC6DD2F32682853500C95111 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD2F22682853500C95111 /* SceneDelegate.swift */; };
 		BC6DD2F52682853500C95111 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD2F42682853500C95111 /* LoginVC.swift */; };
@@ -20,7 +24,6 @@
 		BC6DD30A2682890800C95111 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BC6DD3092682890800C95111 /* FirebaseFirestore */; };
 		BC6DD30C268295C300C95111 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD30B268295C300C95111 /* SignupVC.swift */; };
 		BC6DD30F2682A51500C95111 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD30E2682A51500C95111 /* Utilities.swift */; };
-		BC6DD3112682A57600C95111 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD3102682A57600C95111 /* Extensions.swift */; };
 		BC6DD3132682ADAE00C95111 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD3122682ADAE00C95111 /* HomeVC.swift */; };
 		BCA9FF1D2685840400B2A4F7 /* SelectAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9FF1C2685840400B2A4F7 /* SelectAlertVC.swift */; };
 		BCC2867B2683C80E00050BF8 /* MonthTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC286792683C80E00050BF8 /* MonthTabCell.swift */; };
@@ -41,6 +44,10 @@
 		BC036BF52686474000E4ECE8 /* TableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableItem.swift; sourceTree = "<group>"; };
 		BC036BF726867B0E00E4ECE8 /* ScheduledEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledEvent.swift; sourceTree = "<group>"; };
 		BC394BFA268A6A36000380F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BC5FA16B2695016A00C76EDD /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		BC5FA16D2695018E00C76EDD /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		BC5FA16F269501A500C76EDD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		BC5FA1712695119C00C76EDD /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		BC6DD2ED2682853500C95111 /* Maniau.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maniau.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC6DD2F02682853500C95111 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC6DD2F22682853500C95111 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,7 +58,6 @@
 		BC6DD2FE2682853800C95111 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC6DD30B268295C300C95111 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		BC6DD30E2682A51500C95111 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		BC6DD3102682A57600C95111 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BC6DD3122682ADAE00C95111 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		BCA9FF1C2685840400B2A4F7 /* SelectAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlertVC.swift; sourceTree = "<group>"; };
 		BCC286792683C80E00050BF8 /* MonthTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthTabCell.swift; sourceTree = "<group>"; };
@@ -81,6 +87,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC5FA16A2695015000C76EDD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BC5FA16B2695016A00C76EDD /* UIViewController.swift */,
+				BC5FA16D2695018E00C76EDD /* Date.swift */,
+				BC5FA16F269501A500C76EDD /* String.swift */,
+				BC5FA1712695119C00C76EDD /* UIAlertController.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		BC6DD2E42682853500C95111 = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +120,7 @@
 				BC6DD2F02682853500C95111 /* AppDelegate.swift */,
 				BC6DD2F22682853500C95111 /* SceneDelegate.swift */,
 				BC6DD2F62682853500C95111 /* Main.storyboard */,
+				BC5FA16A2695015000C76EDD /* Extensions */,
 				BCD9587E2682DB8F00B4A06C /* Utilities */,
 				BCC286782683C7DC00050BF8 /* Model */,
 				BCC286772683C7CE00050BF8 /* View */,
@@ -155,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				BC6DD30E2682A51500C95111 /* Utilities.swift */,
-				BC6DD3102682A57600C95111 /* Extensions.swift */,
 				BCD9587F2682DBAE00B4A06C /* K.swift */,
 				BCC286832683CB0900050BF8 /* Defaults.swift */,
 			);
@@ -248,17 +265,20 @@
 				BCD958802682DBAE00B4A06C /* K.swift in Sources */,
 				BCC286842683CB0900050BF8 /* Defaults.swift in Sources */,
 				BC6DD30C268295C300C95111 /* SignupVC.swift in Sources */,
+				BC5FA1722695119C00C76EDD /* UIAlertController.swift in Sources */,
 				BCC286822683C83700050BF8 /* UserLogin.swift in Sources */,
 				BC6DD3132682ADAE00C95111 /* HomeVC.swift in Sources */,
-				BC6DD3112682A57600C95111 /* Extensions.swift in Sources */,
 				BCC2867B2683C80E00050BF8 /* MonthTabCell.swift in Sources */,
 				BC6DD2F52682853500C95111 /* LoginVC.swift in Sources */,
 				BCC2868A26840A2200050BF8 /* AddVC.swift in Sources */,
 				BC036BF62686474000E4ECE8 /* TableItem.swift in Sources */,
 				BC6DD2F12682853500C95111 /* AppDelegate.swift in Sources */,
+				BC5FA170269501A500C76EDD /* String.swift in Sources */,
 				BCC2867F2683C82900050BF8 /* DayTabCell.swift in Sources */,
 				BC6DD30F2682A51500C95111 /* Utilities.swift in Sources */,
+				BC5FA16C2695016A00C76EDD /* UIViewController.swift in Sources */,
 				BC6DD2F32682853500C95111 /* SceneDelegate.swift in Sources */,
+				BC5FA16E2695018E00C76EDD /* Date.swift in Sources */,
 				BC036BF826867B0E00E4ECE8 /* ScheduledEvent.swift in Sources */,
 				BCC2868E26840AAA00050BF8 /* SelectRepeatVC.swift in Sources */,
 				BCC286882683E79C00050BF8 /* DayVC.swift in Sources */,

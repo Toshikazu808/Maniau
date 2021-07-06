@@ -46,21 +46,21 @@ class SignupVC: UIViewController {
          } else {
             print("User created successfully")
             User.email = email
-            let db = Firestore.firestore()
-            db.collection(K.fbUsers).document(result!.user.uid).setData([
-               "email": email
-            ]) { err in
-               if let err = err {
-                  print("Error writing document: \(err)")
-               } else {
-                  print("Document successfully written!")
-               }
-            }
-            let saveAutoLogin = Bool(Defaults.autoLogin.bool(forKey: Defaults.autoLoginKey))
-            if saveAutoLogin {
-               self?.saveUserInfoToDefaults(email, pw)
-            }
+            let userID = result!.user.uid
+            self?.initUserDocument(userID, email)
             self?.clearLoginTextFields(self!.emailTextfield, self!.pwTextfield)
+            self?.transitionToHome()
+         }
+      }
+   }
+   
+   private func initUserDocument(_ uid: String, _ email: String) {
+      let db = Firestore.firestore()
+      db.collection(uid).document(email).setData(["email": email]) { err in
+         if let err = err {
+            print("Error writing email document: \(err)")
+         } else {
+            print("Email document successfully written!")
          }
       }
    }
@@ -71,8 +71,7 @@ class SignupVC: UIViewController {
       if let encoded = try? encoder.encode(user) {
          Defaults.userInfo.setValue(encoded, forKey: Defaults.userInfoKey)
       }
-   }
-   
+   }   
 }
 
 

@@ -16,7 +16,7 @@ class LoginVC: UIViewController {
    @IBOutlet weak var loginBtn: UIButton!
    var saveAutoLogin = false
    let emailPlaceholder = "email"
-   let pwPlaceholder = "password"
+   let pwPlaceholder = "password"   
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -29,13 +29,18 @@ class LoginVC: UIViewController {
    
    private func getUserEmailFromFirebase() {
       let id = Auth.auth().currentUser?.uid
-      let users = Firestore.firestore().collection(K.fbUsers)
+      let users = Firestore.firestore().collection(id!)
       let doc = users.document(id!)
+      print(id!)
       doc.getDocument { [weak self] document, error in
          if let document = document, document.exists {
             let data = document.data().map(String.init(describing:)) ?? "nil"
             print("data: \(data)")
+            print("document: \(document)")
             User.email = Utilities.extractEmail(from: data)
+            self?.transitionToHome()
+         } else {
+            print("Document doesn't exist.")
             self?.transitionToHome()
          }
       }
@@ -47,13 +52,19 @@ class LoginVC: UIViewController {
          getUserEmailFromFirebase()
       } else {
          print("No current user")
-         askToSavePw()
-         checkSavedLoginInfo()
+         DispatchQueue.main.async { [weak self] in
+            if let _ = UserDefaults.standard.data(forKey: Defaults.autoLoginKey) {
+               self?.checkSavedLoginInfo()
+            } else {
+               self?.askToSavePw()
+            } // let user login like normal
+         }
       }
    }
    
    private func checkSavedLoginInfo() {
       saveAutoLogin = Bool(Defaults.autoLogin.bool(forKey: Defaults.autoLoginKey))
+      print("saveAutoLogin: \(saveAutoLogin)")
       if saveAutoLogin {
          if let (email, pw) = loadUserInfo() {
             loginUser(email, pw)
@@ -74,12 +85,17 @@ class LoginVC: UIViewController {
    }
    
    private func loginUser(_ email: String, _ pw: String) {
-      Auth.auth().signIn(withEmail: email, password: pw) { [weak self] authResult, error in
+      if let _ = UserDefaults.standard.data(forKey: Defaults.autoLoginKey) {
+         saveAutoLogin = Bool(Defaults.autoLogin.bool(forKey: Defaults.autoLoginKey))
+         if !saveAutoLogin {
+            self.askToSavePw()
+         }
+      }
+      Auth.auth().signIn(withEmail: email, password: pw) { [weak self] _, error in
          if let error = error {
             self?.showError(error.localizedDescription)
          } else {
-            print("authResult: \(String(describing: authResult))")
-            self?.getUserEmailFromFirebase()
+            self?.transitionToHome()
          }
       }
    }
@@ -90,11 +106,11 @@ class LoginVC: UIViewController {
       let err = Utilities.validateFields(email, pw)
       if err == nil {
          loginUser(email, pw)
+         saveAutoLogin = Bool(Defaults.autoLogin.bool(forKey: Defaults.autoLoginKey))
          if saveAutoLogin {
             saveUserInfoToDefaults(email, pw)
          }
          clearLoginTextFields(emailTextfield, pwTextfield)
-         // Go to HomeVC via Storyboard segue
       } else {
          showError(err!)
       }
@@ -102,7 +118,7 @@ class LoginVC: UIViewController {
    
    @IBAction func signupTapped(_ sender: UIButton) {
       clearLoginTextFields(emailTextfield, pwTextfield)
-      // Go to HomeVC via Storyboard segue
+      // Go to SignupVC via Storyboard segue
    }
    
    private func saveUserInfoToDefaults(_ email: String, _ pw: String) {
@@ -111,11 +127,6 @@ class LoginVC: UIViewController {
       if let encoded = try? encoder.encode(user) {
          Defaults.userInfo.setValue(encoded, forKey: Defaults.userInfoKey)
       }
-   }
-   
-   private func transitionToHome() {
-      let homeVC = storyboard?.instantiateViewController(identifier: K.tabBarVC)
-      self.present(homeVC!, animated: true, completion: nil)
    }
 }
 

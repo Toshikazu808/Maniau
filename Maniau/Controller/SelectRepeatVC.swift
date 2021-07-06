@@ -35,6 +35,9 @@ class SelectRepeatVC: UIViewController {
          }
       }
    }
+   override var shouldAutorotate: Bool { return false }
+   override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
+   override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation { return .portrait }
    
    @IBAction func saveTapped(_ sender: UIBarButtonItem) {
       for i in 0..<repeatSelection.count {

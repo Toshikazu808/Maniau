@@ -9,4 +9,5 @@ import Foundation
 
 struct User {
    static var email: String = ""
+   
 }
