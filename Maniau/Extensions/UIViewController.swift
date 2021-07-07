@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 extension UIViewController {
    func showError(_ error: String) {
@@ -21,6 +23,16 @@ extension UIViewController {
       pwTF.placeholder = "password"
    }
    
+   func validateFields(_ email: String, _ password: String) -> String? {
+      if email == "" {
+         return "Please enter your email."
+      }
+      if password == "" {
+         return "Please enter a password"
+      }
+      return nil
+   }
+   
    func askToSavePw() {
       let alert = UIAlertController(
          title: "Do you want to save your login information?",
@@ -29,16 +41,28 @@ extension UIViewController {
       alert.addAction(UIAlertAction(title: "No", style: .default, handler: { _ in
          Defaults.autoLogin.removeObject(forKey: Defaults.autoLoginKey)
          Defaults.autoLogin.setValue(false, forKey: Defaults.autoLoginKey)
+         print("autoLogin set value to false")
       }))
       alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
          Defaults.autoLogin.removeObject(forKey: Defaults.autoLoginKey)
          Defaults.autoLogin.setValue(true, forKey: Defaults.autoLoginKey)
+         print("autoLogin set value to true")
       }))
       self.present(alert, animated: true)
    }
    
-   func transitionToHome() {
-      let homeVC = storyboard?.instantiateViewController(identifier: K.tabBarVC)
-      self.present(homeVC!, animated: true, completion: nil)
+   func transitionToHome(_ email: String) {
+      let tabVC = storyboard?.instantiateViewController(identifier: K.tabBarVC) as! UITabBarController
+      if let vcs = tabVC.viewControllers,
+         let navVC = vcs.first as? UINavigationController,
+         let homeVC = navVC.topViewController as? HomeVC {
+         homeVC.email = email
+      }
+      self.present(tabVC, animated: true, completion: nil)
+   }
+   
+   func saveUserEmailToDefaults(_ email: String) {
+      Defaults.userInfo.removeObject(forKey: Defaults.userInfoKey)
+      Defaults.userInfo.setValue(email, forKey: Defaults.userInfoKey)
    }
 }

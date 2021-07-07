@@ -9,17 +9,7 @@ import UIKit
 import FirebaseFirestore
 import Firebase
 
-struct Utilities {
-   static func validateFields(_ email: String, _ password: String) -> String? {
-      if email == "" {
-         return "Please enter your email."
-      }
-      if password == "" {
-         return "Please enter a password"
-      }
-      return nil
-   }
-   
+struct Utilities {   
    static func extractEmail(from data: String) -> String {
       var email = data
       for char in email {
@@ -146,5 +136,16 @@ struct Utilities {
          "alert": event.alert,
          "date": event.date]
       return converted
+   }
+   
+   static func logoutUser() {
+      do {
+         try Auth.auth().signOut()
+         print("Signed out user")
+         Defaults.autoLogin.removeObject(forKey: Defaults.autoLoginKey)
+         Defaults.autoLogin.setValue(false, forKey: Defaults.autoLoginKey)
+      } catch let signOutError as NSError {
+         print("Error signing out: \(signOutError)")
+      }
    }
 }

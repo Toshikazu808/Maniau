@@ -30,7 +30,7 @@ class SignupVC: UIViewController {
    @IBAction func signupTapped(_ sender: UIButton) {
       let email = emailTextfield.text ?? ""
       let pw = pwTextfield.text ?? ""
-      let err = Utilities.validateFields(email, pw)
+      let err = validateFields(email, pw)
       if err == nil {
          createUser(email, pw)
       } else {
@@ -45,11 +45,10 @@ class SignupVC: UIViewController {
             print(err)
          } else {
             print("User created successfully")
-            User.email = email
             let userID = result!.user.uid
             self?.initUserDocument(userID, email)
             self?.clearLoginTextFields(self!.emailTextfield, self!.pwTextfield)
-            self?.transitionToHome()
+            self?.transitionToHome(email)
          }
       }
    }
@@ -64,16 +63,7 @@ class SignupVC: UIViewController {
          }
       }
    }
-   
-   private func saveUserInfoToDefaults(_ email: String, _ pw: String) {
-      let encoder = JSONEncoder()
-      let user = UserLogin(email, pw)
-      if let encoded = try? encoder.encode(user) {
-         Defaults.userInfo.setValue(encoded, forKey: Defaults.userInfoKey)
-      }
-   }   
 }
-
 
 extension SignupVC: UITextFieldDelegate {
    func textFieldShouldReturn(_ textField: UITextField) -> Bool {

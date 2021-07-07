@@ -41,6 +41,7 @@ class HomeVC: UIViewController {
       return num
    }
    private var scheduleItems: [ScheduledEvent] = []
+   var email = ""
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -60,15 +61,8 @@ class HomeVC: UIViewController {
    }
    
    @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
-      do {
-         try firebaseAuth.signOut()
-         print("Signed out user")
-         Defaults.autoLogin.removeObject(forKey: Defaults.autoLoginKey)
-         Defaults.autoLogin.setValue(false, forKey: Defaults.autoLoginKey)
-         self.dismiss(animated: true, completion: nil)
-      } catch let signOutError as NSError {
-         print ("Error signing out: \(signOutError)")
-      }
+      Utilities.logoutUser()
+      self.dismiss(animated: true, completion: nil)
    }
    
    private func loadFromFirebase() {
@@ -81,7 +75,7 @@ class HomeVC: UIViewController {
                for doc in snapshotDocuments {
                   let data = doc.data()
                   if let item = data[K.schedule] as? String {
-                     
+                     print("item: \(item)")
                   }
                }
             }
