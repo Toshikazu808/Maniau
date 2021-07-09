@@ -6,17 +6,14 @@
 //
 
 import UIKit
-import FirebaseAuth
 import Firebase
+import FirebaseAuth
 
 class LoginVC: UIViewController {
-   @IBOutlet weak var loginView: UIView!
-   @IBOutlet weak var emailTextfield: UITextField!
-   @IBOutlet weak var pwTextfield: UITextField!
-   @IBOutlet weak var loginBtn: UIButton!
-//   var saveAutoLogin = false
-   let emailPlaceholder = "email"
-   let pwPlaceholder = "password"   
+   @IBOutlet private weak var loginView: UIView!
+   @IBOutlet private weak var emailTextfield: UITextField!
+   @IBOutlet private weak var pwTextfield: UITextField!
+   @IBOutlet private weak var loginBtn: UIButton!
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -31,7 +28,9 @@ class LoginVC: UIViewController {
       if Auth.auth().currentUser != nil {
          print("User is already signed in")
          let email = loadUserEmail()
-         transitionToHome(email)
+         DispatchQueue.main.async {
+            self.transitionToHome(email)
+         }         
       } else {
          print("No current user. Tap login button to login like normal.")
       }
@@ -39,11 +38,10 @@ class LoginVC: UIViewController {
    
    private func loadUserEmail() -> String {
       var info: String = ""
-      if let savedInfo = Defaults.userInfo.object(forKey: Defaults.userInfoKey) as? Data {
-         let decoder = JSONDecoder()
-         if let loadedInfo = try? decoder.decode(UserLogin.self, from: savedInfo) {
-            info = loadedInfo.email
-         }
+      if let savedInfo = Defaults.userInfo.string(forKey: Defaults.userInfoKey) {
+         info = savedInfo
+      } else {
+         print("No email was saved")
       }
       return info
    }
@@ -52,11 +50,11 @@ class LoginVC: UIViewController {
       let email = emailTextfield.text ?? ""
       let pw = pwTextfield.text ?? ""
       let err = validateFields(email, pw)
-      if err == nil {
+      if let err = err {
+         showError(err)
+      } else {
          loginUser(email, pw)
          clearLoginTextFields(emailTextfield, pwTextfield)
-      } else {
-         showError(err!)
       }
    }
    
@@ -65,6 +63,7 @@ class LoginVC: UIViewController {
          if let error = error {
             self?.showError(error.localizedDescription)
          } else {
+            self?.saveUserEmailToDefaults(email)
             self?.transitionToHome(email)
          }
       }

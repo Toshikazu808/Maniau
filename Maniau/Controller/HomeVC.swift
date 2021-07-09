@@ -11,44 +11,20 @@ import FSCalendar
 import Firebase
 
 class HomeVC: UIViewController {
-   @IBOutlet weak var calendar: FSCalendar!
-   @IBOutlet weak var tableView: UITableView!
-   private let firebaseAuth = Auth.auth()
+   @IBOutlet private weak var calendar: FSCalendar!
+   @IBOutlet private weak var tableView: UITableView!
    private let db = Firestore.firestore()
-   
-   private let formatter = DateFormatter()
-   private let dateDays = Calendar.current.dateComponents([.day],
-      from: Calendar.current.dateInterval(of: .month, for: Date())!.start,
-      to: Calendar.current.dateInterval(of: .month, for: Date())!.end)
-   
-   private var daysInMonth: String {
-      var days = "\(dateDays)"
-      var num = ""
-      for char in days {
-         if char == " " {
-            days.removeFirst()
-            break
-         }
-         days.removeFirst()
-      }
-      for char in days {
-         if char != " " {
-            num += "\(char)"
-         } else {
-            break
-         }
-      }
-      return num
-   }
+   private let date = Date()
    private var scheduleItems: [ScheduledEvent] = []
    var email = ""
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      formatter.dateFormat = "EEEE MM-dd-YYYY"
+      self.title = email
       calendar.delegate = self
-      print("days as string: \(daysInMonth)")
-      loadFromFirebase()
+      tableView.delegate = self
+      tableView.dataSource = self
+      scheduleItems = Utilities.loadFromFirebase(viewController: self, database: db, date: date)
    }
    override var shouldAutorotate: Bool { return false }
    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
@@ -64,72 +40,42 @@ class HomeVC: UIViewController {
       Utilities.logoutUser()
       self.dismiss(animated: true, completion: nil)
    }
-   
-   private func loadFromFirebase() {
-      db.collection(K.fbUsers).order(by: "date").addSnapshotListener { [weak self] querySnapshot, error in
-         self?.scheduleItems = []
-         if let err = error {
-            print(err)
-         } else {
-            if let snapshotDocuments = querySnapshot?.documents {
-               for doc in snapshotDocuments {
-                  let data = doc.data()
-                  if let item = data[K.schedule] as? String {
-                     print("item: \(item)")
-                  }
-               }
-            }
-         }
-      }
-      
-//      let doc = db.collection(K.fbUsers).document(id!)
-//      doc.getDocument { [weak self] document, error in
-//         if let document = document, document.exists {
-//            let data = document.data().map(String.init(describing:)) ?? "nil"
-//            print("data: \(data)")
-//
-//         }
-//      }
-   }
-   
 }
 
 extension HomeVC: FSCalendarDelegate {
    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-      let dateString = formatter.string(from: date)
-      print(dateString)
+      print("date selected: \(date.formatDate())")
+      
    }
 }
 
 extension HomeVC: AddVCDelegate {
    func updateScheduleTable(scheduleAdded: Bool) {
       if scheduleAdded {
-//         tableView.reloadData()
-         
-         
+         scheduleItems = Utilities.loadFromFirebase(viewController: self, database: db, date: date)
       }
    }
 }
 
-//extension HomeVC: UITableViewDelegate, UITableViewDataSource {
-//   func numberOfSections(in tableView: UITableView) -> Int {
-//      <#code#>
-//   }
-//
-//   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//      <#code#>
-//   }
-//
-//   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//      <#code#>
-//   }
-//
-//   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//      <#code#>
-//   }
-//
+extension HomeVC: UITableViewDelegate, UITableViewDataSource {
+   func numberOfSections(in tableView: UITableView) -> Int {
+      return 1
+   }
+
+   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return scheduleItems.count
+   }
+
+   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+      return 50
+   }
+
+   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      let cell = tableView.dequeueReusableCell(withIdentifier: MonthTabCell.name, for: indexPath) as! MonthTabCell
+      return cell
+   }
+
 //   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //      <#code#>
 //   }
-//
-//}
+}

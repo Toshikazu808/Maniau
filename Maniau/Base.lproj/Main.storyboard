@@ -519,19 +519,40 @@
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zec-Sl-zMa">
                                 <rect key="frame" x="0.0" y="685" width="428" height="216"/>
                             </pickerView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CuY-JT-HKZ" userLabel="Loading View">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="QL2-sR-Brl">
+                                        <rect key="frame" x="194" y="443" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="LM5-vG-PEg"/>
+                                            <constraint firstAttribute="height" constant="40" id="cCK-2D-ckZ"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="QL2-sR-Brl" firstAttribute="centerX" secondItem="CuY-JT-HKZ" secondAttribute="centerX" id="6W4-xw-5T1"/>
+                                    <constraint firstItem="QL2-sR-Brl" firstAttribute="centerY" secondItem="CuY-JT-HKZ" secondAttribute="centerY" id="lfL-u7-qKP"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LFB-Jy-hyT"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Sp0-94-NHy" firstAttribute="top" secondItem="Qxo-mP-RQX" secondAttribute="top" id="0gQ-cd-SJ8"/>
                             <constraint firstItem="zec-Sl-zMa" firstAttribute="leading" secondItem="Qxo-mP-RQX" secondAttribute="leading" id="5CB-io-HOz"/>
+                            <constraint firstAttribute="bottom" secondItem="CuY-JT-HKZ" secondAttribute="bottom" id="AD2-nI-kqp"/>
                             <constraint firstItem="s72-iU-vUf" firstAttribute="top" secondItem="Fqj-Sc-faS" secondAttribute="bottom" constant="40" id="Ac5-ev-BxA"/>
                             <constraint firstItem="LFB-Jy-hyT" firstAttribute="trailing" secondItem="Fqj-Sc-faS" secondAttribute="trailing" id="Del-6W-Ek8"/>
                             <constraint firstItem="zec-Sl-zMa" firstAttribute="height" secondItem="Qxo-mP-RQX" secondAttribute="height" multiplier="0.233261" id="Drp-62-BVe"/>
+                            <constraint firstItem="CuY-JT-HKZ" firstAttribute="leading" secondItem="Qxo-mP-RQX" secondAttribute="leading" id="Fbn-Wz-sYL"/>
                             <constraint firstAttribute="trailing" secondItem="Sp0-94-NHy" secondAttribute="trailing" id="OK5-NC-bDK"/>
                             <constraint firstItem="Fqj-Sc-faS" firstAttribute="top" secondItem="LFB-Jy-hyT" secondAttribute="top" constant="15" id="OMd-bw-PQj"/>
                             <constraint firstAttribute="trailing" secondItem="zec-Sl-zMa" secondAttribute="trailing" id="REd-8o-unU"/>
                             <constraint firstItem="etN-q5-VTc" firstAttribute="centerX" secondItem="zec-Sl-zMa" secondAttribute="centerX" id="SlO-zc-vxs"/>
+                            <constraint firstItem="CuY-JT-HKZ" firstAttribute="top" secondItem="Qxo-mP-RQX" secondAttribute="top" id="XAK-Qn-qFN"/>
+                            <constraint firstAttribute="trailing" secondItem="CuY-JT-HKZ" secondAttribute="trailing" id="Zxb-2n-2Vu"/>
                             <constraint firstItem="s72-iU-vUf" firstAttribute="leading" secondItem="LFB-Jy-hyT" secondAttribute="leading" id="bLT-E2-mU8"/>
                             <constraint firstItem="Fqj-Sc-faS" firstAttribute="leading" secondItem="LFB-Jy-hyT" secondAttribute="leading" id="ctr-gU-Z3V"/>
                             <constraint firstItem="s72-iU-vUf" firstAttribute="trailing" secondItem="LFB-Jy-hyT" secondAttribute="trailing" id="pbX-3i-LMd"/>
@@ -554,6 +575,8 @@
                         <outlet property="datePicker" destination="Xp6-9R-x0r" id="FBD-83-TnQ"/>
                         <outlet property="descriptionTF" destination="Q4e-ZD-DDn" id="mYp-5p-ObI"/>
                         <outlet property="endBtn" destination="keP-IK-7ea" id="lbu-18-86H"/>
+                        <outlet property="loadingIndicator" destination="QL2-sR-Brl" id="waE-7h-vr8"/>
+                        <outlet property="loadingView" destination="CuY-JT-HKZ" id="N0w-Ek-Cvf"/>
                         <outlet property="picker" destination="zec-Sl-zMa" id="pmM-gk-xGi"/>
                         <outlet property="pickerLabel" destination="etN-q5-VTc" id="NuT-pr-aZh"/>
                         <outlet property="repeatBtn" destination="i3b-Lw-Rhs" id="n1g-SJ-aHi"/>
@@ -1300,7 +1323,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bKZ-Nb-0wg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1576" y="-571"/>
+            <point key="canvasLocation" x="1576" y="-570"/>
         </scene>
         <!--Month-->
         <scene sceneID="gYl-nf-CYH">

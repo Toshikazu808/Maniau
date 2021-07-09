@@ -13,4 +13,10 @@ extension Date {
       formatter.dateFormat = "MMM dd, yyyy"
       return formatter.string(from: self)
    }
+   
+   func getRelevantMonth() -> String {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "yyyy-MM"
+      return formatter.string(from: self)
+   }
 }

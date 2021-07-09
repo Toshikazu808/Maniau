@@ -12,7 +12,6 @@
 		BC394BFB268A6A36000380F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC394BFA268A6A36000380F6 /* GoogleService-Info.plist */; };
 		BC5FA16C2695016A00C76EDD /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5FA16B2695016A00C76EDD /* UIViewController.swift */; };
 		BC5FA16E2695018E00C76EDD /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5FA16D2695018E00C76EDD /* Date.swift */; };
-		BC5FA170269501A500C76EDD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5FA16F269501A500C76EDD /* String.swift */; };
 		BC5FA1722695119C00C76EDD /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5FA1712695119C00C76EDD /* UIAlertController.swift */; };
 		BC6DD2F12682853500C95111 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD2F02682853500C95111 /* AppDelegate.swift */; };
 		BC6DD2F32682853500C95111 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD2F22682853500C95111 /* SceneDelegate.swift */; };
@@ -38,6 +37,7 @@
 		BCC2868E26840AAA00050BF8 /* SelectRepeatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2868D26840AAA00050BF8 /* SelectRepeatVC.swift */; };
 		BCD9587C2682D4F400B4A06C /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = BCD9587B2682D4F400B4A06C /* FSCalendar */; };
 		BCD958802682DBAE00B4A06C /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD9587F2682DBAE00B4A06C /* K.swift */; };
+		BCDADDD32697D2630073F74B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDADDD22697D2630073F74B /* String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +46,6 @@
 		BC394BFA268A6A36000380F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BC5FA16B2695016A00C76EDD /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		BC5FA16D2695018E00C76EDD /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		BC5FA16F269501A500C76EDD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BC5FA1712695119C00C76EDD /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		BC6DD2ED2682853500C95111 /* Maniau.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maniau.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC6DD2F02682853500C95111 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +70,7 @@
 		BCC2868926840A2200050BF8 /* AddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVC.swift; sourceTree = "<group>"; };
 		BCC2868D26840AAA00050BF8 /* SelectRepeatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRepeatVC.swift; sourceTree = "<group>"; };
 		BCD9587F2682DBAE00B4A06C /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
+		BCDADDD22697D2630073F74B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +92,7 @@
 			children = (
 				BC5FA16B2695016A00C76EDD /* UIViewController.swift */,
 				BC5FA16D2695018E00C76EDD /* Date.swift */,
-				BC5FA16F269501A500C76EDD /* String.swift */,
+				BCDADDD22697D2630073F74B /* String.swift */,
 				BC5FA1712695119C00C76EDD /* UIAlertController.swift */,
 			);
 			path = Extensions;
@@ -273,7 +273,7 @@
 				BCC2868A26840A2200050BF8 /* AddVC.swift in Sources */,
 				BC036BF62686474000E4ECE8 /* TableItem.swift in Sources */,
 				BC6DD2F12682853500C95111 /* AppDelegate.swift in Sources */,
-				BC5FA170269501A500C76EDD /* String.swift in Sources */,
+				BCDADDD32697D2630073F74B /* String.swift in Sources */,
 				BCC2867F2683C82900050BF8 /* DayTabCell.swift in Sources */,
 				BC6DD30F2682A51500C95111 /* Utilities.swift in Sources */,
 				BC5FA16C2695016A00C76EDD /* UIViewController.swift in Sources */,

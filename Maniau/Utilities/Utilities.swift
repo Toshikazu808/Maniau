@@ -114,8 +114,7 @@ struct Utilities {
    static func saveToFirebase(_ event: ScheduledEvent) -> Error? {
       var error: Error? = nil
       let id = Auth.auth().currentUser?.uid
-      let path = Firestore.firestore().collection(K.fbUsers).document(id!)
-      path.setData(Utilities.convertScheduled(event), merge: true) { err in
+      Firestore.firestore().collection(id!).document(event.title).setData(Utilities.convertScheduledToDict(event), merge: true) { err in
          if let err = err {
             print(err)
             error = err
@@ -126,7 +125,7 @@ struct Utilities {
       return error
    }
    
-   private static func convertScheduled(_ event: ScheduledEvent) -> [String: String] {
+   private static func convertScheduledToDict(_ event: ScheduledEvent) -> [String: String] {
       let converted = [
          "title": event.title,
          "description": event.description,
@@ -134,6 +133,7 @@ struct Utilities {
          "endTime": event.endTime,
          "repeats": event.repeats,
          "alert": event.alert,
+         "relevantMonth": event.relevantMonth,
          "date": event.date]
       return converted
    }
@@ -147,5 +147,48 @@ struct Utilities {
       } catch let signOutError as NSError {
          print("Error signing out: \(signOutError)")
       }
+   }
+   
+   static func loadFromFirebase(viewController vc: UIViewController, database db: Firestore, date: Date) -> [ScheduledEvent] {
+      var events: [ScheduledEvent] = []
+      let id = Auth.auth().currentUser!.uid
+      
+      db.collection(id).whereField("relevantMonth", isEqualTo: date.getRelevantMonth()).getDocuments { snapshot, error in
+         if let error = error {
+            DispatchQueue.main.async {
+               vc.showError(error.localizedDescription)
+            }
+         } else if let snapshot = snapshot {
+            DispatchQueue.main.async {
+               events = Utilities.retrieveDocuments(from: snapshot)
+            }
+         }
+      }
+      return events
+   }
+   
+   private static func retrieveDocuments(from snapshot: QuerySnapshot) -> [ScheduledEvent] {
+      var events: [ScheduledEvent] = []
+      for document in snapshot.documents {
+         let data = document.data() as! [String: String]
+         let converted = Utilities.convertScheduleToStruct(data)
+         events.append(converted)
+         print("\nDocument: \(document.documentID)")
+         print(data)
+      }
+      return events
+   }
+   
+   private static func convertScheduleToStruct(_ data: [String: String]) -> ScheduledEvent {
+      let converted = ScheduledEvent(
+         title: data["title"] ?? "title unavailable",
+         description: data["description"] ?? "description unavailable",
+         startTime: data["startTime"] ?? "startTime unavailable",
+         endTime: data["endTime"] ?? "endTime unavailable",
+         repeats: data["repeats"] ?? "repeat frequency unavailable",
+         alert: data["alert"] ?? "alert time unavailable",
+         relevantMonth: data["relevantMonth"] ?? "relevantMonth unavailable",
+         date: data["date"] ?? "date unavailable")
+      return converted
    }
 }

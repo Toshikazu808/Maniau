@@ -10,10 +10,10 @@ import FirebaseAuth
 import Firebase
 
 class SignupVC: UIViewController {
-   @IBOutlet weak var signupView: UIView!
-   @IBOutlet weak var emailTextfield: UITextField!
-   @IBOutlet weak var pwTextfield: UITextField!
-   @IBOutlet weak var signupBtn: UIButton!
+   @IBOutlet private weak var signupView: UIView!
+   @IBOutlet private weak var emailTextfield: UITextField!
+   @IBOutlet private weak var pwTextfield: UITextField!
+   @IBOutlet private weak var signupBtn: UIButton!
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -31,10 +31,10 @@ class SignupVC: UIViewController {
       let email = emailTextfield.text ?? ""
       let pw = pwTextfield.text ?? ""
       let err = validateFields(email, pw)
-      if err == nil {
-         createUser(email, pw)
+      if let err = err {
+         showError(err)
       } else {
-         showError(err!)
+         createUser(email, pw)
       }
    }
    
@@ -45,6 +45,7 @@ class SignupVC: UIViewController {
             print(err)
          } else {
             print("User created successfully")
+            self?.saveUserEmailToDefaults(email)
             let userID = result!.user.uid
             self?.initUserDocument(userID, email)
             self?.clearLoginTextFields(self!.emailTextfield, self!.pwTextfield)
@@ -55,7 +56,7 @@ class SignupVC: UIViewController {
    
    private func initUserDocument(_ uid: String, _ email: String) {
       let db = Firestore.firestore()
-      db.collection(uid).document(email).setData(["email": email]) { err in
+      db.collection(uid).document(uid).setData(["email": email]) { err in
          if let err = err {
             print("Error writing email document: \(err)")
          } else {

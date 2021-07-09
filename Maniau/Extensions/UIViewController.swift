@@ -39,13 +39,9 @@ extension UIViewController {
          message: "Enabling automatic login will save your username and password to your device.",
          preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "No", style: .default, handler: { _ in
-         Defaults.autoLogin.removeObject(forKey: Defaults.autoLoginKey)
-         Defaults.autoLogin.setValue(false, forKey: Defaults.autoLoginKey)
          print("autoLogin set value to false")
       }))
       alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
-         Defaults.autoLogin.removeObject(forKey: Defaults.autoLoginKey)
-         Defaults.autoLogin.setValue(true, forKey: Defaults.autoLoginKey)
          print("autoLogin set value to true")
       }))
       self.present(alert, animated: true)
@@ -64,5 +60,17 @@ extension UIViewController {
    func saveUserEmailToDefaults(_ email: String) {
       Defaults.userInfo.removeObject(forKey: Defaults.userInfoKey)
       Defaults.userInfo.setValue(email, forKey: Defaults.userInfoKey)
+   }
+   
+   func displayLoading(with view: UIView, and indicator: UIActivityIndicatorView) {
+      if indicator.isAnimating {
+         indicator.stopAnimating()
+         indicator.alpha = 0
+         view.alpha = 0
+      } else {
+         view.alpha = 0.5
+         indicator.alpha = 1
+         indicator.startAnimating()
+      }
    }
 }

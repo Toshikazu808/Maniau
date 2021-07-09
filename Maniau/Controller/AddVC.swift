@@ -14,19 +14,22 @@ protocol AddVCDelegate {
 
 class AddVC: UIViewController {
    var delegate: AddVCDelegate?
-   @IBOutlet weak var titleTF: UITextField!
-   @IBOutlet weak var descriptionTF: UITextField!
-   @IBOutlet weak var allDay: UISwitch!
+   @IBOutlet private weak var loadingView: UIView!
+   @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
+    
+   @IBOutlet private weak var titleTF: UITextField!
+   @IBOutlet private weak var descriptionTF: UITextField!
+   @IBOutlet private weak var allDay: UISwitch!
    
-   @IBOutlet weak var datePicker: UIDatePicker!
-   @IBOutlet weak var startBtn: UIButton!
-   @IBOutlet weak var endBtn: UIButton!
+   @IBOutlet private weak var datePicker: UIDatePicker!
+   @IBOutlet private weak var startBtn: UIButton!
+   @IBOutlet private weak var endBtn: UIButton!
    private var startWasTapped = false
-   @IBOutlet weak var repeatBtn: UIButton!
-   @IBOutlet weak var alertBtn: UIButton!
+   @IBOutlet private weak var repeatBtn: UIButton!
+   @IBOutlet private weak var alertBtn: UIButton!
    
-   @IBOutlet weak var pickerLabel: UILabel!
-   @IBOutlet weak var picker: UIPickerView!
+   @IBOutlet private weak var pickerLabel: UILabel!
+   @IBOutlet private weak var picker: UIPickerView!
    private var pickerIsSelected = false
    private var hrArray: [String] = []
    private var minArray: [String] = []
@@ -45,9 +48,10 @@ class AddVC: UIViewController {
       endTime: "5:00 PM",
       repeats: "Never",
       alert: "None",
-      date: "Jun 24, 2021")
-   private var formatter = DateFormatter()
+      relevantMonth: "",
+      date: Date().formatDate())
    private var scheduleAdded = false
+   private var date = Date()
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -65,15 +69,6 @@ class AddVC: UIViewController {
    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation { return .portrait }
    
-   private func makePickerArrays() {
-      for i in 1...12 {
-         hrArray.append("\(i)")
-      }
-      for i in 0...60 {
-         minArray.append("\(i)")
-      }
-   }
-   
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       if let destination = segue.destination as? SelectRepeatVC {
          destination.delegate = self
@@ -84,15 +79,29 @@ class AddVC: UIViewController {
    
    @IBAction func saveTapped(_ sender: UIBarButtonItem) {
       if titleTF.text != "" {
+         displayLoading(with: loadingView, and: loadingIndicator)
          event.title = titleTF.text!
          event.description = descriptionTF.text ?? ""
-         Utilities.setAlert(for: event)
-         if let err = Utilities.saveToFirebase(event) {
-            self.showError(err.localizedDescription)
-         }
-         self.navigationController?.popViewController(animated: true)
+         event.relevantMonth = date.getRelevantMonth()
+//         Utilities.setAlert(for: event)
+         attemptToSaveData()
       } else {
          showError("Please give your event a title")
+      }
+   }
+   
+   private func attemptToSaveData() {
+      if let err = Utilities.saveToFirebase(event) {
+         DispatchQueue.main.async {
+            self.displayLoading(with: self.loadingView, and: self.loadingIndicator)
+            self.showError(err.localizedDescription)
+         }
+      } else {
+         DispatchQueue.main.async {
+            self.displayLoading(with: self.loadingView, and: self.loadingIndicator)
+            self.delegate?.updateScheduleTable(scheduleAdded: true)
+            self.navigationController?.popViewController(animated: true)
+         }
       }
    }
    
@@ -115,6 +124,7 @@ class AddVC: UIViewController {
    
    @IBAction func dateTapped(_ sender: UIDatePicker) {
       event.date = sender.date.formatDate()
+      print("event.date: \(event.date)")
    }
 }
 
@@ -134,6 +144,15 @@ extension AddVC: UITextFieldDelegate {
 }
 
 extension AddVC: UIPickerViewDelegate, UIPickerViewDataSource {
+   func makePickerArrays() {
+      for i in 1...12 {
+         hrArray.append("\(i)")
+      }
+      for i in 0...60 {
+         minArray.append("\(i)")
+      }
+   }
+   
    func numberOfComponents(in pickerView: UIPickerView) -> Int {
       return 3
    }
@@ -199,6 +218,3 @@ extension AddVC: SelectAlertVCDelegate {
       // Set notification for selected date / time
    }
 }
-
-
-
