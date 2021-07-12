@@ -15,7 +15,7 @@ class HomeTabVC: UIViewController {
    @IBOutlet private weak var tableView: UITableView!
    private let db = Firestore.firestore()
    private let selectedDate = Date()
-   private var scheduleItems: [ScheduledEvent] = []
+   private var thisMonthsSchedule: [ScheduledEvent] = []
    private var todaysEvents: [ScheduledEvent] = []
    private var itemIndex = 0
    var email = ""
@@ -28,8 +28,8 @@ class HomeTabVC: UIViewController {
       tableView.delegate = self
       tableView.dataSource = self
       tableView.register(UINib(nibName: MonthTabCell.name, bundle: nil), forCellReuseIdentifier: MonthTabCell.name)
-      scheduleItems = Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate)
-      todaysEvents = Utilities.filterTodaysEvents(from: scheduleItems, for: selectedDate)
+      thisMonthsSchedule = Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate)
+      todaysEvents = Utilities.filterTodaysEvents(from: thisMonthsSchedule, for: selectedDate)
       DispatchQueue.main.async {
          print("Async tableView.reloadData()")
          self.tableView.reloadData()
@@ -37,14 +37,14 @@ class HomeTabVC: UIViewController {
    }
    override func viewWillAppear(_ animated: Bool) {
       let tabbar = tabBarController as! BaseTabBarController
-      scheduleItems = tabbar.scheduleItems
+      thisMonthsSchedule = tabbar.scheduleItems
       print("\(#function) for HomeTabVC")
       print("Retrieving data from BaseTabBarController")
       print("scheduleItems printing from BaseTabBarController: \(tabbar.scheduleItems)")
    }
    override func viewWillDisappear(_ animated: Bool) {
       let tabbar = tabBarController as! BaseTabBarController
-      tabbar.scheduleItems = scheduleItems
+      tabbar.scheduleItems = thisMonthsSchedule
       print("\(#function) for HomeTabVC")
       print("Passing data to BaseTabBarController")
       print("scheduleItems printing from BaseTabBarController: \(tabbar.scheduleItems)")
@@ -58,7 +58,7 @@ class HomeTabVC: UIViewController {
          destination.delegate = self
       } else if segue.destination is DetailsVC {
          let vc = segue.destination as? DetailsVC
-         vc?.schedule = scheduleItems[itemIndex]
+         vc?.schedule = thisMonthsSchedule[itemIndex]
       } else if let destination = segue.destination as? DetailsVC {
          destination.delegate = self
       }
@@ -70,16 +70,17 @@ class HomeTabVC: UIViewController {
    }
 }
 
-extension HomeTabVC: FSCalendarDelegate { // TODO: Calendar
+extension HomeTabVC: FSCalendarDelegate {
    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
       print("date selected: \(date.formatDate())")
-      // Display tableView based on date selected
+      todaysEvents = Utilities.filterTodaysEvents(from: thisMonthsSchedule, for: date)
+      tableView.reloadData()
    }
 }
 
 extension HomeTabVC: AddVCDelegate {
    func updateScheduleTable() {
-      self.scheduleItems = Utilities.loadFromFirebase(viewController: self, database: self.db, date: self.selectedDate)
+      self.thisMonthsSchedule = Utilities.loadFromFirebase(viewController: self, database: self.db, date: self.selectedDate)
       DispatchQueue.main.async {
          self.tableView.reloadData()
       }
@@ -98,7 +99,7 @@ extension HomeTabVC: UITableViewDelegate, UITableViewDataSource {
    }
 
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return scheduleItems.count
+      return thisMonthsSchedule.count
    }
 
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -106,14 +107,13 @@ extension HomeTabVC: UITableViewDelegate, UITableViewDataSource {
    }
 
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(withIdentifier: MonthTabCell.name, for: indexPath) as! MonthTabCell
-      // TODO: Configure cell to display only selected day items
+      let cell = tableView.dequeueReusableCell(withIdentifier: MonthTabCell.name, for: indexPath) as! MonthTabCell      
       cell.configure(
-         color: scheduleItems[indexPath.row].color,
-         title: scheduleItems[indexPath.row].title,
-         details: scheduleItems[indexPath.row].description,
-         start: scheduleItems[indexPath.row].startTime,
-         end: scheduleItems[indexPath.row].endTime)
+         color: todaysEvents[indexPath.row].color,
+         title: todaysEvents[indexPath.row].title,
+         details: todaysEvents[indexPath.row].description,
+         start: todaysEvents[indexPath.row].startTime,
+         end: todaysEvents[indexPath.row].endTime)
       return cell
    }
 
