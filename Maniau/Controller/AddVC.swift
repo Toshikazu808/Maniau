@@ -9,14 +9,16 @@ import UIKit
 import FirebaseFirestore
 
 protocol AddVCDelegate {
-   func updateScheduleTable(scheduleAdded: Bool)
+   func updateScheduleTable()
 }
 
 class AddVC: UIViewController {
    var delegate: AddVCDelegate?
    @IBOutlet private weak var loadingView: UIView!
    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
-    
+   
+   var updateItem: Bool = false
+   var prefillTF: String = ""
    @IBOutlet private weak var titleTF: UITextField!
    @IBOutlet private weak var descriptionTF: UITextField!
    @IBOutlet private weak var allDay: UISwitch!
@@ -27,6 +29,11 @@ class AddVC: UIViewController {
    private var startWasTapped = false
    @IBOutlet private weak var repeatBtn: UIButton!
    @IBOutlet private weak var alertBtn: UIButton!
+   @IBOutlet private weak var colorBtn: UIButton!
+   
+   @IBOutlet weak var pickerBackground: UIView!
+   @IBOutlet weak var colorPickerView: UIView!
+   @IBOutlet var colorButtons: [UIButton]!
    
    @IBOutlet private weak var pickerLabel: UILabel!
    @IBOutlet private weak var picker: UIPickerView!
@@ -49,7 +56,10 @@ class AddVC: UIViewController {
       repeats: "Never",
       alert: "None",
       relevantMonth: "",
-      date: Date().formatDate())
+      date: Date().formatDate(),
+      selectedDay: Date().getSelectedDay(),
+      dayOfWeek: Date().formatDayOfWeek(),
+      color: "Teal")
    private var scheduleAdded = false
    private var date = Date()
    
@@ -58,12 +68,15 @@ class AddVC: UIViewController {
       self.tabBarController?.tabBar.isHidden = true
       selectRepeatVC.delegate = self
       selectAlertVC.delegate = self
-      pickerLabel.alpha = 0
-      picker.alpha = 0
       makePickerArrays()
       picker.delegate = self
       picker.dataSource = self
       datePicker.datePickerMode = .date
+      let tapBackground = UITapGestureRecognizer(
+         target: self,
+         action: #selector(backgroundTapped))
+      pickerBackground.addGestureRecognizer(tapBackground)
+      colorBtn.layer.cornerRadius = 3
    }
    override var shouldAutorotate: Bool { return false }
    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
@@ -77,13 +90,13 @@ class AddVC: UIViewController {
       }
    }
    
-   @IBAction func saveTapped(_ sender: UIBarButtonItem) {
+   @IBAction private func saveTapped(_ sender: UIBarButtonItem) {
       if titleTF.text != "" {
          displayLoading(with: loadingView, and: loadingIndicator)
          event.title = titleTF.text!
          event.description = descriptionTF.text ?? ""
          event.relevantMonth = date.getRelevantMonth()
-//         Utilities.setAlert(for: event)
+         //         Utilities.setAlert(for: event)
          attemptToSaveData()
       } else {
          showError("Please give your event a title")
@@ -91,6 +104,14 @@ class AddVC: UIViewController {
    }
    
    private func attemptToSaveData() {
+      if !updateItem {
+         saveSequence()
+      } else {
+         updateSequence()
+      }
+   }
+   
+   private func saveSequence() {
       if let err = Utilities.saveToFirebase(event) {
          DispatchQueue.main.async {
             self.displayLoading(with: self.loadingView, and: self.loadingIndicator)
@@ -99,32 +120,90 @@ class AddVC: UIViewController {
       } else {
          DispatchQueue.main.async {
             self.displayLoading(with: self.loadingView, and: self.loadingIndicator)
-            self.delegate?.updateScheduleTable(scheduleAdded: true)
-            self.navigationController?.popViewController(animated: true)
+            self.delegate?.updateScheduleTable()
+            self.navigationController?.popToRootViewController(animated: true)
          }
       }
    }
    
-   @IBAction func displayPicker(_ sender: UIButton) {
-      startWasTapped = sender.tag == 0 ? true : false
-      pickerLabel.text = startWasTapped ? "Select Start Time" : "Select End Time"
-      if pickerIsSelected {
-         UIView.animate(withDuration: 0.4) {
-            self.pickerLabel.alpha = 0
-            self.picker.alpha = 0
+   private func updateSequence() {
+      if let err = Utilities.updateToFirebase(event, docID: prefillTF) {
+         DispatchQueue.main.async {
+            self.displayLoading(with: self.loadingView, and: self.loadingIndicator)
+            self.showError(err.localizedDescription)
          }
       } else {
-         UIView.animate(withDuration: 0.4) {
-            self.pickerLabel.alpha = 1
-            self.picker.alpha = 1
+         DispatchQueue.main.async {
+            self.displayLoading(with: self.loadingView, and: self.loadingIndicator)
+            self.delegate?.updateScheduleTable()
+            self.navigationController?.popToRootViewController(animated: true)
          }
       }
-      pickerIsSelected = pickerIsSelected == true ? false : true
    }
    
-   @IBAction func dateTapped(_ sender: UIDatePicker) {
+   @IBAction private func dateTapped(_ sender: UIDatePicker) {
       event.date = sender.date.formatDate()
+      event.selectedDay = sender.date.getSelectedDay()
+      event.dayOfWeek = sender.date.formatDayOfWeek()
       print("event.date: \(event.date)")
+   }
+   
+   @IBAction private func displayPicker(_ sender: UIButton) {
+      startWasTapped = sender.tag == 0 ? true : false
+      pickerLabel.text = startWasTapped ? "Select Start Time" : "Select End Time"
+      Animations.fadeInViews(
+         background: pickerBackground,
+         views: [pickerLabel, picker],
+         collection: nil)
+      pickerIsSelected = true
+   }
+      
+   @IBAction private func colorTapped(_ sender: UIButton) {
+      Animations.fadeInViews(
+         background: pickerBackground,
+         views: [colorPickerView],
+         collection: colorButtons)
+   }
+   
+   @objc private func backgroundTapped() {
+      if pickerIsSelected {
+         Animations.fadeOutViews(
+            background: pickerBackground,
+            views: [pickerLabel, picker],
+            collection: nil)
+         pickerIsSelected = false
+      } else {
+         Animations.fadeOutViews(
+            background: pickerBackground,
+            views: [colorPickerView],
+            collection: colorButtons)
+      }
+   }
+   
+   @IBAction private func chosenColorTapped(_ sender: UIButton) {
+      switch sender.tag {
+      case 0:
+         event.color = "Blue"
+      case 1:
+         event.color = "Teal"
+      case 2:
+         event.color = "Green"
+      case 3:
+         event.color = "Orange"
+      case 4:
+         event.color = "Red"
+      case 5:
+         event.color = "Yellow"
+      case 6:
+         event.color = "Gray"
+      default:
+         event.color = "Teal"
+      }
+      colorBtn.backgroundColor = Animations.convertColorString(event.color)
+      Animations.fadeOutViews(
+         background: pickerBackground,
+         views: [colorPickerView],
+         collection: colorButtons)
    }
 }
 

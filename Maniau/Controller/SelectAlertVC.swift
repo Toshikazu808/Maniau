@@ -44,7 +44,7 @@ class SelectAlertVC: UIViewController {
    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation { return .portrait }
    
-   @IBAction func saveTapped(_ sender: UIBarButtonItem) {
+   @IBAction private func saveTapped(_ sender: UIBarButtonItem) {
       for i in 0..<alertSelection.count {
          if !alertSelection[i].isSelected {
             continue
@@ -55,7 +55,7 @@ class SelectAlertVC: UIViewController {
       self.navigationController?.popViewController(animated: true)
    }
    
-   @IBAction func cellTapped(_ sender: UIButton) {
+   @IBAction private func cellTapped(_ sender: UIButton) {
       alertSelection[sender.tag].isSelected = true
       selectedImages[sender.tag].alpha = 1
       for i in 0..<alertSelection.count {
@@ -66,5 +66,4 @@ class SelectAlertVC: UIViewController {
          selectedImages[i].alpha = 0
       }
    }
-   
 }

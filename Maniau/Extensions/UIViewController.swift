@@ -51,7 +51,7 @@ extension UIViewController {
       let tabVC = storyboard?.instantiateViewController(identifier: K.tabBarVC) as! UITabBarController
       if let vcs = tabVC.viewControllers,
          let navVC = vcs.first as? UINavigationController,
-         let homeVC = navVC.topViewController as? HomeVC {
+         let homeVC = navVC.topViewController as? HomeTabVC {
          homeVC.email = email
       }
       self.present(tabVC, animated: true, completion: nil)

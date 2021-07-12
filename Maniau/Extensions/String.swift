@@ -61,4 +61,16 @@ extension String {
          fatalError("Unable to convert month: String to month: Int")
       }
    }
+   
+   func timeStringToDouble() -> Double {
+      var decimalTime: String = ""
+      for char in self {
+         if char == String.Element(":") {
+            decimalTime.append(".")
+         } else {
+            decimalTime.append("\(char)")
+         }
+      }
+      return Double(decimalTime)!
+   }
 }

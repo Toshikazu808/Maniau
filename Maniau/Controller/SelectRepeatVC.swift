@@ -39,7 +39,7 @@ class SelectRepeatVC: UIViewController {
    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation { return .portrait }
    
-   @IBAction func saveTapped(_ sender: UIBarButtonItem) {
+   @IBAction private func saveTapped(_ sender: UIBarButtonItem) {
       for i in 0..<repeatSelection.count {
          if !repeatSelection[i].isSelected {
             continue
@@ -50,7 +50,7 @@ class SelectRepeatVC: UIViewController {
       self.navigationController?.popViewController(animated: true)
    }
    
-   @IBAction func cellTapped(_ sender: UIButton) {
+   @IBAction private func cellTapped(_ sender: UIButton) {
       repeatSelection[sender.tag].isSelected = true
       selectedImages[sender.tag].alpha = 1
       
@@ -62,7 +62,5 @@ class SelectRepeatVC: UIViewController {
          selectedImages[i].alpha = 0
       }
    }
-   
-   
 }
 

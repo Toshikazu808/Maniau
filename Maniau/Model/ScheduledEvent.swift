@@ -15,5 +15,8 @@ struct ScheduledEvent: Codable {
    var repeats: String
    var alert: String
    var relevantMonth: String
-   var date: String
+   var date: String // example: Jul 10, 2021
+   var selectedDay: String
+   var dayOfWeek: String
+   var color: String
 }

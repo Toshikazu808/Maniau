@@ -125,6 +125,20 @@ struct Utilities {
       return error
    }
    
+   static func updateToFirebase(_ event: ScheduledEvent, docID: String) -> Error? {
+      var error: Error? = nil
+      let id = Auth.auth().currentUser?.uid
+      Firestore.firestore().collection(id!).document(docID).setData(Utilities.convertScheduledToDict(event), merge: false) { err in
+         if let err = err {
+            print(err)
+            error = err
+         } else {
+            print("Successfully updated document")
+         }
+      }
+      return error
+   }
+   
    private static func convertScheduledToDict(_ event: ScheduledEvent) -> [String: String] {
       let converted = [
          "title": event.title,
@@ -134,7 +148,10 @@ struct Utilities {
          "repeats": event.repeats,
          "alert": event.alert,
          "relevantMonth": event.relevantMonth,
-         "date": event.date]
+         "date": event.date,
+         "selectedDay": event.selectedDay,
+         "dayOfWeek": event.dayOfWeek,
+         "color": event.color]
       return converted
    }
    
@@ -188,7 +205,84 @@ struct Utilities {
          repeats: data["repeats"] ?? "repeat frequency unavailable",
          alert: data["alert"] ?? "alert time unavailable",
          relevantMonth: data["relevantMonth"] ?? "relevantMonth unavailable",
-         date: data["date"] ?? "date unavailable")
+         date: data["date"] ?? "date unavailable",
+         selectedDay: data["selectedDay"] ?? "selectedDay unavailable",
+         dayOfWeek: data["dayOfWeek"] ?? "dayOfWeek unavailable",
+         color: data["color"] ?? "color unavailable")
       return converted
+   }
+   
+   static func filterTodaysEvents(from scheduleItems: [ScheduledEvent], for date: Date) -> [ScheduledEvent] {
+      var items: [ScheduledEvent] = []
+      let selectedDay: String = date.getSelectedDay()
+      for i in 0..<scheduleItems.count {
+         if scheduleItems[i].selectedDay == selectedDay {
+            items.append(scheduleItems[i])
+         }
+      }
+      items = Utilities.sortItems(items: items)
+      return items
+   }
+   
+   private static func sortItems(items: [ScheduledEvent]) -> [ScheduledEvent] {
+      guard items.count > 1 else { return items }
+      var newArray: [Double] = Utilities.convertScheduleToSortable(items)
+      newArray = Utilities.mergeSort(newArray)
+      return Utilities.rearrangeItems(compare: newArray, to: items)
+   }
+   
+   private static func convertScheduleToSortable(_ items: [ScheduledEvent]) -> [Double] {
+      var newArray: [Double] = []
+      items.forEach { item in
+         newArray.append(item.startTime.timeStringToDouble())
+      }
+      return newArray
+   }
+   
+   private static func mergeSort(_ array: [Double]) -> [Double] {
+      guard array.count > 1 else { return array }
+      let leftArray = Array(array[0..<array.count / 2])
+      let rightArray = Array(array[array.count / 2..<array.count])
+      return merge(
+         left: mergeSort(leftArray),
+         right: mergeSort(rightArray))
+   }
+   
+   private static func merge(left: [Double], right: [Double]) -> [Double] {
+      var mergedArray: [Double] = []
+      var left = left
+      var right = right
+      while left.count > 0 && right.count > 0 {
+         if left.first! < right.first! {
+            mergedArray.append(left.removeFirst())
+         } else {
+            mergedArray.append(right.removeFirst())
+         }
+      }
+      return mergedArray + left + right
+   }
+   
+   private static func rearrangeItems(compare newArray: [Double], to items: [ScheduledEvent]) -> [ScheduledEvent] {
+      let sortedStringArray = Utilities.convertToSortedString(newArray)
+      var sortedSchedule: [ScheduledEvent] = []
+      var j = 0
+      while sortedSchedule.count < items.count {
+         for i in 0..<items.count {
+            if sortedStringArray[j] == items[i].startTime {
+               sortedSchedule.append(items[i])
+               break
+            }
+         }
+         j += 1
+      }
+      return sortedSchedule
+   }
+   
+   private static func convertToSortedString(_ sortedArray: [Double]) -> [String] {
+      var stringArray: [String] = []
+      sortedArray.forEach { item in
+         stringArray.append(item.timeDoubleToString())
+      }
+      return stringArray
    }
 }
