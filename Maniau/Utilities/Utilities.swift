@@ -166,7 +166,7 @@ struct Utilities {
       }
    }
    
-   static func loadFromFirebase(viewController vc: UIViewController, database db: Firestore, date: Date) -> [ScheduledEvent] {
+   static func loadFromFirebase(viewController vc: UIViewController, database db: Firestore, date: Date, _ completion: @escaping ([ScheduledEvent]) -> Void ) {
       var events: [ScheduledEvent] = []
       let id = Auth.auth().currentUser!.uid
       
@@ -178,10 +178,14 @@ struct Utilities {
          } else if let snapshot = snapshot {
             DispatchQueue.main.async {
                events = Utilities.retrieveDocuments(from: snapshot)
+               completion(events)
             }
          }
       }
-      return events
+      // We want to wait for data before returning events
+      
+//      print("events: \(events)")
+//      return events
    }
    
    private static func retrieveDocuments(from snapshot: QuerySnapshot) -> [ScheduledEvent] {
@@ -190,8 +194,6 @@ struct Utilities {
          let data = document.data() as! [String: String]
          let converted = Utilities.convertScheduleToStruct(data)
          events.append(converted)
-         print("\nDocument: \(document.documentID)")
-         print(data)
       }
       return events
    }

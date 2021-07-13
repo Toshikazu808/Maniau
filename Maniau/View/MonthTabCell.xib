@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FHY-Oc-9q9" userLabel="Color View">
-                        <rect key="frame" x="4" y="4" width="8" height="76"/>
+                        <rect key="frame" x="4" y="5" width="8" height="74"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="8" id="pps-dC-FSQ"/>
@@ -66,9 +66,9 @@
                     <constraint firstAttribute="trailing" secondItem="jci-rE-taW" secondAttribute="trailing" constant="15" id="009-K3-wrb"/>
                     <constraint firstAttribute="bottom" secondItem="jci-rE-taW" secondAttribute="bottom" constant="15" id="ACN-xX-xiD"/>
                     <constraint firstItem="jci-rE-taW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Ciu-ib-Q5V"/>
-                    <constraint firstAttribute="bottom" secondItem="FHY-Oc-9q9" secondAttribute="bottom" constant="4" id="H8G-sI-bC7"/>
+                    <constraint firstAttribute="bottom" secondItem="FHY-Oc-9q9" secondAttribute="bottom" constant="5" id="H8G-sI-bC7"/>
                     <constraint firstAttribute="bottom" secondItem="9Jm-Xq-mzu" secondAttribute="bottom" constant="15" id="HIU-h6-yZj"/>
-                    <constraint firstItem="FHY-Oc-9q9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="PXh-WK-ZtQ"/>
+                    <constraint firstItem="FHY-Oc-9q9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="PXh-WK-ZtQ"/>
                     <constraint firstItem="9Jm-Xq-mzu" firstAttribute="leading" secondItem="FHY-Oc-9q9" secondAttribute="trailing" constant="5" id="cNa-6G-LrV"/>
                     <constraint firstItem="FHY-Oc-9q9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="dOv-Vp-gB4"/>
                     <constraint firstItem="9Jm-Xq-mzu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="m2r-6B-RCI"/>

@@ -17,7 +17,7 @@ class MonthTabCell: UITableViewCell {
    
    override func awakeFromNib() {
       super.awakeFromNib()
-      colorView.layer.cornerRadius = 3
+      colorView.layer.cornerRadius = 4
       colorView.backgroundColor = .systemTeal
    }
    override func setSelected(_ selected: Bool, animated: Bool) {

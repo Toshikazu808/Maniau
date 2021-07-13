@@ -734,7 +734,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9sP-Ed-YfI">
-                                <rect key="frame" x="20" y="176" width="388" height="324"/>
+                                <rect key="frame" x="20" y="175.99999999999997" width="388" height="370.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6o-gP-NXZ">
@@ -792,7 +792,7 @@
                             <constraint firstItem="GJq-Fd-4lX" firstAttribute="leading" secondItem="O3I-HM-n6X" secondAttribute="leading" constant="20" id="f2W-8o-Psj"/>
                             <constraint firstAttribute="trailing" secondItem="EtA-bS-4fv" secondAttribute="trailing" constant="30" id="lma-t5-mgG"/>
                             <constraint firstItem="EtA-bS-4fv" firstAttribute="centerY" secondItem="G93-9L-ME1" secondAttribute="centerY" id="vtC-EX-5no"/>
-                            <constraint firstItem="9sP-Ed-YfI" firstAttribute="height" secondItem="G93-9L-ME1" secondAttribute="height" multiplier="0.35" id="wqI-Wl-rUy"/>
+                            <constraint firstItem="9sP-Ed-YfI" firstAttribute="height" secondItem="G93-9L-ME1" secondAttribute="height" multiplier="0.4" id="wqI-Wl-rUy"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Event Details" id="60Y-Wb-ETb">
@@ -1572,7 +1572,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="j1e-vC-TzW"/>
+        <segue reference="PJK-jg-v7P"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="LogoBackground" width="341.33334350585938" height="455.33334350585938"/>

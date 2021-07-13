@@ -28,14 +28,12 @@ class HomeTabVC: UIViewController {
       tableView.delegate = self
       tableView.dataSource = self
       tableView.register(UINib(nibName: MonthTabCell.name, bundle: nil), forCellReuseIdentifier: MonthTabCell.name)
-      thisMonthsSchedule = Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate)
-      todaysEvents = Utilities.filterTodaysEvents(from: thisMonthsSchedule, for: selectedDate)
-      DispatchQueue.main.async {
-         print("Async tableView.reloadData()")
-         self.tableView.reloadData()
+      Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate) { [weak self] retrievedSchedule in
+         self?.thisMonthsSchedule = retrievedSchedule
+         self?.todaysEvents = Utilities.filterTodaysEvents(from: self!.thisMonthsSchedule, for: self!.selectedDate)
       }
    }
-   override func viewWillAppear(_ animated: Bool) {
+   override func viewDidAppear(_ animated: Bool) {
       let tabbar = tabBarController as! BaseTabBarController
       thisMonthsSchedule = tabbar.scheduleItems
       print("\(#function) for HomeTabVC")
@@ -72,7 +70,6 @@ class HomeTabVC: UIViewController {
 
 extension HomeTabVC: FSCalendarDelegate {
    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-      print("date selected: \(date.formatDate())")
       todaysEvents = Utilities.filterTodaysEvents(from: thisMonthsSchedule, for: date)
       tableView.reloadData()
    }
@@ -80,15 +77,15 @@ extension HomeTabVC: FSCalendarDelegate {
 
 extension HomeTabVC: AddVCDelegate {
    func updateScheduleTable() {
-      self.thisMonthsSchedule = Utilities.loadFromFirebase(viewController: self, database: self.db, date: self.selectedDate)
-      DispatchQueue.main.async {
-         self.tableView.reloadData()
+      Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate) { [weak self] retrievedSchedule in
+         self?.thisMonthsSchedule = retrievedSchedule
+         self?.tableView.reloadData()
       }
    }
 }
 
 extension HomeTabVC: DetailsVCDelegate {
-   func deleteAndUpdate() {
+   func deleteAndUpdate() { // TODO
       print("Item deleted, update tableView")
    }
 }
@@ -103,11 +100,12 @@ extension HomeTabVC: UITableViewDelegate, UITableViewDataSource {
    }
 
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-      return 50
+      return 77
    }
 
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(withIdentifier: MonthTabCell.name, for: indexPath) as! MonthTabCell      
+      let cell = tableView.dequeueReusableCell(
+         withIdentifier: MonthTabCell.name, for: indexPath) as! MonthTabCell
       cell.configure(
          color: todaysEvents[indexPath.row].color,
          title: todaysEvents[indexPath.row].title,

@@ -26,6 +26,7 @@ class DetailsVC: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
+      print(#function)
       self.tabBarController?.tabBar.isHidden = true
       if let schedule = schedule {
          titleLabel.text = schedule.title
@@ -37,6 +38,8 @@ class DetailsVC: UIViewController {
             schedule.alert,
             schedule.color]
       }
+      print("")
+      tableView.backgroundColor = .clear
       tableView.delegate = self
       tableView.dataSource = self
       tableView.register(UINib(nibName: EventDetailsCell.name, bundle: nil), forCellReuseIdentifier: EventDetailsCell.name)
@@ -88,8 +91,12 @@ extension DetailsVC: UITableViewDelegate, UITableViewDataSource {
    }
    
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailsCell.name, for: indexPath) as! EventDetailsCell
-      cell.configure(label: titles[indexPath.row], selection: selections[indexPath.row])
+      let cell = tableView.dequeueReusableCell(
+         withIdentifier: EventDetailsCell.name,
+         for: indexPath) as! EventDetailsCell
+      cell.configure(
+         label: titles[indexPath.row],
+         selection: selections[indexPath.row])
       return cell
    }
 }

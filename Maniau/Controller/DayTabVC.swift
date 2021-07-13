@@ -15,17 +15,17 @@ class DayTabVC: UIViewController {
       super.viewDidLoad()
       
    }
-   override func viewWillAppear(_ animated: Bool) {
+   override func viewDidAppear(_ animated: Bool) {
       let tabbar = tabBarController as! BaseTabBarController
       scheduleItems = tabbar.scheduleItems
-      print("\(#function) for HomeTabVC")
+      print("\(#function) for DayTabVC")
       print("Retrieving data from BaseTabBarController")
       print("scheduleItems printing from BaseTabBarController: \(tabbar.scheduleItems)")
    }
    override func viewWillDisappear(_ animated: Bool) {
       let tabbar = tabBarController as! BaseTabBarController
       tabbar.scheduleItems = scheduleItems
-      print("\(#function) for HomeTabVC")
+      print("\(#function) for DayTabVC")
       print("Passing data to BaseTabBarController")
       print("scheduleItems printing from BaseTabBarController: \(tabbar.scheduleItems)")
    }
