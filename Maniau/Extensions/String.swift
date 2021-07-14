@@ -64,7 +64,6 @@ extension String {
    
    func timeStringToDouble() -> Double {
       var hour: Double = 0
-      
       var hourStr = ""
       var minuteStr = ""
       var hitDecimal = false

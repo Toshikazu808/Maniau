@@ -220,20 +220,11 @@ struct Utilities {
    
    private static func sortItems(items: [ScheduledEvent]) -> [ScheduledEvent] {
       guard items.count > 1 else { return items }
-      var sortedArray: [Double] = Utilities.convertScheduleToSortable(items)
-      sortedArray = Utilities.mergeSort(sortedArray)
+      let sortedArray: [ScheduledEvent] = Utilities.mergeSort(items)
       return Utilities.rearrangeItems(compare: sortedArray, to: items)
    }
    
-   private static func convertScheduleToSortable(_ items: [ScheduledEvent]) -> [Double] {
-      var newArray: [Double] = []
-      items.forEach { item in
-         newArray.append(item.startTime.timeStringToDouble())
-      }
-      return newArray
-   }
-   
-   private static func mergeSort(_ array: [Double]) -> [Double] {
+   private static func mergeSort(_ array: [ScheduledEvent]) -> [ScheduledEvent] {
       guard array.count > 1 else { return array }
       let leftArray = Array(array[0..<array.count / 2])
       let rightArray = Array(array[array.count / 2..<array.count])
@@ -242,12 +233,12 @@ struct Utilities {
          right: mergeSort(rightArray))
    }
    
-   private static func merge(left: [Double], right: [Double]) -> [Double] {
-      var mergedArray: [Double] = []
+   private static func merge(left: [ScheduledEvent], right: [ScheduledEvent]) -> [ScheduledEvent] {
+      var mergedArray: [ScheduledEvent] = []
       var left = left
       var right = right
       while left.count > 0 && right.count > 0 {
-         if left.first! < right.first! {
+         if left.first!.startTime.timeStringToDouble() < right.first!.startTime.timeStringToDouble() {
             mergedArray.append(left.removeFirst())
          } else {
             mergedArray.append(right.removeFirst())
@@ -256,27 +247,18 @@ struct Utilities {
       return mergedArray + left + right
    }
    
-   private static func rearrangeItems(compare newArray: [Double], to items: [ScheduledEvent]) -> [ScheduledEvent] {
-      let sortedStringArray: [String] = Utilities.convertToSortedStringArray(newArray)
-      var sortedSchedule: [ScheduledEvent] = []
+   private static func rearrangeItems(compare sortedArray: [ScheduledEvent], to originalArray: [ScheduledEvent]) -> [ScheduledEvent] {
+      var rearranged: [ScheduledEvent] = []
       var j = 0
-      while sortedSchedule.count < items.count {
-         for i in 0..<items.count {
-            if sortedStringArray[j] == items[i].startTime {
-               sortedSchedule.append(items[i])
+      while rearranged.count < originalArray.count {
+         for i in 0..<originalArray.count {
+            if sortedArray[j] == originalArray[i] {
+               rearranged.append(originalArray[i])
                break
             }
          }
          j += 1
       }
-      return sortedSchedule
-   }
-   
-   private static func convertToSortedStringArray(_ sortedArray: [Double]) -> [String] {
-      var stringArray: [String] = []
-      sortedArray.forEach { item in
-         stringArray.append(item.timeDoubleToString())
-      }
-      return stringArray
+      return rearranged
    }
 }

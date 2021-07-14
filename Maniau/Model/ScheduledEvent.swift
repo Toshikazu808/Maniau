@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ScheduledEvent: Codable {
+struct ScheduledEvent: Codable, Equatable {
    var title: String
    var description: String
    var startTime: String
@@ -28,5 +28,9 @@ struct ScheduledEvent: Codable {
          "\(self.repeats)",
          "\(self.alert)",
          "\(self.color)"]
+   }
+   
+   static func == (lhs: ScheduledEvent, rhs: ScheduledEvent) -> Bool {
+      return lhs.title == rhs.title && lhs.description == rhs.description && lhs.startTime == rhs.startTime && lhs.endTime == rhs.endTime && lhs.repeats == rhs.repeats && lhs.alert == rhs.alert && lhs.relevantMonth == rhs.relevantMonth && lhs.date == rhs.date && lhs.selectedDay == rhs.selectedDay && lhs.dayOfWeek == rhs.dayOfWeek && lhs.color == rhs.color
    }
 }
