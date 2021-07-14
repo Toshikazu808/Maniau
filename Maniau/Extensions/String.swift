@@ -63,26 +63,43 @@ extension String {
    }
    
    func timeStringToDouble() -> Double {
-      var decimalTime: String = ""
-      var time: Double = 0
+      var hour: Double = 0
+      
+      var hourStr = ""
+      var minuteStr = ""
+      var hitDecimal = false
+      
       for char in self {
-         if char == String.Element(":") {
-            decimalTime += "."
-            continue
-         }
-         if char == String.Element(" ") {
-            continue
-         }
-         if char == String.Element("A") {
-            time = Double(decimalTime)!
-            break
-         }
-         if char == String.Element("P") {
-            time = Double(decimalTime)! + 12
-            break
+         if !hitDecimal {
+            if char == String.Element(":") {
+               hour = Double(hourStr)!
+               hitDecimal = true
+            } else {
+               hourStr += "\(char)"
+            }
+         } else {
+            switch char {
+            case String.Element(" "):
+               break
+            case String.Element("A"):
+               if hour == 12 {
+                  hour += 12
+                  hourStr = String(format: "%.0f", hour)
+               }
+            case String.Element("P"):
+               if hour != 12 {
+                  hour += 12
+                  hourStr = String(format: "%.0f", hour)
+               }
+            case String.Element("M"):
+               break
+            default:
+               minuteStr += "\(char)"
+            }
          }
       }
-      return time
+      let total = "\(hourStr).\(minuteStr)"
+      return Double(total)!
    }
    
    func convertColorString() -> UIColor {

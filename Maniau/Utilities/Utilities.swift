@@ -257,8 +257,7 @@ struct Utilities {
    }
    
    private static func rearrangeItems(compare newArray: [Double], to items: [ScheduledEvent]) -> [ScheduledEvent] {
-      // We need to add on AM / PM
-      let sortedStringArray: [String] = Utilities.convertToSortedString(newArray)
+      let sortedStringArray: [String] = Utilities.convertToSortedStringArray(newArray)
       var sortedSchedule: [ScheduledEvent] = []
       var j = 0
       while sortedSchedule.count < items.count {
@@ -273,7 +272,7 @@ struct Utilities {
       return sortedSchedule
    }
    
-   private static func convertToSortedString(_ sortedArray: [Double]) -> [String] {
+   private static func convertToSortedStringArray(_ sortedArray: [Double]) -> [String] {
       var stringArray: [String] = []
       sortedArray.forEach { item in
          stringArray.append(item.timeDoubleToString())
