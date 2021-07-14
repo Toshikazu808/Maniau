@@ -8,6 +8,7 @@
 import UIKit
 
 class DayTabCell: UITableViewCell {
+   static let name = "DayTabCell"
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -16,8 +17,10 @@ class DayTabCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+   
+   func configure() {
+      
+   }
     
 }

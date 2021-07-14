@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
 
 protocol DetailsVCDelegate {
    func deleteAndUpdate()
@@ -15,39 +17,23 @@ class DetailsVC: UIViewController {
    var delegate: DetailsVCDelegate?
    var schedule: ScheduledEvent?
    @IBOutlet private weak var titleLabel: UILabel!
-   @IBOutlet private weak var tableView: UITableView!
    @IBOutlet private weak var background: UIView!
    @IBOutlet private weak var confirmLabel: UILabel!
    @IBOutlet private weak var confirmDelete: UIButton!
-   
-   private let titles: [String] = [
-      "Date:", "Start:", "End:", "Repeat:", "Alert:", "Color:"]
+   @IBOutlet private var details: [UILabel]!
    private var selections: [String] = ["", "", "", "", "", ""]
+   private let db = Firestore.firestore()
    
    override func viewDidLoad() {
       super.viewDidLoad()
       print(#function)
       self.tabBarController?.tabBar.isHidden = true
-      if let schedule = schedule {
-         titleLabel.text = schedule.title
-         selections = [
-            schedule.date,
-            schedule.startTime,
-            schedule.endTime,
-            schedule.repeats,
-            schedule.alert,
-            schedule.color]
-      }
-      print("")
-      tableView.backgroundColor = .clear
-      tableView.delegate = self
-      tableView.dataSource = self
-      tableView.register(UINib(nibName: EventDetailsCell.name, bundle: nil), forCellReuseIdentifier: EventDetailsCell.name)
-      let tapBackground = UITapGestureRecognizer(
-         target: self,
-         action: #selector(backgroundTapped))
-      background.addGestureRecognizer(tapBackground)
+      setupLabels()
+      setupBackgroundUI()
    }
+   override var shouldAutorotate: Bool { return false }
+   override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
+   override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation { return .portrait }
    
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       if segue.destination is AddVC {
@@ -55,6 +41,26 @@ class DetailsVC: UIViewController {
          vc?.updateItem = true
          vc?.prefillTF = titleLabel.text ?? ""
       }
+   }
+   
+   private func setupLabels() {
+      if let schedule = schedule {
+         titleLabel.text = schedule.title
+         self.selections = schedule.convertToDetailsArray()
+      }
+      for i in 0..<selections.count {
+         details[i].text = selections[i]
+      }
+   }
+   
+   private func setupBackgroundUI() {
+      let tapBackground = UITapGestureRecognizer(
+         target: self,
+         action: #selector(backgroundTapped))
+      background.addGestureRecognizer(tapBackground)
+      confirmDelete.layer.cornerRadius = 18
+      confirmDelete.layer.borderColor = UIColor.white.cgColor
+      confirmDelete.layer.borderWidth = 1.5
    }
    
    @IBAction private func deleteTapped(_ sender: UIButton) {
@@ -72,31 +78,15 @@ class DetailsVC: UIViewController {
    }
    
    @IBAction func confirmDeleteTapped(_ sender: UIButton) {
-      // update Firestore
-      
-   }
-}
-
-extension DetailsVC: UITableViewDelegate, UITableViewDataSource {
-   func numberOfSections(in tableView: UITableView) -> Int {
-      return 1
-   }
-   
-   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return titles.count
-   }
-   
-   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-      UITableView.automaticDimension
-   }
-   
-   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(
-         withIdentifier: EventDetailsCell.name,
-         for: indexPath) as! EventDetailsCell
-      cell.configure(
-         label: titles[indexPath.row],
-         selection: selections[indexPath.row])
-      return cell
+      let id = Auth.auth().currentUser?.uid
+      Firestore.firestore().collection(id!).document(schedule!.title).delete { [weak self] err in
+         if let err = err {
+            self?.showError(err.localizedDescription)
+         } else {
+            print("Successfully deleted document")
+            self?.delegate?.deleteAndUpdate()
+            self?.navigationController?.popViewController(animated: true)
+         }
+      }
    }
 }

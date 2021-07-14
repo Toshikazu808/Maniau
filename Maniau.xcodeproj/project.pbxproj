@@ -14,6 +14,7 @@
 		BC5FA16C2695016A00C76EDD /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5FA16B2695016A00C76EDD /* UIViewController.swift */; };
 		BC5FA16E2695018E00C76EDD /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5FA16D2695018E00C76EDD /* Date.swift */; };
 		BC5FA1722695119C00C76EDD /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5FA1712695119C00C76EDD /* UIAlertController.swift */; };
+		BC6870EB269F32840033ECB4 /* ManiauTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6870EA269F32840033ECB4 /* ManiauTests.swift */; };
 		BC6DD2F12682853500C95111 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD2F02682853500C95111 /* AppDelegate.swift */; };
 		BC6DD2F32682853500C95111 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD2F22682853500C95111 /* SceneDelegate.swift */; };
 		BC6DD2F52682853500C95111 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD2F42682853500C95111 /* LoginVC.swift */; };
@@ -41,10 +42,18 @@
 		BCDADDD32697D2630073F74B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDADDD22697D2630073F74B /* String.swift */; };
 		BCF873752698B9DB006E8292 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF873742698B9DB006E8292 /* Animations.swift */; };
 		BCF873772698C8D6006E8292 /* DetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF873762698C8D6006E8292 /* DetailsVC.swift */; };
-		BCF8737A2698D210006E8292 /* EventDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF873782698D210006E8292 /* EventDetailsCell.swift */; };
-		BCF8737B2698D210006E8292 /* EventDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCF873792698D210006E8292 /* EventDetailsCell.xib */; };
 		BCF8737D2698FE4D006E8292 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF8737C2698FE4D006E8292 /* BaseTabBarController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BC6870ED269F32840033ECB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC6DD2E52682853500C95111 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BC6DD2EC2682853500C95111;
+			remoteInfo = Maniau;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		BC036BF52686474000E4ECE8 /* TableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableItem.swift; sourceTree = "<group>"; };
@@ -54,6 +63,9 @@
 		BC5FA16B2695016A00C76EDD /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		BC5FA16D2695018E00C76EDD /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		BC5FA1712695119C00C76EDD /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		BC6870E8269F32840033ECB4 /* ManiauTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ManiauTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC6870EA269F32840033ECB4 /* ManiauTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManiauTests.swift; sourceTree = "<group>"; };
+		BC6870EC269F32840033ECB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC6DD2ED2682853500C95111 /* Maniau.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maniau.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC6DD2F02682853500C95111 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC6DD2F22682853500C95111 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,12 +92,17 @@
 		BCDADDD22697D2630073F74B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BCF873742698B9DB006E8292 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		BCF873762698C8D6006E8292 /* DetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsVC.swift; sourceTree = "<group>"; };
-		BCF873782698D210006E8292 /* EventDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsCell.swift; sourceTree = "<group>"; };
-		BCF873792698D210006E8292 /* EventDetailsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailsCell.xib; sourceTree = "<group>"; };
 		BCF8737C2698FE4D006E8292 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BC6870E5269F32840033ECB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BC6DD2EA2682853500C95111 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -111,10 +128,20 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		BC6870E9269F32840033ECB4 /* ManiauTests */ = {
+			isa = PBXGroup;
+			children = (
+				BC6870EA269F32840033ECB4 /* ManiauTests.swift */,
+				BC6870EC269F32840033ECB4 /* Info.plist */,
+			);
+			path = ManiauTests;
+			sourceTree = "<group>";
+		};
 		BC6DD2E42682853500C95111 = {
 			isa = PBXGroup;
 			children = (
 				BC6DD2EF2682853500C95111 /* Maniau */,
+				BC6870E9269F32840033ECB4 /* ManiauTests */,
 				BC6DD2EE2682853500C95111 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -123,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				BC6DD2ED2682853500C95111 /* Maniau.app */,
+				BC6870E8269F32840033ECB4 /* ManiauTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -168,8 +196,6 @@
 				BCC2867A2683C80E00050BF8 /* MonthTabCell.xib */,
 				BCC2867D2683C82900050BF8 /* DayTabCell.swift */,
 				BCC2867E2683C82900050BF8 /* DayTabCell.xib */,
-				BCF873782698D210006E8292 /* EventDetailsCell.swift */,
-				BCF873792698D210006E8292 /* EventDetailsCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -200,6 +226,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BC6870E7269F32840033ECB4 /* ManiauTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC6870F1269F32840033ECB4 /* Build configuration list for PBXNativeTarget "ManiauTests" */;
+			buildPhases = (
+				BC6870E4269F32840033ECB4 /* Sources */,
+				BC6870E5269F32840033ECB4 /* Frameworks */,
+				BC6870E6269F32840033ECB4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BC6870EE269F32840033ECB4 /* PBXTargetDependency */,
+			);
+			name = ManiauTests;
+			productName = ManiauTests;
+			productReference = BC6870E8269F32840033ECB4 /* ManiauTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BC6DD2EC2682853500C95111 /* Maniau */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BC6DD3012682853800C95111 /* Build configuration list for PBXNativeTarget "Maniau" */;
@@ -231,6 +275,10 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					BC6870E7269F32840033ECB4 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = BC6DD2EC2682853500C95111;
+					};
 					BC6DD2EC2682853500C95111 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
@@ -254,11 +302,19 @@
 			projectRoot = "";
 			targets = (
 				BC6DD2EC2682853500C95111 /* Maniau */,
+				BC6870E7269F32840033ECB4 /* ManiauTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BC6870E6269F32840033ECB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BC6DD2EB2682853500C95111 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -266,7 +322,6 @@
 				BCC286802683C82900050BF8 /* DayTabCell.xib in Resources */,
 				BC6DD2FD2682853800C95111 /* LaunchScreen.storyboard in Resources */,
 				BCC2867C2683C80E00050BF8 /* MonthTabCell.xib in Resources */,
-				BCF8737B2698D210006E8292 /* EventDetailsCell.xib in Resources */,
 				BC6DD2FA2682853800C95111 /* Assets.xcassets in Resources */,
 				BC6DD2F82682853500C95111 /* Main.storyboard in Resources */,
 				BC394BFB268A6A36000380F6 /* GoogleService-Info.plist in Resources */,
@@ -276,6 +331,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BC6870E4269F32840033ECB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC6870EB269F32840033ECB4 /* ManiauTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BC6DD2E92682853500C95111 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -295,7 +358,6 @@
 				BCC2868A26840A2200050BF8 /* AddVC.swift in Sources */,
 				BC036BF62686474000E4ECE8 /* TableItem.swift in Sources */,
 				BC6DD2F12682853500C95111 /* AppDelegate.swift in Sources */,
-				BCF8737A2698D210006E8292 /* EventDetailsCell.swift in Sources */,
 				BCDADDD32697D2630073F74B /* String.swift in Sources */,
 				BCC2867F2683C82900050BF8 /* DayTabCell.swift in Sources */,
 				BC6DD30F2682A51500C95111 /* Utilities.swift in Sources */,
@@ -311,6 +373,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BC6870EE269F32840033ECB4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BC6DD2EC2682853500C95111 /* Maniau */;
+			targetProxy = BC6870ED269F32840033ECB4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BC6DD2F62682853500C95111 /* Main.storyboard */ = {
@@ -332,6 +402,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		BC6870EF269F32840033ECB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 676A84J3QT;
+				INFOPLIST_FILE = ManiauTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RyanKanno.ManiauTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Maniau.app/Maniau";
+			};
+			name = Debug;
+		};
+		BC6870F0269F32840033ECB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 676A84J3QT;
+				INFOPLIST_FILE = ManiauTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RyanKanno.ManiauTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Maniau.app/Maniau";
+			};
+			name = Release;
+		};
 		BC6DD2FF2682853800C95111 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -489,6 +599,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BC6870F1269F32840033ECB4 /* Build configuration list for PBXNativeTarget "ManiauTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC6870EF269F32840033ECB4 /* Debug */,
+				BC6870F0269F32840033ECB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BC6DD2E82682853500C95111 /* Build configuration list for PBXProject "Maniau" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

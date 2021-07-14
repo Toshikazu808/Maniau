@@ -30,5 +30,5 @@ class MonthTabCell: UITableViewCell {
       descriptionLabel.text = details
       startLabel.text = start
       endLabel.text = end
-   }   
+   }
 }

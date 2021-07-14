@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseAuth
 
 protocol AddVCDelegate {
    func updateScheduleTable()
@@ -112,31 +113,27 @@ class AddVC: UIViewController {
    }
    
    private func saveSequence() {
-      if let err = Utilities.saveToFirebase(event) {
-         DispatchQueue.main.async {
-            self.displayLoading(with: self.loadingView, and: self.loadingIndicator)
-            self.showError(err.localizedDescription)
-         }
-      } else {
-         DispatchQueue.main.async {
-            self.displayLoading(with: self.loadingView, and: self.loadingIndicator)
-            self.delegate?.updateScheduleTable()
-            self.navigationController?.popToRootViewController(animated: true)
+      let id = Auth.auth().currentUser?.uid
+      Firestore.firestore().collection(id!).document(event.title).setData(Utilities.convertScheduledToDict(event), merge: true) { [weak self] err in
+         if let err = err {
+            self?.showError(err.localizedDescription)
+         } else {
+            print("Successfully saved document")
+            self?.delegate?.updateScheduleTable()
+            self?.navigationController?.popToRootViewController(animated: true)
          }
       }
    }
    
    private func updateSequence() {
-      if let err = Utilities.updateToFirebase(event, docID: prefillTF) {
-         DispatchQueue.main.async {
-            self.displayLoading(with: self.loadingView, and: self.loadingIndicator)
-            self.showError(err.localizedDescription)
-         }
-      } else {
-         DispatchQueue.main.async {
-            self.displayLoading(with: self.loadingView, and: self.loadingIndicator)
-            self.delegate?.updateScheduleTable()
-            self.navigationController?.popToRootViewController(animated: true)
+      let id = Auth.auth().currentUser?.uid
+      Firestore.firestore().collection(id!).document(event.title).setData(Utilities.convertScheduledToDict(event), merge: false) { [weak self] err in
+         if let err = err {
+            self?.showError(err.localizedDescription)
+         } else {
+            print("Successfully updated document")
+            self?.delegate?.updateScheduleTable()
+            self?.navigationController?.popToRootViewController(animated: true)
          }
       }
    }
@@ -269,7 +266,7 @@ extension AddVC: UIPickerViewDelegate, UIPickerViewDataSource {
       case 0:
          time.hr = "\(row + 1)"
       case 1:
-         time.min = Utilities.formatMinutes(num: row + 1)
+         time.min = Utilities.formatMinutes(num: row)
       case 2:
          time.amPm = row == 0 ? "AM" : "PM"
       default:

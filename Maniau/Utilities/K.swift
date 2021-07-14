@@ -13,4 +13,6 @@ struct K {
    
    static let tabBarVC = "BaseTabBarController"
    static let homeVC = "HomeVC"
+   
+   static let toDetailsVC = "toDetailsVC"
 }

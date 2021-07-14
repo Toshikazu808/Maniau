@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import FirebaseAuth
 import Firebase
+import FirebaseAuth
 
 class SignupVC: UIViewController {
    @IBOutlet private weak var signupView: UIView!

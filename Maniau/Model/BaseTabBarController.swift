@@ -13,8 +13,5 @@ class BaseTabBarController: UITabBarController {
    override func viewDidLoad() {
       super.viewDidLoad()
       print("\(#function) for BaseTabBarController")
-      
    }
-   
-   
 }

@@ -111,35 +111,7 @@ struct Utilities {
       return (hour, minute)
    }
    
-   static func saveToFirebase(_ event: ScheduledEvent) -> Error? {
-      var error: Error? = nil
-      let id = Auth.auth().currentUser?.uid
-      Firestore.firestore().collection(id!).document(event.title).setData(Utilities.convertScheduledToDict(event), merge: true) { err in
-         if let err = err {
-            print(err)
-            error = err
-         } else {
-            print("Successfully updated document")
-         }
-      }
-      return error
-   }
-   
-   static func updateToFirebase(_ event: ScheduledEvent, docID: String) -> Error? {
-      var error: Error? = nil
-      let id = Auth.auth().currentUser?.uid
-      Firestore.firestore().collection(id!).document(docID).setData(Utilities.convertScheduledToDict(event), merge: false) { err in
-         if let err = err {
-            print(err)
-            error = err
-         } else {
-            print("Successfully updated document")
-         }
-      }
-      return error
-   }
-   
-   private static func convertScheduledToDict(_ event: ScheduledEvent) -> [String: String] {
+   static func convertScheduledToDict(_ event: ScheduledEvent) -> [String: String] {
       let converted = [
          "title": event.title,
          "description": event.description,
@@ -182,10 +154,6 @@ struct Utilities {
             }
          }
       }
-      // We want to wait for data before returning events
-      
-//      print("events: \(events)")
-//      return events
    }
    
    private static func retrieveDocuments(from snapshot: QuerySnapshot) -> [ScheduledEvent] {
@@ -214,6 +182,30 @@ struct Utilities {
       return converted
    }
    
+   static func getDaysWithItems(from schedule: [ScheduledEvent]) -> [String] {
+      var days: [String] = []
+      for i in 0..<schedule.count {
+         if !days.contains(schedule[i].selectedDay) {
+            days.append(schedule[i].selectedDay)
+         }
+      }
+      return days
+   }
+   
+   static func createDataForTableView(using days: [String], toLoopThrough scheduledEvent: [ScheduledEvent]) -> [[ScheduledEvent]] {
+      var newArray: [[ScheduledEvent]] = [[]]
+      for i in 0..<days.count {
+         var subArray: [ScheduledEvent] = []
+         for j in 0..<scheduledEvent.count {
+            if days[i] == scheduledEvent[j].selectedDay {
+               subArray.append(scheduledEvent[j])
+            }
+         }
+         newArray.append(subArray)
+      }
+      return newArray
+   }
+   
    static func filterTodaysEvents(from scheduleItems: [ScheduledEvent], for date: Date) -> [ScheduledEvent] {
       var items: [ScheduledEvent] = []
       let selectedDay: String = date.getSelectedDay()
@@ -228,9 +220,9 @@ struct Utilities {
    
    private static func sortItems(items: [ScheduledEvent]) -> [ScheduledEvent] {
       guard items.count > 1 else { return items }
-      var newArray: [Double] = Utilities.convertScheduleToSortable(items)
-      newArray = Utilities.mergeSort(newArray)
-      return Utilities.rearrangeItems(compare: newArray, to: items)
+      var sortedArray: [Double] = Utilities.convertScheduleToSortable(items)
+      sortedArray = Utilities.mergeSort(sortedArray)
+      return Utilities.rearrangeItems(compare: sortedArray, to: items)
    }
    
    private static func convertScheduleToSortable(_ items: [ScheduledEvent]) -> [Double] {
@@ -265,7 +257,8 @@ struct Utilities {
    }
    
    private static func rearrangeItems(compare newArray: [Double], to items: [ScheduledEvent]) -> [ScheduledEvent] {
-      let sortedStringArray = Utilities.convertToSortedString(newArray)
+      // We need to add on AM / PM
+      let sortedStringArray: [String] = Utilities.convertToSortedString(newArray)
       var sortedSchedule: [ScheduledEvent] = []
       var j = 0
       while sortedSchedule.count < items.count {

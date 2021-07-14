@@ -19,4 +19,14 @@ struct ScheduledEvent: Codable {
    var selectedDay: String
    var dayOfWeek: String
    var color: String
+   
+   func convertToDetailsArray() -> [String] {
+      return [
+         "\(self.date)",
+         "\(self.startTime)",
+         "\(self.endTime)",
+         "\(self.repeats)",
+         "\(self.alert)",
+         "\(self.color)"]
+   }
 }

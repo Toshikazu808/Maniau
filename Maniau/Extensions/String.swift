@@ -5,7 +5,7 @@
 //  Created by Ryan Kanno on 7/6/21.
 //
 
-import Foundation
+import UIKit
 
 extension String {
 //   func toTimeInterval(timeString: String) -> TimeInterval {
@@ -64,13 +64,45 @@ extension String {
    
    func timeStringToDouble() -> Double {
       var decimalTime: String = ""
+      var time: Double = 0
       for char in self {
          if char == String.Element(":") {
-            decimalTime.append(".")
-         } else {
-            decimalTime.append("\(char)")
+            decimalTime += "."
+            continue
+         }
+         if char == String.Element(" ") {
+            continue
+         }
+         if char == String.Element("A") {
+            time = Double(decimalTime)!
+            break
+         }
+         if char == String.Element("P") {
+            time = Double(decimalTime)! + 12
+            break
          }
       }
-      return Double(decimalTime)!
+      return time
+   }
+   
+   func convertColorString() -> UIColor {
+      switch self {
+      case "Blue":
+         return UIColor.systemBlue
+      case "Teal":
+         return UIColor.systemTeal
+      case "Green":
+         return UIColor.systemGreen
+      case "Orange":
+         return UIColor.systemOrange
+      case "Red":
+         return UIColor.systemRed
+      case "Yellow":
+         return UIColor.systemYellow
+      case "Gray":
+         return UIColor.systemGray
+      default:
+         return UIColor.systemTeal
+      }
    }
 }
