@@ -8,14 +8,12 @@
 import UIKit
 
 class DayTabVC: UIViewController {
-   static let name = "DayTabVC"
    @IBOutlet weak var tableView: UITableView!
    private var days: [String] = []
    private var data: [[ScheduledEvent]] = [[]]
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      print("thisMonthsSchedule: \(HomeTabVC.thisMonthsSchedule)")
    }
    override func viewWillAppear(_ animated: Bool) {
       self.tabBarController?.tabBar.isHidden = false

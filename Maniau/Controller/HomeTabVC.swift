@@ -11,7 +11,6 @@ import FSCalendar
 import Firebase
 
 class HomeTabVC: UIViewController {
-   static let name = "HomeTabVC"
    @IBOutlet private weak var calendar: FSCalendar!
    @IBOutlet private weak var tableView: UITableView!
    private let db = Firestore.firestore()
@@ -23,7 +22,6 @@ class HomeTabVC: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      print("\(#function) for HomeTabVC")
       self.title = email
       calendar.delegate = self
       tableView.delegate = self
@@ -52,7 +50,8 @@ class HomeTabVC: UIViewController {
          destination.delegate = self
       } else if segue.destination is DetailsVC {
          let vc = segue.destination as? DetailsVC
-         vc?.schedule = HomeTabVC.thisMonthsSchedule[itemIndex]
+         vc?.schedule = todaysEvents[itemIndex]
+         print("vc?.schedule: \(String(describing: vc?.schedule))")
       } else if let destination = segue.destination as? DetailsVC {
          destination.delegate = self
       }
@@ -73,12 +72,11 @@ extension HomeTabVC: FSCalendarDelegate {
 
 extension HomeTabVC: AddVCDelegate {
    func updateScheduleTable() {
-      print(#function)
       Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate) { [weak self] retrievedSchedule in
-         let tabbar = self?.tabBarController as! BaseTabBarController
-         tabbar.scheduleItems = retrievedSchedule
          HomeTabVC.thisMonthsSchedule = retrievedSchedule
-         self?.tableView.reloadData()
+         DispatchQueue.main.async {
+            self?.tableView.reloadData()
+         }
       }
    }
 }
@@ -87,7 +85,9 @@ extension HomeTabVC: DetailsVCDelegate {
    func deleteAndUpdate() {
       Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate) { [weak self] retrievedSchedule in
          HomeTabVC.thisMonthsSchedule = retrievedSchedule
-         self?.tableView.reloadData()
+         DispatchQueue.main.async {
+            self?.tableView.reloadData()
+         }
       }
    }
 }
@@ -120,6 +120,7 @@ extension HomeTabVC: UITableViewDelegate, UITableViewDataSource {
 
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       itemIndex = indexPath.row
+      print("itemIndex: \(itemIndex)")
       performSegue(withIdentifier: K.toDetailsVC, sender: nil)
    }
 }

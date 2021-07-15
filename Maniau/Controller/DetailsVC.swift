@@ -46,7 +46,7 @@ class DetailsVC: UIViewController {
    private func setupLabels() {
       if let schedule = schedule {
          titleLabel.text = schedule.title
-         self.selections = schedule.convertToDetailsArray()
+         selections = schedule.convertToDetailsArray()
       }
       for i in 0..<selections.count {
          details[i].text = selections[i]

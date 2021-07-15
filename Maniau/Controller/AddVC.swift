@@ -96,6 +96,8 @@ class AddVC: UIViewController {
          displayLoading(with: loadingView, and: loadingIndicator)
          event.title = titleTF.text!
          event.description = descriptionTF.text ?? ""
+         event.startTime = startBtn.title(for: .normal) ?? "12:00 AM"
+         event.endTime = endBtn.title(for: .normal) ?? "12:01 AM"         
          event.relevantMonth = date.getRelevantMonth()
          //         Utilities.setAlert(for: event)
          attemptToSaveData()

@@ -10,6 +10,10 @@
 		BC036BF62686474000E4ECE8 /* TableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC036BF52686474000E4ECE8 /* TableItem.swift */; };
 		BC036BF826867B0E00E4ECE8 /* ScheduledEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC036BF726867B0E00E4ECE8 /* ScheduledEvent.swift */; };
 		BC2BD4FE269CFC0A00E90953 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2BD4FD269CFC0A00E90953 /* Double.swift */; };
+		BC33A9A226A09B1E00AEC70C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BC33A9A126A09B1E00AEC70C /* FirebaseAnalytics */; };
+		BC33A9A426A09B1E00AEC70C /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BC33A9A326A09B1E00AEC70C /* FirebaseMessaging */; };
+		BC33A9A626A09B1E00AEC70C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BC33A9A526A09B1E00AEC70C /* FirebaseAuth */; };
+		BC33A9A826A09B1E00AEC70C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BC33A9A726A09B1E00AEC70C /* FirebaseFirestore */; };
 		BC394BFB268A6A36000380F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC394BFA268A6A36000380F6 /* GoogleService-Info.plist */; };
 		BC5FA16C2695016A00C76EDD /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5FA16B2695016A00C76EDD /* UIViewController.swift */; };
 		BC5FA16E2695018E00C76EDD /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5FA16D2695018E00C76EDD /* Date.swift */; };
@@ -21,8 +25,6 @@
 		BC6DD2F82682853500C95111 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC6DD2F62682853500C95111 /* Main.storyboard */; };
 		BC6DD2FA2682853800C95111 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC6DD2F92682853800C95111 /* Assets.xcassets */; };
 		BC6DD2FD2682853800C95111 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC6DD2FB2682853800C95111 /* LaunchScreen.storyboard */; };
-		BC6DD3082682890800C95111 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BC6DD3072682890800C95111 /* FirebaseAuth */; };
-		BC6DD30A2682890800C95111 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BC6DD3092682890800C95111 /* FirebaseFirestore */; };
 		BC6DD30C268295C300C95111 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD30B268295C300C95111 /* SignupVC.swift */; };
 		BC6DD30F2682A51500C95111 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD30E2682A51500C95111 /* Utilities.swift */; };
 		BC6DD3132682ADAE00C95111 /* HomeTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD3122682ADAE00C95111 /* HomeTabVC.swift */; };
@@ -105,9 +107,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC6DD3082682890800C95111 /* FirebaseAuth in Frameworks */,
+				BC33A9A426A09B1E00AEC70C /* FirebaseMessaging in Frameworks */,
+				BC33A9A226A09B1E00AEC70C /* FirebaseAnalytics in Frameworks */,
 				BCD9587C2682D4F400B4A06C /* FSCalendar in Frameworks */,
-				BC6DD30A2682890800C95111 /* FirebaseFirestore in Frameworks */,
+				BC33A9A826A09B1E00AEC70C /* FirebaseFirestore in Frameworks */,
+				BC33A9A626A09B1E00AEC70C /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,9 +259,11 @@
 			);
 			name = Maniau;
 			packageProductDependencies = (
-				BC6DD3072682890800C95111 /* FirebaseAuth */,
-				BC6DD3092682890800C95111 /* FirebaseFirestore */,
 				BCD9587B2682D4F400B4A06C /* FSCalendar */,
+				BC33A9A126A09B1E00AEC70C /* FirebaseAnalytics */,
+				BC33A9A326A09B1E00AEC70C /* FirebaseMessaging */,
+				BC33A9A526A09B1E00AEC70C /* FirebaseAuth */,
+				BC33A9A726A09B1E00AEC70C /* FirebaseFirestore */,
 			);
 			productName = Maniau;
 			productReference = BC6DD2ED2682853500C95111 /* Maniau.app */;
@@ -291,8 +297,8 @@
 			);
 			mainGroup = BC6DD2E42682853500C95111;
 			packageReferences = (
-				BC6DD3062682890800C95111 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				BCD9587A2682D4F400B4A06C /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				BC33A9A026A09B1E00AEC70C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = BC6DD2EE2682853500C95111 /* Products */;
 			projectDirPath = "";
@@ -625,12 +631,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BC6DD3062682890800C95111 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		BC33A9A026A09B1E00AEC70C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.1.1;
+				minimumVersion = 8.3.1;
 			};
 		};
 		BCD9587A2682D4F400B4A06C /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
@@ -644,14 +650,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BC6DD3072682890800C95111 /* FirebaseAuth */ = {
+		BC33A9A126A09B1E00AEC70C /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BC6DD3062682890800C95111 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = BC33A9A026A09B1E00AEC70C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		BC33A9A326A09B1E00AEC70C /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC33A9A026A09B1E00AEC70C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		BC33A9A526A09B1E00AEC70C /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC33A9A026A09B1E00AEC70C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		BC6DD3092682890800C95111 /* FirebaseFirestore */ = {
+		BC33A9A726A09B1E00AEC70C /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BC6DD3062682890800C95111 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = BC33A9A026A09B1E00AEC70C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
 		BCD9587B2682D4F400B4A06C /* FSCalendar */ = {
