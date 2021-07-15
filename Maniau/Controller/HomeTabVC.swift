@@ -11,11 +11,12 @@ import FSCalendar
 import Firebase
 
 class HomeTabVC: UIViewController {
+   static let name = "HomeTabVC"
    @IBOutlet private weak var calendar: FSCalendar!
    @IBOutlet private weak var tableView: UITableView!
    private let db = Firestore.firestore()
    private let selectedDate = Date()
-   private var thisMonthsSchedule: [ScheduledEvent] = []
+   static var thisMonthsSchedule: [ScheduledEvent] = []
    private var todaysEvents: [ScheduledEvent] = []
    private var itemIndex = 0
    var email = ""
@@ -31,29 +32,16 @@ class HomeTabVC: UIViewController {
          UINib(nibName: MonthTabCell.name,bundle: nil),
          forCellReuseIdentifier: MonthTabCell.name)
       Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate) { [weak self] retrievedSchedule in
-         self?.thisMonthsSchedule = retrievedSchedule
-         self?.todaysEvents = Utilities.filterTodaysEvents(from: self!.thisMonthsSchedule, for: self!.selectedDate)
-         self?.tableView.reloadData()
+         guard let self = self else { return }
+         HomeTabVC.thisMonthsSchedule = retrievedSchedule
+         self.todaysEvents = Utilities.filterTodaysEvents(from: HomeTabVC.thisMonthsSchedule, for: self.selectedDate)
+         self.tableView.reloadData()
       }
    }
    override func viewWillAppear(_ animated: Bool) {
       self.tabBarController?.tabBar.isHidden = false
-   }
-   override func viewDidAppear(_ animated: Bool) {      
-      let tabbar = tabBarController as! BaseTabBarController
-      thisMonthsSchedule = tabbar.scheduleItems
-      print("\(#function) for HomeTabVC")
-      print("Retrieving data from BaseTabBarController")
-      print("scheduleItems printing from BaseTabBarController: \(tabbar.scheduleItems)")
-      todaysEvents = Utilities.filterTodaysEvents(from: thisMonthsSchedule, for: selectedDate)
+      todaysEvents = Utilities.filterTodaysEvents(from: HomeTabVC.thisMonthsSchedule, for: selectedDate)
       tableView.reloadData()
-   }
-   override func viewWillDisappear(_ animated: Bool) {
-      let tabbar = tabBarController as! BaseTabBarController
-      tabbar.scheduleItems = thisMonthsSchedule
-      print("\(#function) for HomeTabVC")
-      print("Passing data to BaseTabBarController")
-      print("scheduleItems printing from BaseTabBarController: \(tabbar.scheduleItems)")
    }
    override var shouldAutorotate: Bool { return false }
    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
@@ -64,7 +52,7 @@ class HomeTabVC: UIViewController {
          destination.delegate = self
       } else if segue.destination is DetailsVC {
          let vc = segue.destination as? DetailsVC
-         vc?.schedule = thisMonthsSchedule[itemIndex]
+         vc?.schedule = HomeTabVC.thisMonthsSchedule[itemIndex]
       } else if let destination = segue.destination as? DetailsVC {
          destination.delegate = self
       }
@@ -78,7 +66,7 @@ class HomeTabVC: UIViewController {
 
 extension HomeTabVC: FSCalendarDelegate {
    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-      todaysEvents = Utilities.filterTodaysEvents(from: thisMonthsSchedule, for: date)
+      todaysEvents = Utilities.filterTodaysEvents(from: HomeTabVC.thisMonthsSchedule, for: date)
       tableView.reloadData()
    }
 }
@@ -89,7 +77,7 @@ extension HomeTabVC: AddVCDelegate {
       Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate) { [weak self] retrievedSchedule in
          let tabbar = self?.tabBarController as! BaseTabBarController
          tabbar.scheduleItems = retrievedSchedule
-         self?.thisMonthsSchedule = retrievedSchedule
+         HomeTabVC.thisMonthsSchedule = retrievedSchedule
          self?.tableView.reloadData()
       }
    }
@@ -98,7 +86,7 @@ extension HomeTabVC: AddVCDelegate {
 extension HomeTabVC: DetailsVCDelegate {
    func deleteAndUpdate() {
       Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate) { [weak self] retrievedSchedule in
-         self?.thisMonthsSchedule = retrievedSchedule
+         HomeTabVC.thisMonthsSchedule = retrievedSchedule
          self?.tableView.reloadData()
       }
    }

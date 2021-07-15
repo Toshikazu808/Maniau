@@ -42,7 +42,6 @@
 		BCDADDD32697D2630073F74B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDADDD22697D2630073F74B /* String.swift */; };
 		BCF873752698B9DB006E8292 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF873742698B9DB006E8292 /* Animations.swift */; };
 		BCF873772698C8D6006E8292 /* DetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF873762698C8D6006E8292 /* DetailsVC.swift */; };
-		BCF8737D2698FE4D006E8292 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF8737C2698FE4D006E8292 /* BaseTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,7 +91,6 @@
 		BCDADDD22697D2630073F74B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BCF873742698B9DB006E8292 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		BCF873762698C8D6006E8292 /* DetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsVC.swift; sourceTree = "<group>"; };
-		BCF8737C2698FE4D006E8292 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,7 +201,6 @@
 		BCC286782683C7DC00050BF8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BCF8737C2698FE4D006E8292 /* BaseTabBarController.swift */,
 				BCC286812683C83700050BF8 /* UserLogin.swift */,
 				BCC286852683CE4000050BF8 /* User.swift */,
 				BC036BF52686474000E4ECE8 /* TableItem.swift */,
@@ -354,7 +351,6 @@
 				BC6DD3132682ADAE00C95111 /* HomeTabVC.swift in Sources */,
 				BCC2867B2683C80E00050BF8 /* MonthTabCell.swift in Sources */,
 				BC6DD2F52682853500C95111 /* LoginVC.swift in Sources */,
-				BCF8737D2698FE4D006E8292 /* BaseTabBarController.swift in Sources */,
 				BCC2868A26840A2200050BF8 /* AddVC.swift in Sources */,
 				BC036BF62686474000E4ECE8 /* TableItem.swift in Sources */,
 				BC6DD2F12682853500C95111 /* AppDelegate.swift in Sources */,

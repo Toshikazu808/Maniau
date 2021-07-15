@@ -185,19 +185,19 @@ struct Utilities {
    static func getDaysWithItems(from schedule: [ScheduledEvent]) -> [String] {
       var days: [String] = []
       for i in 0..<schedule.count {
-         if !days.contains(schedule[i].selectedDay) {
-            days.append(schedule[i].selectedDay)
+         if !days.contains(schedule[i].date) {
+            days.append(schedule[i].date)
          }
       }
       return days
    }
    
    static func createDataForTableView(using days: [String], toLoopThrough scheduledEvent: [ScheduledEvent]) -> [[ScheduledEvent]] {
-      var newArray: [[ScheduledEvent]] = [[]]
+      var newArray = [[ScheduledEvent]]()
       for i in 0..<days.count {
          var subArray: [ScheduledEvent] = []
          for j in 0..<scheduledEvent.count {
-            if days[i] == scheduledEvent[j].selectedDay {
+            if days[i] == scheduledEvent[j].date {
                subArray.append(scheduledEvent[j])
             }
          }
