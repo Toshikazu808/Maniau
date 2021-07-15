@@ -101,6 +101,10 @@ extension String {
       return Double(total)!
    }
    
+   func dayStringToDouble() -> Int {
+      return Int(self)!
+   }
+   
    func convertColorString() -> UIColor {
       switch self {
       case "Blue":

@@ -206,6 +206,42 @@ struct Utilities {
       return newArray
    }
    
+   // MARK: - Merge Sort For This Month
+   static func filterThisMonthsEvents(from schedule: [ScheduledEvent]) -> [ScheduledEvent] {
+      var sortedSchedule: [ScheduledEvent] = schedule
+      sortedSchedule = sortThisMonthsItems(items: sortedSchedule)
+      return sortedSchedule
+   }
+   
+   private static func sortThisMonthsItems(items: [ScheduledEvent]) -> [ScheduledEvent] {
+      guard items.count > 1 else { return items }
+      return mergeSortForThisMonth(items)
+   }
+   
+   private static func mergeSortForThisMonth(_ array: [ScheduledEvent]) -> [ScheduledEvent] {
+      guard array.count > 1 else { return array }
+      let leftArray = Array(array[0..<array.count / 2])
+      let rightArray = Array(array[array.count / 2..<array.count])
+      return mergeForThisMonth(
+         left: mergeSortForThisMonth(leftArray),
+         right: mergeSortForThisMonth(rightArray))
+   }
+   
+   private static func mergeForThisMonth(left: [ScheduledEvent], right: [ScheduledEvent]) -> [ScheduledEvent] {
+      var mergedArray: [ScheduledEvent] = []
+      var left = left
+      var right = right
+      while left.count > 0 && right.count > 0 {
+         if left.first!.selectedDay.dayStringToDouble() > right.first!.selectedDay.dayStringToDouble() {
+            mergedArray.append(left.removeFirst())
+         } else {
+            mergedArray.append(right.removeFirst())
+         }
+      }
+      return mergedArray + left + right
+   }
+   
+   // MARK: - Merge Sort For Today
    static func filterTodaysEvents(from scheduleItems: [ScheduledEvent], for date: Date) -> [ScheduledEvent] {
       var items: [ScheduledEvent] = []
       let selectedDay: String = date.getSelectedDay()
@@ -214,26 +250,26 @@ struct Utilities {
             items.append(scheduleItems[i])
          }
       }
-      items = Utilities.sortItems(items: items)
+      items = sortTodaysItems(items: items)
       return items
    }
    
-   private static func sortItems(items: [ScheduledEvent]) -> [ScheduledEvent] {
+   private static func sortTodaysItems(items: [ScheduledEvent]) -> [ScheduledEvent] {
       guard items.count > 1 else { return items }
-      let sortedArray: [ScheduledEvent] = Utilities.mergeSort(items)
-      return Utilities.rearrangeItems(compare: sortedArray, to: items)
+      let sortedArray = mergeSortForToday(items)
+      return rearrangeItems(compare: sortedArray, to: items)
    }
    
-   private static func mergeSort(_ array: [ScheduledEvent]) -> [ScheduledEvent] {
+   private static func mergeSortForToday(_ array: [ScheduledEvent]) -> [ScheduledEvent] {
       guard array.count > 1 else { return array }
       let leftArray = Array(array[0..<array.count / 2])
       let rightArray = Array(array[array.count / 2..<array.count])
-      return merge(
-         left: mergeSort(leftArray),
-         right: mergeSort(rightArray))
+      return mergeForToday(
+         left: mergeSortForToday(leftArray),
+         right: mergeSortForToday(rightArray))
    }
    
-   private static func merge(left: [ScheduledEvent], right: [ScheduledEvent]) -> [ScheduledEvent] {
+   private static func mergeForToday(left: [ScheduledEvent], right: [ScheduledEvent]) -> [ScheduledEvent] {
       var mergedArray: [ScheduledEvent] = []
       var left = left
       var right = right

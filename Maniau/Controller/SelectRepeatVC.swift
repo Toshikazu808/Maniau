@@ -26,7 +26,6 @@ class SelectRepeatVC: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      self.tabBarController?.tabBar.isHidden = true
       for i in 0..<repeatSelection.count {
          if repeatSelection[i].isSelected {
             selectedImages[i].alpha = 1
@@ -34,6 +33,9 @@ class SelectRepeatVC: UIViewController {
             selectedImages[i].alpha = 0
          }
       }
+   }
+   override func viewWillAppear(_ animated: Bool) {
+      self.tabBarController?.tabBar.isHidden = true
    }
    override var shouldAutorotate: Bool { return false }
    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }

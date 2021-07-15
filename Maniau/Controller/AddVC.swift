@@ -66,7 +66,6 @@ class AddVC: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      self.tabBarController?.tabBar.isHidden = true
       selectRepeatVC.delegate = self
       selectAlertVC.delegate = self
       makePickerArrays()
@@ -78,6 +77,9 @@ class AddVC: UIViewController {
          action: #selector(backgroundTapped))
       pickerBackground.addGestureRecognizer(tapBackground)
       colorBtn.layer.cornerRadius = 3
+   }
+   override func viewWillAppear(_ animated: Bool) {
+      self.tabBarController?.tabBar.isHidden = true
    }
    override var shouldAutorotate: Bool { return false }
    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
@@ -97,7 +99,7 @@ class AddVC: UIViewController {
          event.title = titleTF.text!
          event.description = descriptionTF.text ?? ""
          event.startTime = startBtn.title(for: .normal) ?? "12:00 AM"
-         event.endTime = endBtn.title(for: .normal) ?? "12:01 AM"         
+         event.endTime = endBtn.title(for: .normal) ?? "12:01 AM"
          event.relevantMonth = date.getRelevantMonth()
          //         Utilities.setAlert(for: event)
          attemptToSaveData()

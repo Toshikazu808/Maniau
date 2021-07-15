@@ -31,14 +31,16 @@ class HomeTabVC: UIViewController {
          forCellReuseIdentifier: MonthTabCell.name)
       Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate) { [weak self] retrievedSchedule in
          guard let self = self else { return }
-         HomeTabVC.thisMonthsSchedule = retrievedSchedule
+         HomeTabVC.thisMonthsSchedule = Utilities.filterThisMonthsEvents(from: retrievedSchedule)
          self.todaysEvents = Utilities.filterTodaysEvents(from: HomeTabVC.thisMonthsSchedule, for: self.selectedDate)
-         self.tableView.reloadData()
+         DispatchQueue.main.async {
+            self.tableView.reloadData()
+         }
       }
    }
    override func viewWillAppear(_ animated: Bool) {
       self.tabBarController?.tabBar.isHidden = false
-      todaysEvents = Utilities.filterTodaysEvents(from: HomeTabVC.thisMonthsSchedule, for: selectedDate)
+//      todaysEvents = Utilities.filterTodaysEvents(from: HomeTabVC.thisMonthsSchedule, for: selectedDate)
       tableView.reloadData()
    }
    override var shouldAutorotate: Bool { return false }
@@ -66,7 +68,9 @@ class HomeTabVC: UIViewController {
 extension HomeTabVC: FSCalendarDelegate {
    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
       todaysEvents = Utilities.filterTodaysEvents(from: HomeTabVC.thisMonthsSchedule, for: date)
-      tableView.reloadData()
+      DispatchQueue.main.async {
+         self.tableView.reloadData()
+      }
    }
 }
 
@@ -120,7 +124,6 @@ extension HomeTabVC: UITableViewDelegate, UITableViewDataSource {
 
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       itemIndex = indexPath.row
-      print("itemIndex: \(itemIndex)")
       performSegue(withIdentifier: K.toDetailsVC, sender: nil)
    }
 }

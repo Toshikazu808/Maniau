@@ -26,10 +26,11 @@ class DetailsVC: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      print(#function)
-      self.tabBarController?.tabBar.isHidden = true
       setupLabels()
       setupBackgroundUI()
+   }
+   override func viewWillAppear(_ animated: Bool) {
+      self.tabBarController?.tabBar.isHidden = true
    }
    override var shouldAutorotate: Bool { return false }
    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
@@ -85,7 +86,9 @@ class DetailsVC: UIViewController {
          } else {
             print("Successfully deleted document")
             self?.delegate?.deleteAndUpdate()
-            self?.navigationController?.popViewController(animated: true)
+            DispatchQueue.main.async {
+               self?.navigationController?.popViewController(animated: true)
+            }            
          }
       }
    }
