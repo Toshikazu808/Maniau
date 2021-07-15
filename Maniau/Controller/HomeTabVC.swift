@@ -40,7 +40,6 @@ class HomeTabVC: UIViewController {
    }
    override func viewWillAppear(_ animated: Bool) {
       self.tabBarController?.tabBar.isHidden = false
-//      todaysEvents = Utilities.filterTodaysEvents(from: HomeTabVC.thisMonthsSchedule, for: selectedDate)
       tableView.reloadData()
    }
    override var shouldAutorotate: Bool { return false }
