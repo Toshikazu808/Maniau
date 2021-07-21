@@ -118,7 +118,7 @@ class AddVC: UIViewController {
    
    private func saveSequence() {
       let id = Auth.auth().currentUser?.uid
-      Firestore.firestore().collection(id!).document(event.title).setData(Utilities.convertScheduledToDict(event), merge: true) { [weak self] err in
+      Firestore.firestore().collection(id!).document(event.title).setData(Utilities.convertScheduleToDict(event), merge: true) { [weak self] err in
          if let err = err {
             self?.showError(err.localizedDescription)
          } else {
@@ -131,7 +131,7 @@ class AddVC: UIViewController {
    
    private func updateSequence() {
       let id = Auth.auth().currentUser?.uid
-      Firestore.firestore().collection(id!).document(event.title).setData(Utilities.convertScheduledToDict(event), merge: false) { [weak self] err in
+      Firestore.firestore().collection(id!).document(event.title).setData(Utilities.convertScheduleToDict(event), merge: false) { [weak self] err in
          if let err = err {
             self?.showError(err.localizedDescription)
          } else {

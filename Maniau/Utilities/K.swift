@@ -15,4 +15,7 @@ struct K {
    static let homeVC = "HomeVC"
    
    static let toDetailsVC = "toDetailsVC"
+   
+   static var thisMonthsSchedule: [ScheduledEvent] = []
+   static var daysWithEvents: [String] = []
 }

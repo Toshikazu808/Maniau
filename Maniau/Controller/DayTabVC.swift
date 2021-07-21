@@ -9,7 +9,6 @@ import UIKit
 
 class DayTabVC: UIViewController {
    @IBOutlet weak var tableView: UITableView!
-   private var days: [String] = []
    private var data: [[ScheduledEvent]] = [[]]
    
    override func viewDidLoad() {
@@ -17,8 +16,8 @@ class DayTabVC: UIViewController {
    }
    override func viewWillAppear(_ animated: Bool) {
       self.tabBarController?.tabBar.isHidden = false
-      days = Utilities.getDaysWithItems(from: HomeTabVC.thisMonthsSchedule)
-      data = Utilities.createDataForTableView(using: days, toLoopThrough: HomeTabVC.thisMonthsSchedule)
+      K.daysWithEvents = Utilities.getDaysWithItems(from: K.thisMonthsSchedule)
+      data = Utilities.createDataForTableView(using: K.daysWithEvents, toLoopThrough: K.thisMonthsSchedule)
       tableView.delegate = self
       tableView.dataSource = self
       tableView.register(UINib(nibName: MonthTabCell.name, bundle: nil), forCellReuseIdentifier: MonthTabCell.name)
@@ -39,7 +38,7 @@ extension DayTabVC: UITableViewDelegate, UITableViewDataSource {
    }
    
    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-      return days[section]
+      return K.daysWithEvents[section]
    }
    
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

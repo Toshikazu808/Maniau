@@ -111,7 +111,7 @@ struct Utilities {
       return (hour, minute)
    }
    
-   static func convertScheduledToDict(_ event: ScheduledEvent) -> [String: String] {
+   static func convertScheduleToDict(_ event: ScheduledEvent) -> [String: String] {
       let converted = [
          "title": event.title,
          "description": event.description,
@@ -184,9 +184,9 @@ struct Utilities {
    
    static func getDaysWithItems(from schedule: [ScheduledEvent]) -> [String] {
       var days: [String] = []
-      for i in 0..<schedule.count {
-         if !days.contains(schedule[i].date) {
-            days.append(schedule[i].date)
+      schedule.forEach { day in
+         if !days.contains(day.date) {
+            days.append(day.date)
          }
       }
       return days
@@ -194,11 +194,11 @@ struct Utilities {
    
    static func createDataForTableView(using days: [String], toLoopThrough scheduledEvent: [ScheduledEvent]) -> [[ScheduledEvent]] {
       var newArray = [[ScheduledEvent]]()
-      for i in 0..<days.count {
-         var subArray: [ScheduledEvent] = []
-         for j in 0..<scheduledEvent.count {
-            if days[i] == scheduledEvent[j].date {
-               subArray.append(scheduledEvent[j])
+      days.forEach { day in
+         var subArray = [ScheduledEvent]()
+         scheduledEvent.forEach { date in
+            if day == date.date {
+               subArray.append(date)
             }
          }
          newArray.append(subArray)
@@ -245,9 +245,9 @@ struct Utilities {
    static func filterTodaysEvents(from scheduleItems: [ScheduledEvent], for date: Date) -> [ScheduledEvent] {
       var items: [ScheduledEvent] = []
       let selectedDay: String = date.getSelectedDay()
-      for i in 0..<scheduleItems.count {
-         if scheduleItems[i].selectedDay == selectedDay {
-            items.append(scheduleItems[i])
+      scheduleItems.forEach { item in
+         if item.selectedDay == selectedDay {
+            items.append(item)
          }
       }
       items = sortTodaysItems(items: items)
