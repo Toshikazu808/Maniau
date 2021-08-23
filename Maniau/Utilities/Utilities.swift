@@ -9,7 +9,8 @@ import UIKit
 import FirebaseFirestore
 import Firebase
 
-struct Utilities {   
+struct Utilities {
+   
    static func extractEmail(from data: String) -> String {
       var email = data
       for char in email {
@@ -31,6 +32,10 @@ struct Utilities {
       }
    }
    
+   // MARK: - Local notifications
+   
+   
+   // MARK: - Push notifications
    static func setAlert(for event: ScheduledEvent) {
       let content = Utilities.setContent(event.title, event.description)
       let startDate = getStartDate(event.date, event.startTime)
@@ -127,6 +132,7 @@ struct Utilities {
       return converted
    }
    
+   // MARK: - FirebaseAuth
    static func logoutUser() {
       do {
          try Auth.auth().signOut()

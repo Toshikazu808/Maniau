@@ -14,8 +14,10 @@ class DayTabVC: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
    }
+   
    override func viewWillAppear(_ animated: Bool) {
       self.tabBarController?.tabBar.isHidden = false
+      
       K.daysWithEvents = Utilities.getDaysWithItems(from: K.thisMonthsSchedule)
       data = Utilities.createDataForTableView(using: K.daysWithEvents, toLoopThrough: K.thisMonthsSchedule)
       tableView.delegate = self
@@ -23,6 +25,7 @@ class DayTabVC: UIViewController {
       tableView.register(UINib(nibName: MonthTabCell.name, bundle: nil), forCellReuseIdentifier: MonthTabCell.name)
       tableView.reloadData()
    }
+   
    override var shouldAutorotate: Bool { return false }
    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation { return .portrait }

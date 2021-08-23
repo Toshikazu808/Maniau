@@ -18,6 +18,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Osc-mB-C9g">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WFe-i2-vjH" userLabel="LoginView">
                                 <rect key="frame" x="53.666666666666657" y="254.66666666666666" width="321" height="416.66666666666674"/>
@@ -1678,7 +1679,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="PJK-jg-v7P"/>
+        <segue reference="j1e-vC-TzW"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="LogoBackground" width="341.33334350585938" height="455.33334350585938"/>

@@ -119,12 +119,14 @@ class AddVC: UIViewController {
    private func saveSequence() {
       let id = Auth.auth().currentUser?.uid
       Firestore.firestore().collection(id!).document(event.title).setData(Utilities.convertScheduleToDict(event), merge: true) { [weak self] err in
+         guard let self = self else { return }
          if let err = err {
-            self?.showError(err.localizedDescription)
+            self.showError(err.localizedDescription)
          } else {
             print("Successfully saved document")
-            self?.delegate?.updateScheduleTable()
-            self?.navigationController?.popToRootViewController(animated: true)
+            self.delegate?.updateScheduleTable()
+            // set local notifaction here!
+            self.navigationController?.popToRootViewController(animated: true)
          }
       }
    }
@@ -132,12 +134,15 @@ class AddVC: UIViewController {
    private func updateSequence() {
       let id = Auth.auth().currentUser?.uid
       Firestore.firestore().collection(id!).document(event.title).setData(Utilities.convertScheduleToDict(event), merge: false) { [weak self] err in
+         guard let self = self else { return }
          if let err = err {
-            self?.showError(err.localizedDescription)
+            self.showError(err.localizedDescription)
          } else {
             print("Successfully updated document")
-            self?.delegate?.updateScheduleTable()
-            self?.navigationController?.popToRootViewController(animated: true)
+            self.delegate?.updateScheduleTable()
+            // delete corresponding notification
+            // save new local notification!
+            self.navigationController?.popToRootViewController(animated: true)
          }
       }
    }

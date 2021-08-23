@@ -24,27 +24,16 @@ class HomeTabVC: UIViewController {
       self.title = email
       calendar.delegate = self
       calendar.dataSource = self
-      tableView.delegate = self
-      tableView.dataSource = self
-      tableView.register(
-         UINib(nibName: MonthTabCell.name,bundle: nil),
-         forCellReuseIdentifier: MonthTabCell.name)
-      Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate) { [weak self] retrievedSchedule in
-         guard let self = self else { return }
-         K.thisMonthsSchedule = Utilities.filterThisMonthsEvents(from: retrievedSchedule)
-         self.todaysEvents = Utilities.filterTodaysEvents(from: K.thisMonthsSchedule, for: self.selectedDate)
-         K.daysWithEvents = Utilities.getDaysWithItems(from: K.thisMonthsSchedule)
-         DispatchQueue.main.async {
-            self.tableView.reloadData()
-            self.calendar.reloadData()
-         }
-      }
+      setupTableView()
+      loadFromFirebase()
    }
+   
    override func viewWillAppear(_ animated: Bool) {
       self.tabBarController?.tabBar.isHidden = false
       tableView.reloadData()
       calendar.reloadData()
    }
+   
    override var shouldAutorotate: Bool { return false }
    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation { return .portrait }
@@ -58,6 +47,27 @@ class HomeTabVC: UIViewController {
          print("vc?.schedule: \(String(describing: vc?.schedule))")
       } else if let destination = segue.destination as? DetailsVC {
          destination.delegate = self
+      }
+   }
+   
+   private func setupTableView() {
+      tableView.delegate = self
+      tableView.dataSource = self
+      tableView.register(
+         UINib(nibName: MonthTabCell.name,bundle: nil),
+         forCellReuseIdentifier: MonthTabCell.name)
+   }
+   
+   private func loadFromFirebase() {
+      Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate) { [weak self] retrievedSchedule in
+         guard let self = self else { return }
+         K.thisMonthsSchedule = Utilities.filterThisMonthsEvents(from: retrievedSchedule)
+         self.todaysEvents = Utilities.filterTodaysEvents(from: K.thisMonthsSchedule, for: self.selectedDate)
+         K.daysWithEvents = Utilities.getDaysWithItems(from: K.thisMonthsSchedule)
+         DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.calendar.reloadData()
+         }
       }
    }
    
@@ -88,10 +98,11 @@ extension HomeTabVC: FSCalendarDelegate, FSCalendarDataSource {
 extension HomeTabVC: AddVCDelegate {
    func updateScheduleTable() {
       Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate) { [weak self] retrievedSchedule in
-         K.thisMonthsSchedule = retrievedSchedule
+         guard let self = self else { return }
+         K.thisMonthsSchedule = Utilities.filterThisMonthsEvents(from: retrievedSchedule)
          DispatchQueue.main.async {
-            self?.tableView.reloadData()
-            self?.calendar.reloadData()
+            self.tableView.reloadData()
+            self.calendar.reloadData()
          }
       }
    }
@@ -100,10 +111,11 @@ extension HomeTabVC: AddVCDelegate {
 extension HomeTabVC: DetailsVCDelegate {
    func deleteAndUpdate() {
       Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate) { [weak self] retrievedSchedule in
+         guard let self = self else { return }
          K.thisMonthsSchedule = retrievedSchedule
          DispatchQueue.main.async {
-            self?.tableView.reloadData()
-            self?.calendar.reloadData()
+            self.tableView.reloadData()
+            self.calendar.reloadData()
          }
       }
    }

@@ -47,7 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
       // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
    }
-   //: UISceneSession Lifecycle
    
    // MARK: Firebase Push Notifications
    func application(_ application: UIApplication,
@@ -77,9 +76,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // Cloud messaging
 extension AppDelegate: MessagingDelegate {
    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-      let dataDict: [String: String] = ["token": fcmToken ?? ""]
+      print(#function)
+      Messaging.messaging().token { token, error in
+        if let error = error {
+          print("Error fetching FCM registration token: \(error)")
+        } else if let token = token {
+          print("\nFCM registration token: \(token)")
+        }
+      }
       // Store token in Firestore for sending notifications from server in the future
-      print(dataDict)
+      
+      print("Firebase registration token: \(String(describing: fcmToken))")
+
+        let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        NotificationCenter.default.post(
+          name: Notification.Name("FCMToken"),
+          object: nil,
+          userInfo: dataDict
+        )
+        // TODO: If necessary send token to application server.
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
    }
 }
 
@@ -89,7 +105,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
    // Receive displayed notifications for iOS 10 devices.
    func userNotificationCenter(_ center: UNUserNotificationCenter,
                                willPresent notification: UNNotification,
-                               withCompletionHandler completionHandler: @escaping( UNNotificationPresentationOptions) -> Void) {
+                               withCompletionHandler completionHandler: @escaping(UNNotificationPresentationOptions) -> Void) {
       let userInfo = notification.request.content.userInfo
       if let messageID = userInfo[gcmMessageIDKey] {
          print("Message ID: \(messageID)")

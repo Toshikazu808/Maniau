@@ -1,0 +1,6 @@
+framework module Pods_Maniau {
+  umbrella header "Pods-Maniau-umbrella.h"
+
+  export *
+  module * { export * }
+}
