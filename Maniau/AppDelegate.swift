@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 import Firebase
 import FirebaseMessaging
 
@@ -14,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    let gcmMessageIDKey = "gcm.message_id"
    
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+      
+      requestNotificationAuthorization(application: application)
       FirebaseApp.configure()
       Messaging.messaging().delegate = self
       
@@ -21,17 +24,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          // For iOS 10 display notification (sent via APNS)
          UNUserNotificationCenter.current().delegate = self
          
-         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
          UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: { _, _ in }
-         )
+            options: [.alert, .badge, .sound]) { granted, error in
+            if let error = error {
+               print("Error when requesting authorization: \(error)")
+               return
+            }
+            guard granted else {
+               print("Notification center request not granted")
+               return
+            }
+            DispatchQueue.main.async {
+               application.registerForRemoteNotifications()
+            }
+         }
       } else {
          let settings: UIUserNotificationSettings =
             UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
          application.registerUserNotificationSettings(settings)
       }
-      application.registerForRemoteNotifications()
+      
       return true
    }
    
@@ -48,7 +60,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
    }
    
-   // MARK: Firebase Push Notifications
+   // MARK: - Local Notifications
+   private func requestNotificationAuthorization(application: UIApplication) {
+      UNUserNotificationCenter.current().delegate = self
+      let center = UNUserNotificationCenter.current()
+      let options: UNAuthorizationOptions = [.alert, .badge, .sound]
+      center.requestAuthorization(options: options) { granted, error in
+         if let error = error {
+            print(error.localizedDescription)
+         }
+      }
+   }
+   
+   // MARK: - Firebase Push Notifications
    func application(_ application: UIApplication,
                     didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult)
@@ -59,7 +83,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
       // Print full message.
       print(userInfo)
-      
       completionHandler(UIBackgroundFetchResult.newData)
    }
    
@@ -103,28 +126,34 @@ extension AppDelegate: MessagingDelegate {
 @available(iOS 10, *)
 extension AppDelegate: UNUserNotificationCenterDelegate {
    // Receive displayed notifications for iOS 10 devices.
-   func userNotificationCenter(_ center: UNUserNotificationCenter,
-                               willPresent notification: UNNotification,
-                               withCompletionHandler completionHandler: @escaping(UNNotificationPresentationOptions) -> Void) {
+   func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping(UNNotificationPresentationOptions) -> Void) {
+      
       let userInfo = notification.request.content.userInfo
       if let messageID = userInfo[gcmMessageIDKey] {
          print("Message ID: \(messageID)")
       }
       print(userInfo)
       completionHandler([[.banner, .badge, .sound]])
-      
    }
    
-   func userNotificationCenter(_ center: UNUserNotificationCenter,
-                               didReceive response: UNNotificationResponse,
-                               withCompletionHandler completionHandler: @escaping () -> Void) {
-      let userInfo = response.notification.request.content.userInfo
-      if let messageID = userInfo[gcmMessageIDKey] {
-         print("Message ID: \(messageID)")
+   func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+      guard response.actionIdentifier == UNNotificationDefaultActionIdentifier else { return }
+      
+      let content = response.notification.request.content
+      print("Title: \(content.title)")
+      print("Body: \(content.body)")
+      
+      if let userInfo = content.userInfo as? [String: Any], let aps = userInfo["aps"] as? [String: Any] {
+         print("aps: \(aps)")
       }
-      // Do something with message data.
-      print(userInfo)
-      completionHandler()
+      
+//      let userInfo = response.notification.request.content.userInfo
+//      if let messageID = userInfo[gcmMessageIDKey] {
+//         print("Message ID: \(messageID)")
+//      }
+//      // Do something with message data.
+//      print(userInfo)
+//      completionHandler()
    }
    
 }

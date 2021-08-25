@@ -101,7 +101,6 @@ class AddVC: UIViewController {
          event.startTime = startBtn.title(for: .normal) ?? "12:00 AM"
          event.endTime = endBtn.title(for: .normal) ?? "12:01 AM"
          event.relevantMonth = date.getRelevantMonth()
-         //         Utilities.setAlert(for: event)
          attemptToSaveData()
       } else {
          showError("Please give your event a title")
@@ -124,8 +123,8 @@ class AddVC: UIViewController {
             self.showError(err.localizedDescription)
          } else {
             print("Successfully saved document")
+            LocalNotificationManager.setNotification(for: self.event)
             self.delegate?.updateScheduleTable()
-            // set local notifaction here!
             self.navigationController?.popToRootViewController(animated: true)
          }
       }
@@ -287,19 +286,16 @@ extension AddVC: UIPickerViewDelegate, UIPickerViewDataSource {
          endBtn.setTitle(timeToTransfer, for: .normal)
       }
    }
-   
 }
 
 extension AddVC: SelectRepeatVCDelegate {
    func setRepeat(_ repeatSelection: String) {
       repeatBtn.setTitle(repeatSelection, for: .normal)
-      // Set notification for selected interval
    }
 }
 
 extension AddVC: SelectAlertVCDelegate {
    func setAlert(_ alertSelection: String) {
       alertBtn.setTitle(alertSelection, for: .normal)
-      // Set notification for selected date / time
    }
 }

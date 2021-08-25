@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 import FirebaseFirestore
 import Firebase
 
@@ -32,8 +33,7 @@ struct Utilities {
       }
    }
    
-   // MARK: - Local notifications
-   
+
    
    // MARK: - Push notifications
    static func setAlert(for event: ScheduledEvent) {

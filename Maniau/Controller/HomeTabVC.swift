@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 import FirebaseAuth
 import FSCalendar
 import Firebase

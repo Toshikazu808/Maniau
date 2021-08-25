@@ -36,4 +36,16 @@ class ManiauTests: XCTestCase {
       XCTAssertEqual(num5, 12.59)
    }
    
+   func testTimeStringToTimeInterval() {
+      let time1 = String("Jul 10, 2021 7:00 AM").toTimeInterval()
+      let time2 = String("Aug 24, 2021 3:05 PM").toTimeInterval()
+      let time3 = String("Sep 19, 2021 8:00 AM").toTimeInterval()
+      let time4 = String("Jun 5, 1992 1:00 PM").toTimeInterval()
+      let time5 = String("Dec 25, 2021 12:00 AM").toTimeInterval()
+      XCTAssertEqual(time1, 1625925600.0)
+      XCTAssertEqual(time2, 1629842700.0)
+      XCTAssertEqual(time3, 1632063600.0)
+      XCTAssertEqual(time4, 707774400.0)
+      XCTAssertEqual(time5, 1640419200.0)
+   }
 }
