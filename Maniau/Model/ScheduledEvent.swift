@@ -8,6 +8,7 @@
 import Foundation
 
 struct ScheduledEvent: Codable, Equatable {
+   var id: String
    var title: String
    var description: String
    var startTime: String
@@ -31,6 +32,6 @@ struct ScheduledEvent: Codable, Equatable {
    }
    
    static func == (lhs: ScheduledEvent, rhs: ScheduledEvent) -> Bool {
-      return lhs.title == rhs.title && lhs.description == rhs.description && lhs.startTime == rhs.startTime && lhs.endTime == rhs.endTime && lhs.repeats == rhs.repeats && lhs.alert == rhs.alert && lhs.relevantMonth == rhs.relevantMonth && lhs.date == rhs.date && lhs.selectedDay == rhs.selectedDay && lhs.dayOfWeek == rhs.dayOfWeek && lhs.color == rhs.color
+      return lhs.id == rhs.id && lhs.title == rhs.title && lhs.description == rhs.description && lhs.startTime == rhs.startTime && lhs.endTime == rhs.endTime && lhs.repeats == rhs.repeats && lhs.alert == rhs.alert && lhs.relevantMonth == rhs.relevantMonth && lhs.date == rhs.date && lhs.selectedDay == rhs.selectedDay && lhs.dayOfWeek == rhs.dayOfWeek && lhs.color == rhs.color
    }
 }

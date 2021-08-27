@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UserNotifications
 
 struct K {
    static let fbUsers = "users"
@@ -19,7 +18,4 @@ struct K {
    
    static var thisMonthsSchedule: [ScheduledEvent] = []
    static var daysWithEvents: [String] = []
-   
-//   static let center = UNUserNotificationCenter.current()
-   
 }

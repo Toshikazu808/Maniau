@@ -19,7 +19,7 @@ class AddVC: UIViewController {
    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
    
    var updateItem: Bool = false
-   var prefillTF: String = ""
+   var oldId: String = ""
    @IBOutlet private weak var titleTF: UITextField!
    @IBOutlet private weak var descriptionTF: UITextField!
    @IBOutlet private weak var allDay: UISwitch!
@@ -49,7 +49,8 @@ class AddVC: UIViewController {
    
    private var selectRepeatVC = SelectRepeatVC()
    private var selectAlertVC = SelectAlertVC()
-   private var event = ScheduledEvent(
+   var event = ScheduledEvent(
+      id: UUID().uuidString,
       title: "",
       description: "",
       startTime: "4:00 PM",
@@ -77,10 +78,13 @@ class AddVC: UIViewController {
          action: #selector(backgroundTapped))
       pickerBackground.addGestureRecognizer(tapBackground)
       colorBtn.layer.cornerRadius = 3
+      titleTF.text = event.title
    }
+   
    override func viewWillAppear(_ animated: Bool) {
       self.tabBarController?.tabBar.isHidden = true
    }
+   
    override var shouldAutorotate: Bool { return false }
    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation { return .portrait }
@@ -117,7 +121,7 @@ class AddVC: UIViewController {
    
    private func saveSequence() {
       let id = Auth.auth().currentUser?.uid
-      Firestore.firestore().collection(id!).document(event.title).setData(Utilities.convertScheduleToDict(event), merge: true) { [weak self] err in
+      Firestore.firestore().collection(id!).document(event.id).setData(Utilities.convertScheduleToDict(event), merge: true) { [weak self] err in
          guard let self = self else { return }
          if let err = err {
             self.showError(err.localizedDescription)
@@ -138,9 +142,10 @@ class AddVC: UIViewController {
             self.showError(err.localizedDescription)
          } else {
             print("Successfully updated document")
+            LocalNotificationManager.updateNotification(
+               newEvent: self.event,
+               oldId: self.oldId)
             self.delegate?.updateScheduleTable()
-            // delete corresponding notification
-            // save new local notification!
             self.navigationController?.popToRootViewController(animated: true)
          }
       }

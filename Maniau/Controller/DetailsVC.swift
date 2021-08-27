@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 import FirebaseFirestore
 import FirebaseAuth
 
@@ -40,7 +41,19 @@ class DetailsVC: UIViewController {
       if segue.destination is AddVC {
          let vc = segue.destination as? AddVC
          vc?.updateItem = true
-         vc?.prefillTF = titleLabel.text ?? ""
+         if let schedule = schedule {
+            vc?.oldId = schedule.id
+            vc?.event.title = schedule.title
+            vc?.event.description = schedule.description
+            vc?.event.startTime = schedule.startTime
+            vc?.event.endTime = schedule.endTime
+            vc?.event.repeats = schedule.repeats
+            vc?.event.relevantMonth = schedule.relevantMonth
+            vc?.event.date = schedule.date
+            vc?.event.selectedDay = schedule.selectedDay
+            vc?.event.dayOfWeek = schedule.dayOfWeek
+            vc?.event.color = schedule.color
+         }
       }
    }
    
@@ -80,14 +93,17 @@ class DetailsVC: UIViewController {
    
    @IBAction func confirmDeleteTapped(_ sender: UIButton) {
       let id = Auth.auth().currentUser?.uid
-      Firestore.firestore().collection(id!).document(schedule!.title).delete { [weak self] err in
+      Firestore.firestore().collection(id!).document(schedule!.id).delete { [weak self] err in
+         guard let self = self else { return }
          if let err = err {
-            self?.showError(err.localizedDescription)
+            self.showError(err.localizedDescription)
          } else {
             print("Successfully deleted document")
-            self?.delegate?.deleteAndUpdate()
+            K.thisMonthsSchedule = K.thisMonthsSchedule.filter { $0.id != self.schedule!.id }
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [self.schedule!.id])
+            self.delegate?.deleteAndUpdate()
             DispatchQueue.main.async {
-               self?.navigationController?.popViewController(animated: true)
+               self.navigationController?.popViewController(animated: true)
             }            
          }
       }

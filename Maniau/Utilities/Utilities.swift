@@ -118,6 +118,7 @@ struct Utilities {
    
    static func convertScheduleToDict(_ event: ScheduledEvent) -> [String: String] {
       let converted = [
+         "id": event.id,
          "title": event.title,
          "description": event.description,
          "startTime": event.startTime,
@@ -174,6 +175,7 @@ struct Utilities {
    
    private static func convertScheduleToStruct(_ data: [String: String]) -> ScheduledEvent {
       let converted = ScheduledEvent(
+         id: data["id"] ?? "id unavailable",
          title: data["title"] ?? "title unavailable",
          description: data["description"] ?? "description unavailable",
          startTime: data["startTime"] ?? "startTime unavailable",

@@ -24,6 +24,7 @@
 		BC6DD3132682ADAE00C95111 /* HomeTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DD3122682ADAE00C95111 /* HomeTabVC.swift */; };
 		BC79B44126D593720087A6BA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC79B44026D593720087A6BA /* Extensions.swift */; };
 		BC79B44326D663800087A6BA /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC79B44226D6637F0087A6BA /* LocalNotificationManager.swift */; };
+		BC79B46526D6D6C80087A6BA /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC79B46426D6D6C80087A6BA /* ApiManager.swift */; };
 		BCA9FF1D2685840400B2A4F7 /* SelectAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9FF1C2685840400B2A4F7 /* SelectAlertVC.swift */; };
 		BCC2867B2683C80E00050BF8 /* MonthTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC286792683C80E00050BF8 /* MonthTabCell.swift */; };
 		BCC2867C2683C80E00050BF8 /* MonthTabCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCC2867A2683C80E00050BF8 /* MonthTabCell.xib */; };
@@ -74,6 +75,7 @@
 		BC6DD3122682ADAE00C95111 /* HomeTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabVC.swift; sourceTree = "<group>"; };
 		BC79B44026D593720087A6BA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BC79B44226D6637F0087A6BA /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
+		BC79B46426D6D6C80087A6BA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		BCA9FF1C2685840400B2A4F7 /* SelectAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlertVC.swift; sourceTree = "<group>"; };
 		BCC286792683C80E00050BF8 /* MonthTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthTabCell.swift; sourceTree = "<group>"; };
 		BCC2867A2683C80E00050BF8 /* MonthTabCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthTabCell.xib; sourceTree = "<group>"; };
@@ -157,7 +159,6 @@
 			children = (
 				BC6DD2F02682853500C95111 /* AppDelegate.swift */,
 				BC6DD2F22682853500C95111 /* SceneDelegate.swift */,
-				BC6DD2F62682853500C95111 /* Main.storyboard */,
 				BCD9587E2682DB8F00B4A06C /* Utilities */,
 				BCC286782683C7DC00050BF8 /* Model */,
 				BCC286772683C7CE00050BF8 /* View */,
@@ -188,6 +189,7 @@
 		BCC286772683C7CE00050BF8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BC6DD2F62682853500C95111 /* Main.storyboard */,
 				BCC286792683C80E00050BF8 /* MonthTabCell.swift */,
 				BCC2867A2683C80E00050BF8 /* MonthTabCell.xib */,
 				BCC2867D2683C82900050BF8 /* DayTabCell.swift */,
@@ -216,6 +218,7 @@
 				BCF873742698B9DB006E8292 /* Animations.swift */,
 				BC79B44026D593720087A6BA /* Extensions.swift */,
 				BC79B44226D6637F0087A6BA /* LocalNotificationManager.swift */,
+				BC79B46426D6D6C80087A6BA /* ApiManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				BC79B44126D593720087A6BA /* Extensions.swift in Sources */,
 				BCC2868E26840AAA00050BF8 /* SelectRepeatVC.swift in Sources */,
 				BCC286882683E79C00050BF8 /* DayTabVC.swift in Sources */,
+				BC79B46526D6D6C80087A6BA /* ApiManager.swift in Sources */,
 				BCA9FF1D2685840400B2A4F7 /* SelectAlertVC.swift in Sources */,
 				BCF873752698B9DB006E8292 /* Animations.swift in Sources */,
 			);

@@ -19,6 +19,8 @@ class HomeTabVC: UIViewController {
    private var todaysEvents: [ScheduledEvent] = []
    private var itemIndex = 0
    var email = ""
+   private var timer = Timer()
+
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -33,6 +35,18 @@ class HomeTabVC: UIViewController {
       self.tabBarController?.tabBar.isHidden = false
       tableView.reloadData()
       calendar.reloadData()
+      timer = Timer.scheduledTimer(
+         timeInterval: 2,
+         target: self,
+         selector: #selector(reload),
+         userInfo: nil,
+         repeats: false)
+   }
+   
+   @objc private func reload() {
+      tableView.reloadData()
+      calendar.reloadData()
+      timer.invalidate()
    }
    
    override var shouldAutorotate: Bool { return false }
@@ -64,6 +78,9 @@ class HomeTabVC: UIViewController {
          guard let self = self else { return }
          K.thisMonthsSchedule = Utilities.filterThisMonthsEvents(from: retrievedSchedule)
          self.todaysEvents = Utilities.filterTodaysEvents(from: K.thisMonthsSchedule, for: self.selectedDate)
+         self.todaysEvents.forEach { event in
+            print(event.id)
+         }
          K.daysWithEvents = Utilities.getDaysWithItems(from: K.thisMonthsSchedule)
          DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -113,7 +130,7 @@ extension HomeTabVC: DetailsVCDelegate {
    func deleteAndUpdate() {
       Utilities.loadFromFirebase(viewController: self, database: db, date: selectedDate) { [weak self] retrievedSchedule in
          guard let self = self else { return }
-         K.thisMonthsSchedule = retrievedSchedule
+         K.thisMonthsSchedule = Utilities.filterThisMonthsEvents(from: retrievedSchedule)
          DispatchQueue.main.async {
             self.tableView.reloadData()
             self.calendar.reloadData()
